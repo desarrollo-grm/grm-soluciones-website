@@ -10,6 +10,7 @@ function App() {
       <Header/>
       <Hero/>
       <Clients clients={clientsData}/>
+      <ProductsServices/>
     </>
   )
 }
