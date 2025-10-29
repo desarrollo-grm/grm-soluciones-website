@@ -1,4 +1,4 @@
-import logoGrm from '../../assets/logo-grm.svg';
+import logoGrm from '/assets/logo-grm.svg';
 
 const Header = () => {
     const navItems = ['Conócenos', 'Productos', 'Servicios', 'Blog', 'Contáctanos'];
