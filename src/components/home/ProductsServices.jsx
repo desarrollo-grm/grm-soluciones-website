@@ -57,7 +57,7 @@ const ProductsServices = () => {
     }
 
     return (
-        <section className="bg-light py-12 px-4 h-[calc(100dvh-88px)]">
+        <section className="bg-light py-12 px-4 h-min-[calc(100dvh-88px)]">
             <UnderlinedTitle color="secondary">Nuestros productos y servicios</UnderlinedTitle>
             <div className="container mx-auto mt-10 max-w-6xl">
                 <div className="flex flex-wrap items-stretch gap-6">
