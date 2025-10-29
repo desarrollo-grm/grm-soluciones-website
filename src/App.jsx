@@ -3,6 +3,7 @@ import Hero from './components/home/Hero.jsx'
 import Clients from './components/home/Clients.jsx'
 import clientsData from './data/clients.js'
 import ProductsServices from './components/home/ProductsServices.jsx'
+import Footer from './components/layout/Footer.jsx'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Hero/>
       <Clients clients={clientsData}/>
       <ProductsServices/>
+      <Footer/>
     </>
   )
 }
