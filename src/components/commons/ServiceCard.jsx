@@ -1,6 +1,6 @@
-const ServiceCard = ({ service, isSquare, isFill, onMouseEnter, onMouseLeave }) => {
+const ServiceCard = ({ service, color, isSquare, isFill, onMouseEnter, onMouseLeave }) => {
 
-    const colorClasses = (isFill) ? 'bg-primary' : 'bg-secondary'
+    const colorClasses = (isFill) ? `bg-primary` : `bg-${color}`
 
 
     const textcontainer = (isSquare) ? "" : (isFill) ?

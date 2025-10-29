@@ -65,6 +65,7 @@ const ProductsServices = () => {
                         <ServiceCard 
                             key={service.id} 
                             service={service}
+                            color={((service.id-1) % 2 === 0) ? 'secondary' : 'accent'}
                             isSquare={isSquare(service.id)}
                             isFill={service.id === hoveredCardId}
                             onMouseEnter={() => setHoveredCardId(service.id)}
