@@ -1,0 +1,11 @@
+const LogoCard = ({logoSrc, altText, link}) => {
+    return (
+        <div className="flex items-center justify-center p-4 bg-white rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 flex-shrink-0 w-48 h-32">
+            <a href={link} className="flex items-center justify-center w-full h-full">
+                <img src={logoSrc} alt={altText} className="max-h-full max-w-full object-contain"/>
+            </a>
+        </div>
+    );
+}
+
+export default LogoCard;
