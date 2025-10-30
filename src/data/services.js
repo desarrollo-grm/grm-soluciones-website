@@ -9,8 +9,7 @@ export const services = [
             "Soporte técnico especializado",
             "Desarrollos a la medida"
         ],
-        icon: "✓", // You can replace with an actual icon component
-        color: "green"
+        icon: "/assets/icons/verified.svg"
     },
     {
         id: 2,
@@ -22,8 +21,7 @@ export const services = [
             "Mensajería de texto",
             "Integración de desarrollos"
         ],
-        icon: "🎧", // You can replace with an actual icon component
-        color: "orange"
+        icon: "/assets/icons/facturacion.svg"
     },
     {
         id: 3,
@@ -35,8 +33,7 @@ export const services = [
             "Automatización de tareas administrativas",
             "Comunicación masiva"
         ],
-        icon: "🏢", // You can replace with an actual icon component
-        color: "green"
+        icon: "/assets/icons/condominio.svg"
     },
     {
         id: 4,
@@ -48,8 +45,7 @@ export const services = [
             "Actualización de software fiscal",
             "Asesoría en cumplimiento fiscal"
         ],
-        icon: "🎧", // You can replace with an actual icon component
-        color: "orange"
+        icon: "/assets/icons/hardware.svg"
     },
     {
         id: 5,
@@ -61,8 +57,7 @@ export const services = [
             "Optimización de procesos administrativos",
             "Capacitación personalizada"
         ],
-        icon: "🏢", // You can replace with an actual icon component
-        color: "green"
+        icon: "/assets/icons/verified.svg"
     },
     {
         id: 6,
@@ -74,7 +69,6 @@ export const services = [
             "Actualizaciones de software",
             "Capacitación técnica"
         ],
-        icon: "🔧", // You can replace with an actual icon component
-        color: "orange"
+        icon: "/assets/icons/soporte.svg"
     }
 ];

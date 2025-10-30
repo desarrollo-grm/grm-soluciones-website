@@ -1,6 +1,6 @@
 const ServiceCard = ({ service, color, isSquare, isFill, onMouseEnter, onMouseLeave }) => {
 
-    const colorClasses = (isFill) ? `bg-primary` : `bg-${color}`
+    const colorClasses = (isFill) ? 'bg-primary' : (color === 'secondary' ? 'bg-secondary' : 'bg-accent')
 
 
     const textcontainer = (isSquare) ? "" : (isFill) ?
@@ -36,7 +36,18 @@ const ServiceCard = ({ service, color, isSquare, isFill, onMouseEnter, onMouseLe
         >
             <div className={`flex justify-center items-center gap-4 w-full`}>
                 <div className="flex-shrink-0 w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl">
-                    {service.icon}
+                    <div 
+                        className={`w-12 h-12 ${colorClasses}`}
+                        style={{
+                            maskImage: `url(${service.icon})`,
+                            WebkitMaskImage: `url(${service.icon})`,
+                            maskSize: 'contain',
+                            maskRepeat: 'no-repeat',
+                            maskPosition: 'center'
+                        }}
+                        role="img"
+                        aria-label={service.title}
+                    />
                 </div>
                 {textcontainer}
             </div>
