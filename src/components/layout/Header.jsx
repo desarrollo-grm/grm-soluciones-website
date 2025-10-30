@@ -1,19 +1,33 @@
+import { Link } from 'react-router-dom';
 import logoGrm from '/assets/logo-grm.svg';
 
 const Header = () => {
-    const navItems = ['Conócenos', 'Productos', 'Servicios', 'Blog', 'Contáctanos'];
+    const navItems = [
+        { name: 'Inicio', path: '/' },
+        { name: 'Conócenos', path: '/about-us' },
+        { name: 'Productos', path: '#' },
+        { name: 'Servicios', path: '#' },
+        { name: 'Blog', path: '#' },
+        { name: 'Contáctanos', path: '#' },
+    ];
 
     return (
     <header className="bg-primary text-white sticky top-0 z-50 h-[88px]">
       <div className="w-full h-full mx-auto px-6 py-4 flex justify-between items-center">
         <div className="w-20 h-auto">
-           <a href="/"><img src={logoGrm} alt="GRM Logo" className="w-full h-full" /></a>
+           <Link to="/"><img src={logoGrm} alt="GRM Logo" className="w-full h-full" /></Link>
         </div>
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
-            <a key={item} href="#" className="hover:text-orange-400 transition-colors">
-              {item}
-            </a>
+            item.path.startsWith('#') ? (
+              <a key={item.name} href={item.path} className="hover:text-orange-400 transition-colors">
+                {item.name}
+              </a>
+            ) : (
+              <Link key={item.name} to={item.path} className="hover:text-orange-400 transition-colors">
+                {item.name}
+              </Link>
+            )
           ))}
         </nav>
         <div className="md:hidden">

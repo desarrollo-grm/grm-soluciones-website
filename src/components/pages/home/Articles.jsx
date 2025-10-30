@@ -1,8 +1,7 @@
 import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
 import ArticleCard from "/src/components/commons/ArticleCard";
-import { articles } from "/src/data/articles";
 
-const Articulos = () => {
+const Articles = ({articles}) => {
     const colors = ["secondary", "accent"];
 
     return (
@@ -28,4 +27,4 @@ const Articulos = () => {
 
 };
 
-export default Articulos;
+export default Articles;

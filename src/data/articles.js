@@ -1,4 +1,4 @@
-export const articles = [
+const articles = [
     {
         id: 1,
         image: "/assets/articles/article-placeholder.jpg",
@@ -21,3 +21,5 @@ export const articles = [
         link: "#articulo-3"
     }
 ];
+
+export default articles;

@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
 import ServiceCard from "/src/components/commons/ServiceCard";
-import { services } from "/src/data/services";
 
-const ProductsServices = () => {
+const Services = ({ services }) => {
     const [columnsPerRow, setColumnsPerRow] = useState(3);
     const [hoveredCardId, setHoveredCardId] = useState(null);
 
@@ -75,4 +74,4 @@ const ProductsServices = () => {
     );
 }
 
-export default ProductsServices;
+export default Services;

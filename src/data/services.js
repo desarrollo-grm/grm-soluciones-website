@@ -1,4 +1,4 @@
-export const services = [
+const services = [
     {
         id: 1,
         title: "Saint e integraciones",
@@ -72,3 +72,5 @@ export const services = [
         icon: "/assets/icons/soporte.svg"
     }
 ];
+
+export default services;
