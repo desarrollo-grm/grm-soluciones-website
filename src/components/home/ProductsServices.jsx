@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import UnderlinedTitle from "../commons/UnderlinedTitle";
-import ServiceCard from "../commons/ServiceCard";
-import { services } from "../../data/services";
+import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
+import ServiceCard from "/src/components/commons/ServiceCard";
+import { services } from "/src/data/services";
 
 const ProductsServices = () => {
     const [columnsPerRow, setColumnsPerRow] = useState(3);

@@ -1,5 +1,5 @@
-import SectionHeader from "../commons/SectionHeader";
-import ObjectiveCard from "../commons/ObjectiveCard";
+import SectionHeader from "/src/components/commons/SectionHeader";
+import ObjectiveCard from "/src/components/commons/ObjectiveCard";
 
 const Objetivos = () => {
     return (

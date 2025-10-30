@@ -1,4 +1,4 @@
-import CTAButton from "../commons/CTAButton";
+import CTAButton from "/src/components/commons/CTAButton";
 
 const Hero = () => {
     return (

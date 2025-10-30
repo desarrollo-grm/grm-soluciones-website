@@ -1,6 +1,6 @@
-import UnderlinedTitle from "../commons/UnderlinedTitle";
-import ArticleCard from "../commons/ArticleCard";
-import { articles } from "../../data/articles";
+import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
+import ArticleCard from "/src/components/commons/ArticleCard";
+import { articles } from "/src/data/articles";
 
 const Articulos = () => {
     const colors = ["secondary", "accent"];

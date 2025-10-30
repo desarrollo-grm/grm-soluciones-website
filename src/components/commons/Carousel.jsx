@@ -1,5 +1,5 @@
 import '/src/styles/carousel.css';
-import LogoCard from './LogoCard';
+import LogoCard from '/src/components/commons/LogoCard';
 
 const Carousel = ({ objects }) => {
     return (
