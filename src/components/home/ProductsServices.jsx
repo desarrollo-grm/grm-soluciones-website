@@ -30,9 +30,6 @@ const ProductsServices = () => {
         return () => window.removeEventListener('resize', updateColumns);
     }, []);
 
-    console.log('Current layout:', columnsPerRow, 'columns per row');
-    console.log('Hovered card:', hoveredCardId);
-
     const getHoveredRow = () => {
         if (hoveredCardId === null) return null;
         const index = hoveredCardId - 1;
