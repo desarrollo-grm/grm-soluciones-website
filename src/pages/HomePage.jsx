@@ -4,7 +4,7 @@ import Clients from '/src/components/pages/home/Clients';
 import Services from '/src/components/pages/home/Services';
 import Articles from '/src/components/pages/home/Articles';
 import Footer from '/src/components/layout/Footer';
-import clientsData from '/src/data/clients.js';
+import clientsData from '/src/data/clients';
 import articlesData from "/src/data/articles";
 import servicesData from "/src/data/services";
 
