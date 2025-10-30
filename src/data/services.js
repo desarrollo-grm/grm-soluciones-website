@@ -57,7 +57,7 @@ export const services = [
             "Optimización de procesos administrativos",
             "Capacitación personalizada"
         ],
-        icon: "/assets/icons/verified.svg"
+        icon: "/assets/icons/data.svg"
     },
     {
         id: 6,
