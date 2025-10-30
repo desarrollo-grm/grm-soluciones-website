@@ -1,11 +1,11 @@
-const ObjectiveCard = ({ icon, title, description, color = "accent" }) => {
+const ObjectiveCard = ({ icon, title, description, color = "accent", imageSize = 22 }) => {
     const bgColorClasses = color === "secondary" ? "bg-secondary" : color === "primary" ? "bg-primary" : color === "accent" ? "bg-accent" : "bg-accent";
 
     return (
         <article className="flex flex-col items-center text-center gap-4 max-w-md">
             <div className={`w-32 h-32 ${bgColorClasses} rounded-full flex items-center justify-center shadow-lg`}>
                 <div 
-                    className="w-20 h-20 bg-white"
+                    className={`w-${imageSize} h-${imageSize} bg-white`}
                     style={{
                         maskImage: `url(${icon})`,
                         WebkitMaskImage: `url(${icon})`,

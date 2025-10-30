@@ -53,7 +53,7 @@ const Hero = () => {
                     <circle cx="6" cy="6" r="6" />
                   </svg>
                 </div>
-                <div className="text-sm md:text-base text-primary flex-1">
+                <div className="text-base md:text-lg lg:text-xl text-primary flex-1">
                   <p className="font-bold">{event.year}</p>
                   <p>{event.description}</p>
                 </div>

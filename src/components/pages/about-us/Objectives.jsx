@@ -24,6 +24,7 @@ const Objetivos = () => {
                         title="Nuestra visión"
                         description="Lorem ipsum dolor sit amet, dipiscing elit. Pellentesque auctor sed ante sed iaculis."
                         color="secondary"
+                        imageSize={20}
                     />
                 </div>
             </div>
