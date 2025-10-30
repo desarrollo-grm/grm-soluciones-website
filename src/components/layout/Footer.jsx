@@ -65,7 +65,7 @@ const Footer = () => {
                         <div className="space-y-2 mb-6">
                             <p className="text-sm">Centro Ciudad Comercial Tamanaco, Piso 8, Oficina 805, Caracas, Venezuela.</p>
                             <p className="text-sm">0412-233-43-98</p>
-                            <p className="text-sm">soporte@grm.net.ve</p>
+                            <a className="hover:underline" href="mailto:soporte@grm.net.ve"><p className="text-sm">soporte@grm.net.ve</p></a>
                         </div>
 
                         <div className="mt-6">
