@@ -3,7 +3,6 @@ import logoGrm from '/assets/logo-grm.svg';
 
 const Header = () => {
     const navItems = [
-        { name: 'Inicio', path: '/' },
         { name: 'Conócenos', path: '/about-us' },
         { name: 'Productos', path: '#' },
         { name: 'Servicios', path: '#' },
