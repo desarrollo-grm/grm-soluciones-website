@@ -36,7 +36,7 @@ const ContactUs = () => {
 
                     {/* CTA Button */}
                     <div className="flex justify-center">
-                        <CTAButton onClick={() => window.location.href = '#contact'}>
+                        <CTAButton onClick={() => window.location.href = '/contact'}>
                             Contáctanos
                         </CTAButton>
                     </div>
