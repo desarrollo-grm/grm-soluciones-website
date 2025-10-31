@@ -3,6 +3,7 @@ import HomePage from '/src/pages/HomePage.jsx';
 import AboutUsPage from '/src/pages/AboutUsPage.jsx';
 import ContactPage from '/src/pages/ContactPage.jsx';
 import FacturacionDigitalPage from '/src/pages/FacturacionDigitalPage.jsx';
+import CondominioPage from '/src/pages/CondominioPage.jsx';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/facturacion-digital" element={<FacturacionDigitalPage />} />
+        <Route path="/condominio" element={<CondominioPage />} />
       </Routes>
     </Router>
   );

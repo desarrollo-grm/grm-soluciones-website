@@ -2,7 +2,7 @@ const ValueCard = ({ icon, title, color = "secondary" }) => {
     const bgColorClasses = color === "secondary" ? "bg-secondary" : color === "primary" ? "bg-primary" : color === "accent" ? "bg-accent" : "bg-secondary";
 
     return (
-        <article className={`${bgColorClasses} text-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 flex flex-col items-center justify-center gap-4 min-h-[180px]`}>
+        <article className={`${bgColorClasses} text-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 flex flex-col items-center justify-center gap-4 min-h-[180px] h-full`}>
             <div className="w-20 h-20 flex items-center justify-center">
                 <div 
                     className="w-16 h-16 bg-white"
