@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from '/src/pages/HomePage.jsx';
 import AboutUsPage from '/src/pages/AboutUsPage.jsx';
-import Contact from '/src/pages/Contact.jsx';
+import ContactPage from '/src/pages/ContactPage.jsx';
+import FacturacionDigitalPage from '/src/pages/FacturacionDigitalPage.jsx';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/facturacion-digital" element={<FacturacionDigitalPage />} />
       </Routes>
     </Router>
   );

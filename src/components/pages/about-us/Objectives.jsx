@@ -18,6 +18,7 @@ const Objetivos = () => {
                         title="Nuestra misión"
                         description="Lorem ipsum dolor sit amet, dipiscing elit. Pellentesque auctor sed ante sed iaculis."
                         color="accent"
+                        imageSize={26}
                     />
                     <ObjectiveCard
                         icon="/assets/icons/vision.svg"

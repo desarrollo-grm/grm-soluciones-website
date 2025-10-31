@@ -45,7 +45,7 @@ const Footer = () => {
                         <h3 className="text-xl font-display font-bold mb-4">Servicios y productos</h3>
                         <ul className="space-y-2">
                             <li><a href="#" className="hover:underline">Saint e integraciones</a></li>
-                            <li><a href="#" className="hover:underline">Facturación digital</a></li>
+                            <li><a href="/facturacion-digital" className="hover:underline">Facturación digital</a></li>
                             <li><a href="#" className="hover:underline">Condominio</a></li>
                             <li><a href="#" className="hover:underline">Equipos y máquinas fiscales</a></li>
                             <li><a href="#" className="hover:underline">Asesoría integral</a></li>
