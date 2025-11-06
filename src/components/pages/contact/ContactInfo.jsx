@@ -6,13 +6,13 @@ const ContactInfo = () => {
     const googleMapsUrl = "https://www.google.com/maps/place/Centro+Ciudad+Comercial+Tamanaco+CCCT/@10.4851825,-66.8577697,17z/data=!3m1!4b1!4m6!3m5!1s0x8c2a58562d6be2f7:0x68c1b72d71c1d7d6!8m2!3d10.4851825!4d-66.8551894!16s%2Fg%2F11b60rx05d?entry=ttu&g_ep=EgoyMDI1MTAyOC4wIKXMDSoASAFQAw%3D%3D";
     
     return (
-        <div className="bg-primary text-light p-6 rounded-lg flex flex-col gap-3 max-w-md w-full overflow-hidden">
-            <h2 className="text-secondary text-xl font-bold">
+        <div className="bg-primary text-light p-6 rounded-lg flex flex-col gap-3 max-w-md w-full overflow-hidden lg:h-full">
+            <h2 className="text-secondary text-xl font-bold flex-shrink-0">
                 Información de contacto
             </h2>
             
             {/* Dirección */}
-            <div className="flex gap-3 items-start">
+            <div className="flex gap-3 items-start flex-shrink-0">
                 <MapMarkerIcon className="text-light mt-1 flex-shrink-0" size={18} />
                 <div>
                     <h3 className="font-semibold mb-1 text-sm">Dirección</h3>
@@ -29,7 +29,7 @@ const ContactInfo = () => {
             </div>
             
             {/* Teléfono */}
-            <div className="flex gap-3 items-start">
+            <div className="flex gap-3 items-start flex-shrink-0">
                 <PhoneIcon className="text-light mt-1 flex-shrink-0" size={18} />
                 <div className="flex flex-col gap-1">
                     <h3 className="font-semibold mb-1 text-sm">Teléfono</h3>
@@ -49,7 +49,7 @@ const ContactInfo = () => {
             </div>
             
             {/* Email */}
-            <div className="flex gap-3 items-start">
+            <div className="flex gap-3 items-start flex-shrink-0">
                 <EnvelopeIcon className="text-light mt-1 flex-shrink-0" size={18} />
                 <div>
                     <h3 className="font-semibold mb-1 text-sm">Email</h3>
@@ -68,7 +68,7 @@ const ContactInfo = () => {
             </div>
             
             {/* Redes Sociales */}
-            <div className="flex gap-4 mt-4">
+            <div className="flex gap-4 mt-4 flex-shrink-0">
                 <a 
                     href="https://x.com" 
                     target="_blank" 
