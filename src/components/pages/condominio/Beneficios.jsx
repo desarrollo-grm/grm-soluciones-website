@@ -31,6 +31,7 @@ const Beneficios = () => {
             <div className="container mx-auto px-6 pb-6 flex flex-col md:flex-row flex-wrap items-stretch justify-center gap-6">
                 {beneficios.map((beneficio, index) => (
                     <ObjectiveCard
+                        key={index}
                         icon={beneficio.icon}
                         title={beneficio.title}
                         description={beneficio.description}
