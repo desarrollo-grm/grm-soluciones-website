@@ -1,5 +1,5 @@
 const ObjectiveCard = ({ icon, title, description, color = "accent", imageSize = 22 }) => {
-    const bgColorClasses = color === "secondary" ? "secondary" : color === "primary" ? "bg-primary" : color === "accent" ? "bg-accent" : "bg-accent";
+    const bgColorClasses = color === "secondary" ? "bg-secondary" : color === "primary" ? "bg-primary" : color === "accent" ? "bg-accent" : "bg-accent";
 
     return (
         <article className="flex flex-col items-center text-center gap-4 max-w-md">
