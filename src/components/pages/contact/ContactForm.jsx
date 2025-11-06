@@ -2,9 +2,9 @@ import CTAButton from "/src/components/commons/CTAButton";
 
 const ContactForm = () => {
     return (
-        <div className="flex flex-col max-w-md w-full overflow-visible px-1">
+        <div className="flex flex-col max-w-md w-full overflow-visible px-1 min-h-0">
             <h2 className="text-2xl font-display font-bold mb-4">Envíanos un mensaje</h2>
-            <form action="" className="flex flex-col gap-3 flex-1 overflow-visible">
+            <form action="" className="flex flex-col gap-3 flex-1 overflow-visible min-h-0">
                 <div className="flex flex-col">
                     <label htmlFor="name" className="text-sm font-medium text-dark mb-1">
                         Nombre

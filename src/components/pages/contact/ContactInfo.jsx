@@ -63,7 +63,7 @@ const ContactInfo = () => {
             </div>
             
             {/* Mapa */}
-            <div className="w-full flex-1 bg-light rounded-lg overflow-hidden min-h-[100px]">
+            <div className="w-full flex-1 bg-light rounded-lg overflow-hidden min-h-[100px] z-1">
                 <Map latitude="10.4851825" longitude="-66.8577697" address="CCCT, Caracas, Venezuela" tileStyle="cartoLight"/>
             </div>
             

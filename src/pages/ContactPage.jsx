@@ -2,18 +2,19 @@ import Header from "/src/components/layout/Header";
 import Footer from "/src/components/layout/Footer";
 import ContactForm from "/src/components/pages/contact/ContactForm"; 
 import ContactInfo from "/src/components/pages/contact/ContactInfo"; 
-import SectionHearder from "/src/components/commons/SectionHeader";
+import SectionHeader from "/src/components/commons/SectionHeader";
 
 const ContactPage = () => {
     return (
         <>
             <Header />
-            <section className="bg-light md:h-[calc(100dvh-88px)] flex flex-col overflow-hidden mb-12">
-                <SectionHearder 
+            <section className="bg-light lg:h-[calc(100dvh-88px)] flex flex-col overflow-hidden pb-12">
+                <SectionHeader 
                     title="Contáctanos"
                     subtitle="Envíanos tus datos y te contactaremos pronto."
+                    margin="small"
                 />
-                <div id="contact" className="bg-light flex-1 px-4 py-4 flex flex-wrap items-stretch justify-center gap-8 md:overflow-hidden overflow-y-auto">
+                <div id="contact" className="bg-light flex-1 px-4 py-4 flex flex-wrap items-stretch justify-center gap-8 lg:overflow-hidden overflow-y-auto min-h-0">
                     <ContactForm />
                     <ContactInfo />
                 </div>
