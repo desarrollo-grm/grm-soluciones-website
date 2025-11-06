@@ -23,30 +23,25 @@ const Features = () => {
         {
             icon:"/assets/icons/email.svg",
             title:"Mensajes y correos masivos",
-        },
-        {
-            icon:"/assets/icons/shield.svg",
-            title:"Homologados por el SENIAT",
-        },
-        {
-            icon:"/assets/icons/magnifying-glass.svg",
-            title:"Software 100% auditable",
         }
     ];
 
+    const colors = ["secondary", "accent", "primary"];
+
     return (
-        <section className="bg-light py-16 px-6">
+        <section className="bg-light lg:h-[calc(100dvh-88px)] py-16 px-6 flex flex-col justify-center gap-12">
             <SectionHeader 
             title="Nuestra solución para centros comerciales"
             subtitle="Software de gestion de condominos"
             />
-            <div className="container mx-auto flex flex-col md:flex-row flex-wrap items-stretch justify-center gap-6">
+            <div className="container mx-auto flex flex-col md:flex-row flex-wrap items-stretch justify-center gap-6 xl:gap-8">
                 {features.map((feature, index) => (
                     <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[280px]">
                         <div className="h-[220px]">
                             <ValueCard
                                 icon={feature.icon}
                                 title={feature.title}
+                                color={colors[index % colors.length]}
                             />
                         </div>
                     </div>
