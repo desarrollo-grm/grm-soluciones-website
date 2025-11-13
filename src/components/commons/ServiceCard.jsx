@@ -25,11 +25,16 @@ const ServiceCard = ({ service, color, isSquare, isFill, onMouseEnter, onMouseLe
 
     return (
         <div
+            role="button"
+            tabIndex={0}
+            aria-label={service.title}
+            onClick={() => window.location.href = service.link}
+            //onKeyDown={() => window.location.href = service.link}
             className={`
                 rounded-xl p-8 shadow-lg flex flex-col items-center justify-center
                 ${cardWidth}
                 h-[160px]
-                ${colorClasses} text-white`
+                ${colorClasses} text-white cursor-pointer`
             }
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}

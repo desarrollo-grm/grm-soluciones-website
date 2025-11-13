@@ -9,7 +9,8 @@ const services = [
             "Soporte técnico especializado",
             "Desarrollos a la medida"
         ],
-        icon: "/assets/icons/verified.svg"
+        icon: "/assets/icons/verified.svg",
+        link: "#"
     },
     {
         id: 2,
@@ -21,7 +22,8 @@ const services = [
             "Mensajería de texto",
             "Integración de desarrollos"
         ],
-        icon: "/assets/icons/facturacion.svg"
+        icon: "/assets/icons/facturacion.svg",
+        link: "/facturacion-digital"
     },
     {
         id: 3,
@@ -33,7 +35,8 @@ const services = [
             "Automatización de tareas administrativas",
             "Comunicación masiva"
         ],
-        icon: "/assets/icons/condominio.svg"
+        icon: "/assets/icons/condominio.svg",
+        link: "/condominio"
     },
     {
         id: 4,
@@ -45,7 +48,8 @@ const services = [
             "Actualización de software fiscal",
             "Asesoría en cumplimiento fiscal"
         ],
-        icon: "/assets/icons/hardware.svg"
+        icon: "/assets/icons/hardware.svg",
+        link: "#"
     },
     {
         id: 5,
@@ -57,7 +61,8 @@ const services = [
             "Optimización de procesos administrativos",
             "Capacitación personalizada"
         ],
-        icon: "/assets/icons/data.svg"
+        icon: "/assets/icons/data.svg",
+        link: "#"
     },
     {
         id: 6,
@@ -69,7 +74,8 @@ const services = [
             "Actualizaciones de software",
             "Capacitación técnica"
         ],
-        icon: "/assets/icons/soporte.svg"
+        icon: "/assets/icons/soporte.svg",
+        link: "#"
     }
 ];
 
