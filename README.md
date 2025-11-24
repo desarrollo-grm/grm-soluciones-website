@@ -1,16 +1,121 @@
-# React + Vite
+# GRM Soluciones
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Corporate website for GRM Soluciones, a technology solutions provider specializing in digital services for businesses and condominiums.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** 19.1.1 - Modern UI library
+- **Vite** 7.1.7 - Lightning-fast build tool
+- **React Router** 7.9.5 - Client-side routing
+- **Tailwind CSS** 4.1.16 - Utility-first CSS framework
+- **Leaflet** 1.9.4 - Interactive maps
+- **React Leaflet** 5.0.0 - React components for Leaflet
 
-## React Compiler
+## 📋 Features
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Multi-page Application** with client-side routing
+- **Service Pages**:
+  - Digital Invoicing (`/facturacion-digital`)
+  - Condominium Management (`/condominio`)
+  - Technical Support (`/soporte`)
+- **Corporate Pages**:
+  - Home page with services showcase
+  - About Us with company values and objectives
+  - Contact page with interactive map
+  - Blog with articles
+- **Responsive Design** with Tailwind CSS
+- **Interactive Maps** using Leaflet
+- **Reusable Components** for consistent UI
 
-## Expanding the ESLint configuration
+## 🏗️ Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+grm-soluciones/
+├── src/
+│   ├── components/
+│   │   ├── commons/        # Reusable UI components
+│   │   ├── layout/         # Header, Footer
+│   │   └── pages/          # Page-specific components
+│   ├── data/               # Static data (articles, clients, services)
+│   ├── pages/              # Page components
+│   └── styles/             # Global styles
+├── assets/                 # Images, icons, and static assets
+│   ├── articles/
+│   ├── clients/
+│   ├── icons/
+│   ├── images/
+│   └── partners/
+└── public/                 # Public static files
+```
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd grm-soluciones
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## 📜 Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## 🎨 Key Components
+
+### Commons
+- `ArticleCard` - Blog article preview cards
+- `BenefitCard` - Service benefits display
+- `Carousel` - Image/content carousel
+- `ServiceCard` - Service offering cards
+- `Map` - Interactive Leaflet map
+- `CTAButton` - Call-to-action button
+
+### Pages
+- **HomePage** - Main landing page with services
+- **AboutUsPage** - Company information and values
+- **ContactPage** - Contact form and location
+- **FacturacionDigitalPage** - Digital invoicing service
+- **CondominioPage** - Condominium management service
+- **SoportePage** - Technical support service
+- **Blog** - Blog listing page
+- **BlogPost** - Individual blog post view
+
+## 🚀 Deployment
+
+Build the production-ready application:
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist/` directory, ready for deployment to any static hosting service.
+
+## 📄 License
+
+Private project - All rights reserved.
+
+---
+
+Built with ❤️ by Rafael Sagués - GRM Soluciones
