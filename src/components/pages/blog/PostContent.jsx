@@ -4,6 +4,7 @@ import { getPost, getRelatedPosts } from '/src/data/posts';
 import PostCard from '/src/components/commons/PostCard';
 import CTAButton from '/src/components/commons/CTAButton';
 import PortableTextRenderer from '/src/components/commons/PortableTextRenderer';
+import { urlFor } from '../../../sanity/sanity';
 
 const PostContent = () => {
     const { slug } = useParams();
@@ -18,8 +19,9 @@ const PostContent = () => {
                 const fetchedPost = await getPost(slug);
                 if (fetchedPost) {
                     setPost(fetchedPost);
+                    console.log('Post fetched:', fetchedPost);
                     // Fetch related posts
-                    const related = await getRelatedPosts(fetchedPost._id, fetchedPost.tags, 3);
+                    const related = await getRelatedPosts(fetchedPost.id, fetchedPost.categories, 3);
                     setRelatedPosts(related);
                 }
             } catch (error) {
@@ -62,12 +64,6 @@ const PostContent = () => {
         );
     }
 
-    const formattedDate = new Date(post.publishedAt).toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-
     return (
         <div className="space-y-8">
             {/* Header */}
@@ -78,7 +74,7 @@ const PostContent = () => {
                 
                 {/* Categories */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                    {post.tags.map((tag, index) => (
+                    {post.categories.map((tag, index) => (
                         <span 
                             key={index}
                             className={`px-4 py-1.5 rounded-full text-sm font-semibold ${
@@ -94,7 +90,7 @@ const PostContent = () => {
 
                 {/* Meta */}
                 <div className="flex items-center gap-4 text-dark/60 mb-8">
-                    <span>Publicado el {formattedDate}</span>
+                    <span>Publicado el {post.date}</span>
                     <span className="w-1 h-1 bg-dark/60 rounded-full"></span>
                     <span>Lectura de {post.readtime} minutos</span>
                 </div>
@@ -102,7 +98,7 @@ const PostContent = () => {
                 {/* Featured Image */}
                 <div className="relative w-full rounded-2xl overflow-hidden mb-8">
                     <img 
-                        src={post.coverImage} 
+                        src={post.image} 
                         alt={post.title}
                         className="w-full h-auto object-cover"
                     />

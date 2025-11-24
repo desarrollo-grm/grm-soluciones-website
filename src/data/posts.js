@@ -5,6 +5,7 @@ import {
   getFilteredPosts,
   getPostsCount 
 } from '/src/sanity/queries';
+import { urlFor } from '/src/sanity/sanity';
 
 // Products and services with their tag mappings
 export const products = [
@@ -52,9 +53,8 @@ const calculateReadTime = (content) => {
  * Format a Sanity post for display in PostCard component
  */
 export const formatPost = (post) => ({
-  id: post._id,
   slug: post.slug,
-  image: post.coverImage,
+  image: post.coverImage.asset.url || urlFor(post.coverImage).url(),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,
@@ -65,6 +65,27 @@ export const formatPost = (post) => ({
   }),
   readTime: `${post.readtime || calculateReadTime(post.content)} minutos de lectura`
 });
+
+/**
+ * 
+ * Format a Sanity post for full page display
+ */
+export const formatFullPost = (post) => ({
+  id: post._id,
+  slug: post.slug,
+  image: post.coverImage.asset.url || urlFor(post.coverImage).url(),
+  categories: post.tags,
+  title: post.title,
+  excerpt: post.excerpt,
+  date: new Date(post.publishedAt).toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }),
+  readtime: post.readtime || calculateReadTime(post.content),
+  content: post.content
+});
+
 
 /**
  * Get all posts formatted for display
@@ -78,7 +99,7 @@ export const getFormattedPosts = async (start = 0, end = 100) => {
  * Get a single post by slug
  */
 export const getPost = async (slug) => {
-  return await getPostBySlug(slug);
+  return formatFullPost(await getPostBySlug(slug));
 };
 
 /**
