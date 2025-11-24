@@ -66,7 +66,7 @@ const PostCard = ({ post, featured = false, compact = false }) => {
                             </h3>
 
                             {/* Excerpt */}
-                            <p className="text-dark/80 text-sm md:text-base lg:text-lg mb-4 md:mb-6">
+                            <p className="text-dark/80 text-sm line-clamp-5 md:text-base lg:text-lg mb-4 md:mb-6">
                                 {excerpt}
                             </p>
 
