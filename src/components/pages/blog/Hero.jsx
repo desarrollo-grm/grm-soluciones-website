@@ -1,10 +1,28 @@
+import { useState, useEffect } from 'react';
 import SectionHeader from '/src/components/commons/SectionHeader';
 import PostCard from '/src/components/commons/PostCard';
 import { getFormattedPosts } from '/src/data/posts';
 
 const Hero = () => {
-    // Get the first post as featured
-    const featuredPost = getFormattedPosts()[0];
+    const [featuredPost, setFeaturedPost] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchFeaturedPost = async () => {
+            setLoading(true);
+            try {
+                const posts = await getFormattedPosts(0, 1);
+                setFeaturedPost(posts[0]);
+                console.log('Featured post fetched:', posts[0]);
+            } catch (error) {
+                console.error('Error fetching featured post:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFeaturedPost();
+    }, []);
 
     return (
         <section className="bg-light pb-16 pt-8 md:pb-20 md:pt-10">
@@ -21,10 +39,18 @@ const Hero = () => {
                         Creemos que te podría interesar
                     </h3>
                     <div className="lg:h-[400px]">
-                        <PostCard 
-                            post={featuredPost}
-                            featured={true}
-                        />
+                        {loading ? (
+                            <div className="animate-pulse">
+                                <div className="bg-gray-200 h-64 lg:h-[400px] rounded-2xl"></div>
+                            </div>
+                        ) : featuredPost ? (
+                            <PostCard 
+                                post={featuredPost}
+                                featured={true}
+                            />
+                        ) : (
+                            <p className="text-dark/60 text-center">No hay posts disponibles.</p>
+                        )}
                     </div>
                 </div>
             </div>

@@ -16,6 +16,8 @@ const Posts = () => {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [postsData, setPostsData] = useState({ currentPosts: [], totalPages: 0 });
     const postsPerPage = 4;
 
     // Initialize state from URL params
@@ -25,15 +27,31 @@ const Posts = () => {
         if (product) setSelectedProducts([product]);
     }, [search, category, product]);
 
-    // Get filtered and paginated posts (skip first post which is featured in Hero)
-    const { currentPosts, totalPages } = getFilteredPaginatedPosts(
-        searchTerm,
-        selectedCategories,
-        selectedProducts,
-        currentPage,
-        postsPerPage,
-        true // skipFirst parameter
-    );
+    // Fetch posts when filters change
+    useEffect(() => {
+        const fetchPosts = async () => {
+            setLoading(true);
+            try {
+                const data = await getFilteredPaginatedPosts(
+                    searchTerm,
+                    selectedCategories,
+                    selectedProducts,
+                    currentPage,
+                    postsPerPage,
+                    true // skipFirst parameter
+                );
+                setPostsData(data);
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPosts();
+    }, [searchTerm, selectedCategories, selectedProducts, currentPage]);
+
+    const { currentPosts, totalPages } = postsData;
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -71,16 +89,33 @@ const Posts = () => {
                 <div className="grid lg:grid-cols-[1fr_350px] gap-8 lg:gap-12">
                     {/* Main Content */}
                     <div>
-                        {/* Posts Grid */}
-                        <div className="grid md:grid-cols-2 gap-6 mb-8">
-                            {currentPosts.map(post => (
-                                <PostCard 
-                                    key={post.id}
-                                    post={post}
-                                    featured={false}
-                                />
-                            ))}
-                        </div>
+                        {/* Loading State */}
+                        {loading ? (
+                            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                                {[...Array(postsPerPage)].map((_, i) => (
+                                    <div key={i} className="animate-pulse">
+                                        <div className="bg-gray-200 h-48 rounded-2xl mb-4"></div>
+                                        <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                                        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : currentPosts.length === 0 ? (
+                            <div className="text-center py-12">
+                                <p className="text-dark/60 text-lg">No se encontraron artículos que coincidan con tu búsqueda.</p>
+                            </div>
+                        ) : (
+                            /* Posts Grid */
+                            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                                {currentPosts.map(post => (
+                                    <PostCard 
+                                        key={post.id}
+                                        post={post}
+                                        featured={false}
+                                    />
+                                ))}
+                            </div>
+                        )}
 
                         {/* Pagination */}
                         {totalPages > 1 && (

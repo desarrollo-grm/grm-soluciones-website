@@ -1,13 +1,50 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { posts, getRelatedPosts } from '/src/data/posts';
+import { getPost, getRelatedPosts } from '/src/data/posts';
 import PostCard from '/src/components/commons/PostCard';
 import CTAButton from '/src/components/commons/CTAButton';
+import PortableTextRenderer from '/src/components/commons/PortableTextRenderer';
 
 const PostContent = () => {
     const { slug } = useParams();
+    const [post, setPost] = useState(null);
+    const [relatedPosts, setRelatedPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
     
-    // Find the post by slug
-    const post = posts.find(p => p.slug === slug);
+    useEffect(() => {
+        const fetchPost = async () => {
+            setLoading(true);
+            try {
+                const fetchedPost = await getPost(slug);
+                if (fetchedPost) {
+                    setPost(fetchedPost);
+                    // Fetch related posts
+                    const related = await getRelatedPosts(fetchedPost._id, fetchedPost.tags, 3);
+                    setRelatedPosts(related);
+                }
+            } catch (error) {
+                console.error('Error fetching post:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPost();
+    }, [slug]);
+
+    if (loading) {
+        return (
+            <div className="animate-pulse space-y-8">
+                <div className="h-12 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-64 bg-gray-200 rounded-2xl"></div>
+                <div className="space-y-4">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                </div>
+            </div>
+        );
+    }
     
     if (!post) {
         return (
@@ -30,9 +67,6 @@ const PostContent = () => {
         month: '2-digit',
         year: 'numeric'
     });
-
-    // Get related posts (same tags, excluding current post)
-    const relatedPosts = getRelatedPosts(post.id, post.tags, 3);
 
     return (
         <div className="space-y-8">
@@ -62,7 +96,7 @@ const PostContent = () => {
                 <div className="flex items-center gap-4 text-dark/60 mb-8">
                     <span>Publicado el {formattedDate}</span>
                     <span className="w-1 h-1 bg-dark/60 rounded-full"></span>
-                    <span>Lectura de {post.readTime} minutos</span>
+                    <span>Lectura de {post.readtime} minutos</span>
                 </div>
 
                 {/* Featured Image */}
@@ -76,16 +110,9 @@ const PostContent = () => {
             </div>
 
             {/* Content */}
-            <div 
-                className="prose prose-lg max-w-none
-                    prose-headings:font-display prose-headings:font-bold prose-headings:text-dark
-                    prose-p:text-dark/80 prose-p:text-lg prose-p:leading-relaxed
-                    prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
-                    prose-strong:text-dark prose-strong:font-bold
-                    prose-ul:text-dark/80 prose-ol:text-dark/80
-                    prose-img:rounded-xl"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <div className="space-y-4">
+                <PortableTextRenderer content={post.content} />
+            </div>
 
             {/* CTA Section */}
             <div className="bg-white rounded-2xl p-8 shadow-lg md:p-10 text-center my-12">
