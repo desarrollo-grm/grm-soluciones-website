@@ -6,11 +6,6 @@ import {
   getPostsCount 
 } from '/src/sanity/queries';
 
-// Keep old posts array for fallback (commented out)
-// export const posts = [ ... ];
-
-
-
 // Products and services with their tag mappings
 export const products = [
   { name: 'Condominio Sagúes', tag: 'Condominio' },
@@ -31,6 +26,29 @@ export const categories = [
 ];
 
 /**
+ * Calculate read time based on content word count
+ * Assumes average reading speed of 200 words per minute
+ */
+const calculateReadTime = (content) => {
+  if (!content || !Array.isArray(content)) return 5; // Default fallback
+  
+  let wordCount = 0;
+  
+  content.forEach(block => {
+    if (block._type === 'block' && block.children) {
+      block.children.forEach(child => {
+        if (child.text) {
+          wordCount += child.text.split(/\s+/).filter(word => word.length > 0).length;
+        }
+      });
+    }
+  });
+  
+  const minutes = Math.ceil(wordCount / 200);
+  return minutes > 0 ? minutes : 1; // Minimum 1 minute
+};
+
+/**
  * Format a Sanity post for display in PostCard component
  */
 export const formatPost = (post) => ({
@@ -45,7 +63,7 @@ export const formatPost = (post) => ({
     month: '2-digit',
     year: 'numeric'
   }),
-  readTime: `${post.readtime} minutos de lectura`
+  readTime: `${post.readtime || calculateReadTime(post.content)} minutos de lectura`
 });
 
 /**
