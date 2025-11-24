@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { posts, getFormattedPosts } from '/src/data/posts';
+import { posts, getRelatedPosts } from '/src/data/posts';
 import PostCard from '/src/components/commons/PostCard';
 import CTAButton from '/src/components/commons/CTAButton';
 
@@ -32,9 +32,7 @@ const PostContent = () => {
     });
 
     // Get related posts (same tags, excluding current post)
-    const relatedPosts = getFormattedPosts()
-        .filter(p => p.id !== post.id && p.categories.some(cat => post.tags.includes(cat)))
-        .slice(0, 3);
+    const relatedPosts = getRelatedPosts(post.id, post.tags, 3);
 
     return (
         <div className="space-y-8">

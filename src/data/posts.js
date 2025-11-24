@@ -830,3 +830,9 @@ export const getFilteredPaginatedPosts = (
   
   return paginatePosts(filtered, page, postsPerPage);
 };
+
+export const getRelatedPosts = (postId, postTags, limit = 3) => {
+  return getFormattedPosts()
+    .filter(p => p.id !== postId && p.categories.some(cat => postTags.includes(cat)))
+    .slice(0, limit);
+};
