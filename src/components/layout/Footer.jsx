@@ -33,8 +33,8 @@ const Footer = () => {
                         <h3 className="text-xl font-display font-bold mb-4">Navegación</h3>
                         <ul className="space-y-2">
                             <li><a href="/about-us" className="hover:underline">Conócenos</a></li>
-                            <li><a href="#" className="hover:underline">Productos</a></li>
-                            <li><a href="#" className="hover:underline">Servicio</a></li>
+                            <li><a href="/#services" className="hover:underline">Productos</a></li>
+                            <li><a href="/#services" className="hover:underline">Servicio</a></li>
                             <li><a href="#" className="hover:underline">Blog</a></li>
                             <li><a href="/contact" className="hover:underline">Contáctanos</a></li>
                         </ul>
@@ -44,12 +44,12 @@ const Footer = () => {
                     <div>
                         <h3 className="text-xl font-display font-bold mb-4">Servicios y productos</h3>
                         <ul className="space-y-2">
-                            <li><a href="#" className="hover:underline">Saint e integraciones</a></li>
+                            <li><a href="/saint" className="hover:underline">Saint e integraciones</a></li>
                             <li><a href="/facturacion-digital" className="hover:underline">Facturación digital</a></li>
                             <li><a href="/condominio" className="hover:underline">Condominio</a></li>
-                            <li><a href="#" className="hover:underline">Equipos y máquinas fiscales</a></li>
-                            <li><a href="#" className="hover:underline">Asesoría integral</a></li>
-                            <li><a href="#" className="hover:underline">Soporte integral</a></li>
+                            <li><a href="/equipos" className="hover:underline">Equipos y máquinas fiscales</a></li>
+                            <li><a href="/asesoria" className="hover:underline">Asesoría integral</a></li>
+                            <li><a href="/soporte" className="hover:underline">Soporte integral</a></li>
                         </ul>
                     </div>
 
