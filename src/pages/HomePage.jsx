@@ -15,7 +15,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchArticles = async () => {
             try {
-                const posts = await getPostsForHome(3);
+                const posts = await getPostsForHome(4);
                 setArticles(posts);
             } catch (error) {
                 console.error('Error fetching articles:', error);

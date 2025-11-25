@@ -8,11 +8,13 @@ const Articles = ({articles}) => {
                 <UnderlinedTitle color="primary">Nuestros últimos artículos</UnderlinedTitle>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 px-8">
-                    {articles.map((article) => (
-                        <PostCard
+                    {articles.map((article, index) => (
+                        <div
                             key={article.id}
-                            post={article}
-                        />
+                            className={index === 3 ? 'hidden md:block lg:hidden' : ''}
+                        >
+                            <PostCard post={article} />
+                        </div>
                     ))}
                 </div>
             </div>
