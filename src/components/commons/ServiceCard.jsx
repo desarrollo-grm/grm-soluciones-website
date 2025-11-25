@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const ServiceCard = ({ service, featured = false, color }) => {
     // Map color prop to Tailwind classes
     const colorClass = color === 'primary' ? 'bg-primary' : 
@@ -7,14 +9,12 @@ const ServiceCard = ({ service, featured = false, color }) => {
 
     if (featured) {
         // Featured card: horizontal layout
+        const CardWrapper = service.link ? Link : 'div';
         return (
-            <div
-                role="button"
-                tabIndex={0}
+            <CardWrapper
+                to={service.link || undefined}
                 aria-label={service.title}
-                onClick={() => window.location.href = service.link}
-                onKeyDown={(e) => e.key === 'Enter' && (window.location.href = service.link)}
-                className="bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 cursor-pointer w-full p-8 md:p-10"
+                className={`bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 w-full p-8 md:p-10 ${service.link ? 'cursor-pointer' : ''} block`}
             >
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
                     {/* Left Column - Icon (20-25% width) */}
@@ -45,19 +45,17 @@ const ServiceCard = ({ service, featured = false, color }) => {
                         </p>
                     </div>
                 </div>
-            </div>
+            </CardWrapper>
         );
     }
 
     // Standard card: vertical centered layout
+    const CardWrapper = service.link ? Link : 'div';
     return (
-        <div
-            role="button"
-            tabIndex={0}
+        <CardWrapper
+            to={service.link || undefined}
             aria-label={service.title}
-            onClick={() => window.location.href = service.link}
-            onKeyDown={(e) => e.key === 'Enter' && (window.location.href = service.link)}
-            className="bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 cursor-pointer p-8 flex flex-col items-center justify-center text-center h-full min-h-[280px]"
+            className={`bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 p-8 flex flex-col items-center justify-center text-center h-full min-h-[280px] ${service.link ? 'cursor-pointer' : ''} block`}
         >
             {/* Icon */}
             <div className="mb-6">
@@ -86,7 +84,7 @@ const ServiceCard = ({ service, featured = false, color }) => {
             <p className="font-sans text-sm md:text-base text-gray-600 leading-relaxed">
                 {service.description}
             </p>
-        </div>
+        </CardWrapper>
     );
 };
 

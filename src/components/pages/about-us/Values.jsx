@@ -1,5 +1,5 @@
 import SectionHeader from "/src/components/commons/SectionHeader";
-import ValueCard from "/src/components/commons/ValueCard";
+import ServiceCard from "/src/components/commons/ServiceCard";
 
 const Values = () => {
     return (
@@ -13,24 +13,36 @@ const Values = () => {
                 />
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                    <ValueCard
-                        icon="/assets/icons/ethics.svg"
-                        title="Ética"
+                    <ServiceCard
+                        service={{
+                            icon: "/assets/icons/magnifying-glass.svg",
+                            title: "Transparencia Radical",
+                            description: "La verdad por delante y sin letra pequeña. Hablamos claro siempre.",
+                        }}
                         color="secondary"
                     />
-                    <ValueCard
-                        icon="/assets/icons/responsibility.svg"
-                        title="Responsabilidad"
+                    <ServiceCard
+                        service={{
+                            icon: "/assets/icons/lightning.svg",
+                            title: "Agilidad Resolutiva",
+                            description: "No damos vueltas, damos soluciones. Respuestas rápidas a retos complejos.",
+                        }}
                         color="accent"
                     />
-                    <ValueCard
-                        icon="/assets/icons/commitment.svg"
-                        title="Compromiso"
+                    <ServiceCard
+                        service={{
+                            icon: "/assets/icons/star.svg",
+                            title: "Excelencia en la Ejecución",
+                            description: "Obsesionados con la calidad. Entregamos resultados impecables y robustos.",
+                        }}
                         color="accent"
                     />
-                    <ValueCard
-                        icon="/assets/icons/integrity.svg"
-                        title="Integridad"
+                    <ServiceCard
+                        service={{
+                            icon: "/assets/icons/gear.svg",
+                            title: "Innovación con Propósito",
+                            description: "Tecnología que suma valor real a tu negocio, no solo moda pasajera.",
+                        }}
                         color="secondary"
                     />
                 </div>

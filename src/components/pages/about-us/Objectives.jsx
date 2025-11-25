@@ -16,14 +16,14 @@ const Objetivos = () => {
                     <ObjectiveCard
                         icon="/assets/icons/mission.svg"
                         title="Nuestra misión"
-                        description="Lorem ipsum dolor sit amet, dipiscing elit. Pellentesque auctor sed ante sed iaculis."
+                        description="Ser el motor tecnológico de nuestros clientes, brindando soluciones integrales que faciliten su éxito y tranquilidad."
                         color="accent"
                         imageSize={26}
                     />
                     <ObjectiveCard
                         icon="/assets/icons/vision.svg"
                         title="Nuestra visión"
-                        description="Lorem ipsum dolor sit amet, dipiscing elit. Pellentesque auctor sed ante sed iaculis."
+                        description="Ser el referente líder en innovación tecnológica, redefiniendo los estándares de calidad y servicio en el mercado."
                         color="secondary"
                         imageSize={20}
                     />
