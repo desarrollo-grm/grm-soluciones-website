@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="container mx-auto max-w-6xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[auto_auto_auto_1fr] gap-12">
                     {/* Logo Section */}
-                    <div className="flex flex-col items-start lg:items-center">
+                    <div className="flex flex-col items-center md:items-start">
                         <img 
                             src="/assets/logo-grm.svg" 
                             alt="GRM Soluciones" 
@@ -31,19 +31,19 @@ const Footer = () => {
                     </div>
 
                     {/* Navegación */}
-                    <div>
+                    <div className='hidden md:block'>
                         <h3 className="text-xl font-display font-bold mb-4">Navegación</h3>
                         <ul className="space-y-2">
                             <li><Link to="/about-us" className="hover:underline">Conócenos</Link></li>
                             <li><a href="/#services" className="hover:underline">Productos</a></li>
-                            <li><a href="/#services" className="hover:underline">Servicio</a></li>
+                            <li><a href="/#services" className="hover:underline">Servicios</a></li>
                             <li><Link to="/blog" className="hover:underline">Blog</Link></li>
                             <li><Link to="/contact" className="hover:underline">Contáctanos</Link></li>
                         </ul>
                     </div>
 
                     {/* Servicios y productos */}
-                    <div>
+                    <div className='hidden md:block'>
                         <h3 className="text-xl font-display font-bold mb-4">Servicios y productos</h3>
                         <ul className="space-y-2">
                             {getAllForFooter().map((service, index) => (
