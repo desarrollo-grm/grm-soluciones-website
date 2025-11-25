@@ -53,6 +53,7 @@ const calculateReadTime = (content) => {
  * Format a Sanity post for display in PostCard component
  */
 export const formatPost = (post) => ({
+  id: post._id,
   slug: post.slug,
   image: post.coverImage.asset.url || urlFor(post.coverImage).url(),
   categories: post.tags,
