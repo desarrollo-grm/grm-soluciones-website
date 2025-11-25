@@ -3,7 +3,7 @@ import ServiceCard from "/src/components/commons/ServiceCard";
 
 const Values = () => {
     return (
-        <section className="bg-light py-16 px-4 min-h-[calc(100dvh-88px)] flex items-center">
+        <section className="bg-light py-16 px-4 flex items-center">
             <div className="container mx-auto">
                 <SectionHeader 
                     title="Nuestros valores" 

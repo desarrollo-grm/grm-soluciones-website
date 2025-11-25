@@ -10,7 +10,7 @@ const Services = () => {
     const standardColors = ["secondary", "secondary", "accent", "accent"];
 
     return (
-        <section id="services" className="bg-light py-12 px-4 min-h-[calc(100dvh-88px)] scroll-mt-[88px]">
+        <section id="services" className="bg-light py-12 px-4 scroll-mt-[88px]">
             <UnderlinedTitle color="secondary">Nuestros productos y servicios</UnderlinedTitle>
             <div className="container mx-auto mt-10 max-w-6xl">
                 {/* Featured Card - Full Width */}

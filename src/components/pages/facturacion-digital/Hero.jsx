@@ -2,7 +2,7 @@ import CTAButton from "/src/components/commons/CTAButton";
 
 const Hero = () => {
     return (
-        <section className="bg-light min-h-[calc(100dvh-88px)] flex items-center overflow-hidden py-16 px-6">
+        <section className="bg-light lg:min-h-[calc(100dvh-88px)] flex items-center overflow-hidden py-16 px-6">
             <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 lg:gap-16">
                 {/* Left Side - Text Content */}
                 <div className="flex-1 flex flex-col gap-6 max-w-2xl">

@@ -21,7 +21,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-light min-h-[calc(100dvh-88px)]">
+    <section className="py-16 px-4 bg-light lg:min-h-[calc(100dvh-88px)]">
       <div className="container mx-auto px-6">
         <SectionHeader 
           title="Nuestra Trayectoria"

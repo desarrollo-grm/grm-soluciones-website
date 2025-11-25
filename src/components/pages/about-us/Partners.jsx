@@ -2,7 +2,7 @@ import SectionHeader from "/src/components/commons/SectionHeader";
 import LogoCard from "/src/components/commons/LogoCard";
 const Partners = ({ partners }) => {
     return (
-        <section className="bg-light py-16 px-4 min-h-[calc(100dvh-88px)] flex flex-col items-center justify-center">
+        <section className="bg-light py-16 px-4 flex flex-col items-center justify-center">
             <SectionHeader title="Nuestros aliados comerciales"
             subtitle="Confian en nosotros para representarlos"
             titleColor="secondary"
