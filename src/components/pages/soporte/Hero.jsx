@@ -16,7 +16,7 @@ const Hero = () => {
                         Con el entendimiento y las necesidades de tu empresa en el centro, brindamos una asesoría integral y acompañada 
                         para garantizar el éxito continuo del uso de su Módulo Administrativo, Contable y Gestión de talento humano.
                     </p>
-                    <CTAButton onClick={() => window.location.href = '/contact'}>
+                    <CTAButton to="/contact">
                         Solicita Información
                     </CTAButton>
                 </div>

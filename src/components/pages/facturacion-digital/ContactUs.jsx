@@ -13,7 +13,7 @@ const ContactUs = () => {
                             Ponte en contacto con nuestro equipo de expertos para una consulta sin compromiso.
                         </p>
                         <div className="flex justify-center">
-                            <CTAButton onClick={() => window.location.href = '/contact'}>
+                            <CTAButton to="/contact">
                                 Solicita una demo
                             </CTAButton>
                         </div>

@@ -15,7 +15,7 @@ const ContactUs = () => {
             />
             <p className="text-lg text-dark font-normal text-center max-w-2xl">Ya estos 5 grandes centros comerciales confían en nosotros.</p>
             <Carousel objects={ccClients} animated={false}/>
-            <CTAButton onClick={() => window.location.href = '/contact'}>
+            <CTAButton to="/contact">
                 Solicita una demo
             </CTAButton>
         </section>

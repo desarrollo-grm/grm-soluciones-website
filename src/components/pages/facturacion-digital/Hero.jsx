@@ -17,7 +17,7 @@ const Hero = () => {
                         y optimizan el proceso de gestión de facturas para empresas
                         de todos los tamaños.
                     </p>
-                    <CTAButton onClick={() => window.location.href = '/contact'}>
+                    <CTAButton to="/contact">
                         Solicita Información
                     </CTAButton>
                 </div>

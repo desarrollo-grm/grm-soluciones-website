@@ -11,7 +11,7 @@ const Hero = () => {
                     <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-medium mb-8">
                         En GRM Soluciones combinamos experiencia, innovación y atención personalizada.
                     </h2>
-                    <CTAButton onClick={() => window.location.href = '/about-us'}>Conócenos</CTAButton>
+                    <CTAButton to="/about-us">Conócenos</CTAButton>
                 </div>
                 <div className="h-full flex items-start justify-start flex-shrink-0">
                     <img src="../../assets/images/partners.png" alt="Guiando a nuestros clientes" className="h-full w-auto object-contain"/>
