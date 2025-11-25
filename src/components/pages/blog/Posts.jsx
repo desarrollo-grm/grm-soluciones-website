@@ -119,14 +119,15 @@ const Posts = () => {
 
                         {/* Pagination */}
                         {totalPages > 1 && (
-                            <div className="flex justify-center items-center gap-2 flex-wrap">
+                            <div className="flex justify-center items-center gap-1 sm:gap-2 flex-wrap">
                                 {/* Previous Button */}
                                 <button
                                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                                     disabled={currentPage === 1}
-                                    className="px-3 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-gray-200 text-dark hover:bg-gray-300"
+                                    className="px-2 sm:px-3 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-gray-200 text-dark hover:bg-gray-300 text-sm sm:text-base"
                                 >
-                                    ← Anterior
+                                    <span className="hidden sm:inline">← Anterior</span>
+                                    <span className="sm:hidden">←</span>
                                 </button>
 
                                 {/* Page Numbers */}
@@ -140,7 +141,7 @@ const Posts = () => {
                                                 <button
                                                     key={i}
                                                     onClick={() => setCurrentPage(i)}
-                                                    className={`w-10 h-10 rounded-full font-semibold transition-colors ${
+                                                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full font-semibold transition-colors text-sm sm:text-base ${
                                                         currentPage === i
                                                             ? 'bg-secondary text-white'
                                                             : 'bg-gray-200 text-dark hover:bg-gray-300'
@@ -156,7 +157,7 @@ const Posts = () => {
                                             <button
                                                 key={1}
                                                 onClick={() => setCurrentPage(1)}
-                                                className={`w-10 h-10 rounded-full font-semibold transition-colors ${
+                                                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full font-semibold transition-colors text-sm sm:text-base ${
                                                     currentPage === 1
                                                         ? 'bg-secondary text-white'
                                                         : 'bg-gray-200 text-dark hover:bg-gray-300'
@@ -182,7 +183,7 @@ const Posts = () => {
                                         
                                         // Add ellipsis if gap after first page
                                         if (middlePages[0] > 2) {
-                                            pages.push(<span key="ellipsis-start" className="px-2">...</span>);
+                                            pages.push(<span key="ellipsis-start" className="px-1 sm:px-2 text-sm sm:text-base">...</span>);
                                         }
                                         
                                         // Add middle pages
@@ -191,7 +192,7 @@ const Posts = () => {
                                                 <button
                                                     key={pageNum}
                                                     onClick={() => setCurrentPage(pageNum)}
-                                                    className={`w-10 h-10 rounded-full font-semibold transition-colors ${
+                                                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full font-semibold transition-colors text-sm sm:text-base ${
                                                         currentPage === pageNum
                                                             ? 'bg-secondary text-white'
                                                             : 'bg-gray-200 text-dark hover:bg-gray-300'
@@ -204,7 +205,7 @@ const Posts = () => {
                                         
                                         // Add ellipsis if gap before last page
                                         if (middlePages[middlePages.length - 1] < totalPages - 1) {
-                                            pages.push(<span key="ellipsis-end" className="px-2">...</span>);
+                                            pages.push(<span key="ellipsis-end" className="px-1 sm:px-2 text-sm sm:text-base">...</span>);
                                         }
                                         
                                         // Always show last page
@@ -212,7 +213,7 @@ const Posts = () => {
                                             <button
                                                 key={totalPages}
                                                 onClick={() => setCurrentPage(totalPages)}
-                                                className={`w-10 h-10 rounded-full font-semibold transition-colors ${
+                                                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full font-semibold transition-colors text-sm sm:text-base ${
                                                     currentPage === totalPages
                                                         ? 'bg-secondary text-white'
                                                         : 'bg-gray-200 text-dark hover:bg-gray-300'
@@ -230,9 +231,10 @@ const Posts = () => {
                                 <button
                                     onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                                     disabled={currentPage === totalPages}
-                                    className="px-3 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-gray-200 text-dark hover:bg-gray-300"
+                                    className="px-2 sm:px-3 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-gray-200 text-dark hover:bg-gray-300 text-sm sm:text-base"
                                 >
-                                    Siguiente →
+                                    <span className="hidden sm:inline">Siguiente →</span>
+                                    <span className="sm:hidden">→</span>
                                 </button>
                             </div>
                         )}

@@ -116,7 +116,7 @@ const PostContent = () => {
                 <p className="text-dark/80 mb-6 max-w-2xl mx-auto">
                     Optimiza la gestión de tu condominio con nuestra plataforma integral
                 </p>
-                <CTAButton to="/contacto" variant="secondary">
+                <CTAButton to="/contact" variant="secondary">
                     Solicita una demo
                 </CTAButton>
             </div>
