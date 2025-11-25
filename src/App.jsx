@@ -7,10 +7,12 @@ import CondominioPage from '/src/pages/CondominioPage.jsx';
 import SoportePage from '/src/pages/SoportePage.jsx';
 import Blog from '/src/pages/Blog.jsx';
 import BlogPost from '/src/pages/BlogPost.jsx';
+import ScrollToTop from '/src/components/commons/ScrollToTop.jsx';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
