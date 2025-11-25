@@ -12,7 +12,14 @@ const ContactUs = () => {
             subtitle="Lleva tu gestión de condominios al siguiente nivel"
             />
             <p className="text-lg text-dark font-normal text-center max-w-2xl">Ya estos 5 grandes centros comerciales confían en nosotros.</p>
-            <Carousel objects={ccClients} animated={false}/>
+            <div className="w-full">
+                <div className="block lg:hidden">
+                    <Carousel objects={ccClients} animated={true}/>
+                </div>
+                <div className="hidden lg:block">
+                    <Carousel objects={ccClients} animated={false}/>
+                </div>
+            </div>
             <CTAButton to="/contact">
                 Solicita una demo
             </CTAButton>

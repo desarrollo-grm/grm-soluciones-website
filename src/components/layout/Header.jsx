@@ -27,6 +27,10 @@ const Header = () => {
         setOpenDropdown(null);
     };
 
+    const handleDropdownClick = (itemName) => {
+        setOpenDropdown(openDropdown === itemName ? null : itemName);
+    };
+
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
         setOpenDropdown(null); // Close any open dropdowns when toggling menu
@@ -58,6 +62,18 @@ const Header = () => {
         return () => document.removeEventListener('keydown', handleEscapeKey);
     }, [isMobileMenuOpen]);
 
+    // Close dropdown when clicking outside (only for desktop)
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (openDropdown && !isMobileMenuOpen && !event.target.closest('.dropdown-container')) {
+                setOpenDropdown(null);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [openDropdown, isMobileMenuOpen]);
+
     // Prevent body scroll when mobile menu is open
     useEffect(() => {
         if (isMobileMenuOpen) {
@@ -82,11 +98,14 @@ const Header = () => {
             item.dropdown ? (
               <div 
                 key={item.name} 
-                className="relative group"
+                className="relative group dropdown-container"
                 onMouseEnter={() => handleMouseEnter(item.name)}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className="hover:text-orange-400 transition-colors flex items-center gap-1">
+                <button 
+                  onClick={() => handleDropdownClick(item.name)}
+                  className="hover:text-orange-400 transition-colors flex items-center gap-1"
+                >
                   {item.name}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
@@ -99,6 +118,7 @@ const Header = () => {
                         <Link
                           key={subItem.name}
                           to={subItem.path}
+                          onClick={() => setOpenDropdown(null)}
                           className={`block px-4 py-2 hover:bg-secondary hover:text-light transition-colors ${index === 0 ? 'rounded-t-md' : ''} ${index === item.dropdown.length - 1 ? 'rounded-b-md' : ''}`}
                         >
                           {subItem.name}
