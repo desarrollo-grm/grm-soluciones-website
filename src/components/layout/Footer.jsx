@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '/assets/icons';
+import { getAllForFooter } from '/src/data/services.js';
 
 const Footer = () => {
     return (
@@ -45,12 +46,13 @@ const Footer = () => {
                     <div>
                         <h3 className="text-xl font-display font-bold mb-4">Servicios y productos</h3>
                         <ul className="space-y-2">
-                            <li><Link to="/saint" className="hover:underline">Saint e integraciones</Link></li>
-                            <li><Link to="/facturacion-digital" className="hover:underline">Facturación digital</Link></li>
-                            <li><Link to="/condominio" className="hover:underline">Condominio</Link></li>
-                            <li><Link to="/equipos" className="hover:underline">Equipos y máquinas fiscales</Link></li>
-                            <li><Link to="/asesoria" className="hover:underline">Asesoría integral</Link></li>
-                            <li><Link to="/soporte" className="hover:underline">Soporte integral</Link></li>
+                            {getAllForFooter().map((service, index) => (
+                                <li key={index}>
+                                    <Link to={service.link} className="hover:underline">
+                                        {service.title}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 

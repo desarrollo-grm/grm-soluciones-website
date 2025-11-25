@@ -2,7 +2,7 @@ const services = [
     {
         id: 1,
         title: "Saint e integraciones",
-        description: "Sómos representas de casa matriz desde más de 31 años",
+        description: "Somos representantes de casa matriz desde hace más de 31 años, ofreciendo soluciones administrativas y contables robustas y confiables para potenciar tu negocio.",
         bullets: [
             "Implementación y configuración",
             "Capacitación personalizada",
@@ -10,12 +10,14 @@ const services = [
             "Desarrollos a la medida"
         ],
         icon: "/assets/icons/verified.svg",
-        link: "#"
+        link: "/#services",
+        type: "service",
+        isFeatured: true
     },
     {
         id: 2,
         title: "Facturación digital",
-        description: "Sómos representales en facturación digital",
+        description: "Genera y gestiona tus facturas electrónicas.",
         bullets: [
             "Módulos de Saint",
             "Correos Masivos",
@@ -23,12 +25,14 @@ const services = [
             "Integración de desarrollos"
         ],
         icon: "/assets/icons/facturacion.svg",
-        link: "/facturacion-digital"
+        link: "/facturacion-digital",
+        type: "product",
+        isFeatured: false
     },
     {
         id: 3,
         title: "Condominio",
-        description: "Lorem ipsum dolor sit amet, consectetur.",
+        description: "Administración integral para propiedades horizontales.",
         bullets: [
             "Gestión de condominios",
             "Visualización de datos",
@@ -36,12 +40,14 @@ const services = [
             "Comunicación masiva"
         ],
         icon: "/assets/icons/condominio.svg",
-        link: "/condominio"
+        link: "/condominio",
+        type: "product",
+        isFeatured: false
     },
     {
         id: 4,
         title: "Equipos y máquinas fiscales",
-        description: "Sómos representales en facturación digital",
+        description: "Soluciones de hardware para cumplimiento fiscal.",
         bullets: [
             "Venta y renta de equipos fiscales",
             "Mantenimiento y soporte técnico",
@@ -49,25 +55,14 @@ const services = [
             "Asesoría en cumplimiento fiscal"
         ],
         icon: "/assets/icons/hardware.svg",
-        link: "#"
+        link: "/#services",
+        type: "product",
+        isFeatured: false
     },
     {
         id: 5,
-        title: "Asesoría integral",
-        description: "Lorem ipsum dolor sit amet, consectetur.",
-        bullets: [
-            "Asesorías fiscales",
-            "Consultoría de equipos y software",
-            "Optimización de procesos administrativos",
-            "Capacitación personalizada"
-        ],
-        icon: "/assets/icons/data.svg",
-        link: "#"
-    },
-    {
-        id: 6,
-        title: "Soporte técnico",
-        description: "Lorem ipsum dolor sit amet, consectetur.",
+        title: "Soporte y asesoría",
+        description: "Acompañamiento experto para tus operaciones.",
         bullets: [
             "Soporte remoto y en sitio",
             "Mantenimiento preventivo y correctivo",
@@ -75,8 +70,51 @@ const services = [
             "Capacitación técnica"
         ],
         icon: "/assets/icons/soporte.svg",
-        link: "#"
+        link: "/soporte",
+        type: "service",
+        isFeatured: false
     }
 ];
+
+// Helper function to get all services
+export const getServices = () => services;
+
+// Helper function to get products for navigation dropdown
+export const getProductsForNav = () => {
+    return services
+        .filter(service => service.type === "product")
+        .map(service => ({
+            name: service.title,
+            path: service.link
+        }));
+};
+
+// Helper function to get services for navigation dropdown
+export const getServicesForNav = () => {
+    return services
+        .filter(service => service.type === "service")
+        .map(service => ({
+            name: service.title,
+            path: service.link
+        }));
+};
+
+// Helper function to get all services for footer
+export const getAllForFooter = () => {
+    return services.map(service => ({
+        title: service.title,
+        link: service.link
+    }));
+};
+
+// Helper function to get featured service
+export const getFeaturedService = () => {
+    return services.find(service => service.isFeatured === true);
+};
+
+// Helper function to get non-featured services
+export const getNonFeaturedServices = () => {
+    return services.filter(service => service.isFeatured === false);
+};
 
 export default services;

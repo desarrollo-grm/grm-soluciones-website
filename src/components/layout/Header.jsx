@@ -1,21 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import logoGrm from '/assets/logo-grm.svg';
+import { getProductsForNav, getServicesForNav } from '/src/data/services.js';
 
 const Header = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
 
-    const productos = [
-      { name: 'Condominio', path: '/condominio' },
-      { name: 'Facturación Digital', path: '/facturacion-digital' },
-      { name: 'Equipos y máquinas fiscales', path: '/equipos' },
-    ];
-
-    const servicios = [
-        { name: 'Saint e integraciones' , path: '/saint' },
-        { name: 'Soporte Técnico', path: '/soporte' },
-        { name: 'Asesoría Integral', path: '/asesoria' },
-    ];
+    const productos = getProductsForNav();
+    const servicios = getServicesForNav();
 
     const navItems = [
         { name: 'Conócenos', path: '/about-us' },

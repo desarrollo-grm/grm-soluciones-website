@@ -1,77 +1,40 @@
-import { useState, useEffect } from "react";
 import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
 import ServiceCard from "/src/components/commons/ServiceCard";
+import { getFeaturedService, getNonFeaturedServices } from "/src/data/services.js";
 
-const Services = ({ services }) => {
-    const [columnsPerRow, setColumnsPerRow] = useState(3);
-    const [hoveredCardId, setHoveredCardId] = useState(null);
+const Services = () => {
+    const featuredService = getFeaturedService();
+    const standardServices = getNonFeaturedServices();
 
-    useEffect(() => {
-        const updateColumns = () => {
-            const width = window.innerWidth;
-            // Tailwind breakpoints: md = 768px, lg = 1024px
-            if (width >= 1024) {
-                setColumnsPerRow(3);
-            } else if (width >= 768) {
-                setColumnsPerRow(2);
-            } else {
-                setColumnsPerRow(1);
-            }
-        };
-
-        // Initial check
-        updateColumns();
-
-        // Add event listener
-        window.addEventListener('resize', updateColumns);
-
-        // Cleanup
-        return () => window.removeEventListener('resize', updateColumns);
-    }, []);
-
-    const getHoveredRow = () => {
-        if (hoveredCardId === null) return null;
-        const index = hoveredCardId - 1;
-        if (index === -1) return null;
-        return Math.floor(index / columnsPerRow);
-    }
-
-    const isInHoveredRow = (id) => {
-        const hoveredRow = getHoveredRow();
-        if (hoveredRow === null) return false;
-        const index = id - 1;
-        const row = Math.floor(index / columnsPerRow);
-        return row === hoveredRow;
-    }
-
-    const isSquare = (id) => {
-        if (hoveredCardId === null) return false;
-        if (isInHoveredRow(id) && id !== hoveredCardId) {
-            return true;
-        }
-        return false;
-    }
+    const featuredColor = "primary";
+    const standardColors = ["secondary", "secondary", "accent", "accent"];
 
     return (
         <section id="services" className="bg-light py-12 px-4 min-h-[calc(100dvh-88px)] scroll-mt-[88px]">
             <UnderlinedTitle color="secondary">Nuestros productos y servicios</UnderlinedTitle>
             <div className="container mx-auto mt-10 max-w-6xl">
-                <div className="flex flex-wrap items-stretch gap-6">
-                    {services.map((service) => (
+                {/* Featured Card - Full Width */}
+                <div className="mb-8">
+                    <ServiceCard 
+                        service={featuredService} 
+                        featured={true} 
+                        color={featuredColor}
+                    />
+                </div>
+
+                {/* Standard Cards - 2x2 Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {standardServices.map((service, index) => (
                         <ServiceCard 
                             key={service.id} 
                             service={service}
-                            color={((service.id-1) % 2 === 0) ? 'secondary' : 'accent'}
-                            isSquare={isSquare(service.id)}
-                            isFill={service.id === hoveredCardId}
-                            onMouseEnter={() => setHoveredCardId(service.id)}
-                            onMouseLeave={() => setHoveredCardId(null)}
+                            color={standardColors[index]}
                         />
                     ))}
                 </div>
             </div>
         </section>
     );
-}
+};
 
 export default Services;
