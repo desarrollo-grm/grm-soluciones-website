@@ -21,7 +21,7 @@ const Header = () => {
         { name: 'Conócenos', path: '/about-us' },
         { name: 'Productos', dropdown: productos },
         { name: 'Servicios', dropdown: servicios },
-        { name: 'Blog', path: '#' },
+        { name: 'Blog', path: '/blog' },
         { name: 'Contáctanos', path: '/contact' },
     ];
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '/assets/icons';
 
 const Footer = () => {
@@ -32,11 +33,11 @@ const Footer = () => {
                     <div>
                         <h3 className="text-xl font-display font-bold mb-4">Navegación</h3>
                         <ul className="space-y-2">
-                            <li><a href="/about-us" className="hover:underline">Conócenos</a></li>
+                            <li><Link to="/about-us" className="hover:underline">Conócenos</Link></li>
                             <li><a href="/#services" className="hover:underline">Productos</a></li>
                             <li><a href="/#services" className="hover:underline">Servicio</a></li>
-                            <li><a href="#" className="hover:underline">Blog</a></li>
-                            <li><a href="/contact" className="hover:underline">Contáctanos</a></li>
+                            <li><Link to="/blog" className="hover:underline">Blog</Link></li>
+                            <li><Link to="/contact" className="hover:underline">Contáctanos</Link></li>
                         </ul>
                     </div>
 
@@ -44,12 +45,12 @@ const Footer = () => {
                     <div>
                         <h3 className="text-xl font-display font-bold mb-4">Servicios y productos</h3>
                         <ul className="space-y-2">
-                            <li><a href="/saint" className="hover:underline">Saint e integraciones</a></li>
-                            <li><a href="/facturacion-digital" className="hover:underline">Facturación digital</a></li>
-                            <li><a href="/condominio" className="hover:underline">Condominio</a></li>
-                            <li><a href="/equipos" className="hover:underline">Equipos y máquinas fiscales</a></li>
-                            <li><a href="/asesoria" className="hover:underline">Asesoría integral</a></li>
-                            <li><a href="/soporte" className="hover:underline">Soporte integral</a></li>
+                            <li><Link to="/saint" className="hover:underline">Saint e integraciones</Link></li>
+                            <li><Link to="/facturacion-digital" className="hover:underline">Facturación digital</Link></li>
+                            <li><Link to="/condominio" className="hover:underline">Condominio</Link></li>
+                            <li><Link to="/equipos" className="hover:underline">Equipos y máquinas fiscales</Link></li>
+                            <li><Link to="/asesoria" className="hover:underline">Asesoría integral</Link></li>
+                            <li><Link to="/soporte" className="hover:underline">Soporte integral</Link></li>
                         </ul>
                     </div>
 
