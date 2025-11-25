@@ -4,8 +4,6 @@ import CTAButton from '/src/components/commons/CTAButton';
 
 import { ccClients } from '/src/data/clients';
 
-console.log(ccClients);
-
 const ContactUs = () => {
     return (
         <section className="bg-light lg:h-min-[calc(100dvh-88px)] py-16 px-6 flex flex-col justify-center items-center gap-2">

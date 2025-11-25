@@ -13,7 +13,6 @@ const Hero = () => {
             try {
                 const posts = await getFormattedPosts(0, 1);
                 setFeaturedPost(posts[0]);
-                console.log('Featured post fetched:', posts[0]);
             } catch (error) {
                 console.error('Error fetching featured post:', error);
             } finally {

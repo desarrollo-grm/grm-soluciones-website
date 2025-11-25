@@ -19,7 +19,6 @@ const PostContent = () => {
                 const fetchedPost = await getPost(slug);
                 if (fetchedPost) {
                     setPost(fetchedPost);
-                    console.log('Post fetched:', fetchedPost);
                     // Fetch related posts
                     const related = await getRelatedPosts(fetchedPost.id, fetchedPost.categories, 3);
                     setRelatedPosts(related);
