@@ -136,3 +136,11 @@ export const getRelatedPosts = async (postId, postTags, limit = 3) => {
   const posts = await getRelatedPostsFromSanity(postId, postTags, limit);
   return posts.map(formatPost);
 };
+
+/**
+ * Get posts for home page
+ */
+export const getPostsForHome = async (limit = 3) => {
+  const posts = await getAllPosts(0, limit);
+  return posts.map(formatPost);
+};
