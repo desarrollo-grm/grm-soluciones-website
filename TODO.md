@@ -1,0 +1,21 @@
+# TODO
+
+## GRM 
+
+- Content for about 
+- Content for Saint e Intégraciones
+- Content for Equipos y Maquinas fiscales
+
+## DEV
+
+### Heros 
+
+- Big heros adapt badly to small screens
+
+### Blog
+- Custom CTA
+
+### Side wide 
+- Add newsletter
+- Diffrent links to contactanos with filled about page or secret params
+- Contactanos doing something
