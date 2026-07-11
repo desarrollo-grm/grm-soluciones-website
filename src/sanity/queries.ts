@@ -12,8 +12,7 @@ export const POSTS_QUERY = `*[
   coverImage,
   tags,
   publishedAt,
-  readtime,
-  content
+  readtime
 }`;
 
 // Query to get a single post by slug
@@ -29,7 +28,10 @@ export const POST_BY_SLUG_QUERY = `*[
   tags,
   publishedAt,
   readtime,
-  content
+  content,
+  ctaTitle,
+  ctaSubtitle,
+  ctaButton
 }`;
 
 // Query to get related posts by tags

@@ -88,5 +88,26 @@ export const postType = defineType({
       of: [{type: 'block'}],
       validation: (rule) => rule.required().min(1),
     }),
+    defineField({
+      name: 'ctaTitle',
+      title: 'Título del CTA',
+      description: 'Título que se mostrará en la llamada a la acción. (opcional - se calcula automáticamente si está vacío)',
+      type: 'string',
+      validation: (rule) => rule.max(100),
+    }),
+    defineField({
+      name: 'ctaSubtitle',
+      title: 'Subtítulo del CTA',
+      description: 'Subtítulo que se mostrará en la llamada a la acción. (opcional - se calcula automáticamente si está vacío)',
+      type: 'string',
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
+      name: 'ctaButton',
+      title: 'Texto del botón del CTA',
+      description: 'Texto que se mostrará en el botón de la llamada a la acción. (opcional - si vacio será "Solicita una demo" por defecto)',
+      type: 'string',
+      validation: (rule) => rule.max(50),
+    }),
   ],
 })

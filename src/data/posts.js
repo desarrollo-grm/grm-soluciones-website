@@ -50,6 +50,53 @@ const calculateReadTime = (content) => {
 };
 
 /**
+ * CTA-Title and Subtitle default values by products
+ */
+const defaultCTAs = {
+  'Condominio': {
+    ctaTitle: 'Descubre Condominio Sagúes',
+    ctaSubtitle: 'Optimiza la gestión de tu condominio con nuestra solución integral.'
+  },
+  'Facturación': {
+    ctaTitle: 'Transforma tu facturación',
+    ctaSubtitle: 'Implementa la facturación digital y mejora la eficiencia de tu negocio.'
+  },
+  'Saint': {
+    ctaTitle: 'Potencia tu negocio con Saint',
+    ctaSubtitle: 'Descubre cómo Saint puede ayudarte a optimizar tus procesos empresariales.'
+  },
+  'Soporte': {
+    ctaTitle: 'Soporte integral para tu empresa',
+    ctaSubtitle: 'Nuestro equipo de expertos está listo para ayudarte en cualquier momento.'
+  },
+  'Equipos': {
+    ctaTitle: 'Equipos y máquinas fiscales de última generación',
+    ctaSubtitle: 'Asegura la eficiencia y cumplimiento fiscal con nuestros equipos especializados.'
+  },
+  'Asesoría': {
+    ctaTitle: 'Asesoría integral para tu negocio',
+    ctaSubtitle: 'Recibe orientación experta para tomar decisiones estratégicas y crecer.'
+  },
+  'default': {
+    ctaTitle: 'Contáctanos',
+    ctaSubtitle: 'Descubre cómo nuestras soluciones pueden transformar tu negocio.'
+  }
+}
+
+/**
+ * This function returns the default CTA based on the first matching tag.
+ * Tags is an ordered array that contains products and categories. 
+ **/
+const getDefaultCTAbyTags= (tags) => {
+  for (const tag of tags) {
+    if (defaultCTAs[tag]) {
+      return defaultCTAs[tag];
+    }
+  }
+  return defaultCTAs['default']; // Fallback to default if no matching tag is found
+}
+
+/**
  * Format a Sanity post for display in PostCard component
  */
 export const formatPost = (post) => ({
@@ -84,7 +131,10 @@ export const formatFullPost = (post) => ({
     year: 'numeric'
   }),
   readtime: post.readtime || calculateReadTime(post.content),
-  content: post.content
+  content: post.content,
+  ctaTitle: post.ctaTitle || getDefaultCTAbyTags(post.tags).ctaTitle,
+  ctaSubtitle: post.ctaSubtitle || getDefaultCTAbyTags(post.tags).ctaSubtitle,
+  ctaButton: post.ctaButton || 'Solicita una demo'
 });
 
 

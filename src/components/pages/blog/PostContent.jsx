@@ -111,13 +111,13 @@ const PostContent = () => {
             {/* CTA Section */}
             <div className="bg-white rounded-2xl p-8 shadow-lg md:p-10 text-center my-12">
                 <h3 className="font-display text-2xl md:text-3xl font-bold text-dark mb-4">
-                    Prueba el condominio Sagúes
+                    {post.ctaTitle}
                 </h3>
                 <p className="text-dark/80 mb-6 max-w-2xl mx-auto">
-                    Optimiza la gestión de tu condominio con nuestra plataforma integral
+                    {post.ctaSubtitle}
                 </p>
                 <CTAButton to="/contact" variant="secondary">
-                    Solicita una demo
+                    {post.ctaButton}
                 </CTAButton>
             </div>
 

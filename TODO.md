@@ -12,9 +12,6 @@
 
 - Big heros adapt badly to small screens
 
-### Blog
-- Custom CTA
-
 ### Side wide 
 - Add newsletter
 - Diffrent links to contactanos with filled about page or secret params
