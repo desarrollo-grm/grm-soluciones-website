@@ -12,9 +12,6 @@
 
 - Big heros adapt badly to small screens
 
-### Side wide 
-- Add newsletter
-
 ### Contactanos
 - Diffrent links to contactanos with filled about page or secret params
 - Contactanos doing something
@@ -30,3 +27,6 @@
 - Auth for send endpoints
 - handdle cover image in new post email
 - handdle unsubscribe link
+- subscribe + send welcome
+- send to grm contactanos
+- security

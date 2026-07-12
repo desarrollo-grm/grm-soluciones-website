@@ -1,8 +1,68 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '/assets/icons';
 import { getAllForFooter } from '/src/data/services.js';
 
 const Footer = () => {
+    const [email, setEmail] = useState('');
+    const [status, setStatus] = useState('idle');
+    const [message, setMessage] = useState('');
+
+    const subscriptionApiUrl = import.meta.env.VITE_SUBSCRIPTION_ENDPOINT;
+
+    const handleSubscribe = async (event) => {
+        event.preventDefault();
+
+        const trimmedEmail = email.trim();
+
+        if (!trimmedEmail) {
+            setStatus('error');
+            setMessage('Ingresa tu correo electrónico.');
+            return;
+        }
+
+        setStatus('loading');
+        setMessage('');
+
+        try {
+            const response = await fetch(subscriptionApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: trimmedEmail }),
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (response.ok) {
+                setStatus('success');
+                setMessage('Suscripción exitosa. Revisa tu bandeja para confirmar las novedades.');
+                setEmail('');
+
+                return;
+            }
+
+            if (response.status === 409) {
+                setStatus('error');
+                setMessage(data.error || 'Este correo ya está suscrito.');
+                return;
+            }
+
+            if (response.status === 400) {
+                setStatus('error');
+                setMessage(data.error || 'Ingresa un correo válido.');
+                return;
+            }
+
+            setStatus('error');
+            setMessage(data.error || 'No pudimos completar la suscripción. Intenta de nuevo.');
+        } catch {
+            setStatus('error');
+            setMessage('No pudimos conectar con el servidor. Intenta más tarde.');
+        }
+    };
+
     return (
         <footer className="bg-primary text-white py-12 px-4">
             <div className="container mx-auto max-w-6xl">
@@ -66,17 +126,35 @@ const Footer = () => {
                         </div>
 
                         <div className="mt-6">
-                            <h4 className="text-lg font-displayfont-bold mb-3">Newsletter</h4>
-                            <div className="flex max-w-full">
-                                <input 
-                                    type="email" 
-                                    placeholder="Tu email" 
-                                    className="bg-light flex-1 min-w-0 px-4 py-2 rounded-l-full text-gray-800 focus:outline-none"
-                                />
-                                <button className="bg-secondary hover:bg-accent px-2 py-2 rounded-r-full text-sm font-semibold transition-colors whitespace-nowrap">
-                                    Subscríbete
-                                </button>
-                            </div>
+                            <h4 className="text-lg font-display font-bold mb-3">Newsletter</h4>
+                            <form onSubmit={handleSubscribe} className="space-y-3">
+                                <div className="flex max-w-full">
+                                    <input 
+                                        type="email" 
+                                        placeholder="Tu email" 
+                                        value={email}
+                                        onChange={(event) => setEmail(event.target.value)}
+                                        aria-label="Correo electrónico para newsletter"
+                                        className="bg-light flex-1 min-w-0 px-4 py-2 rounded-l-full text-gray-800 focus:outline-none"
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={status === 'loading'}
+                                        className="bg-secondary hover:bg-accent disabled:opacity-70 disabled:cursor-not-allowed px-4 py-2 rounded-r-full text-sm font-semibold transition-colors whitespace-nowrap"
+                                    >
+                                        {status === 'loading' ? 'Enviando...' : 'Subscríbete'}
+                                    </button>
+                                </div>
+                                {message ? (
+                                    <p
+                                        role="status"
+                                        aria-live="polite"
+                                        className={`text-sm ${status === 'success' ? 'text-green-300' : 'text-red-300'}`}
+                                    >
+                                        {message}
+                                    </p>
+                                ) : null}
+                            </form>
                         </div>
                     </div>
                 </div>
