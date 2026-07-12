@@ -2,6 +2,10 @@
 import test from 'node:test';
 import assert from 'node:assert';
 
+import { loadEnvFile } from "node:process";
+
+loadEnvFile();
+
 const TEST_RECIPIENT = process.env.BREVO_TEST_RECIPIENTS;
 
 
