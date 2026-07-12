@@ -8,13 +8,13 @@ const ContactPage = () => {
     return (
         <>
             <Header />
-            <section className="bg-light lg:h-[calc(100dvh-88px)] flex flex-col overflow-hidden pb-12">
+            <section className="bg-light xl:h-[calc(100dvh-88px)] flex flex-col overflow-hidden pb-12">
                 <SectionHeader 
                     title="Contáctanos"
                     subtitle="Envíanos tus datos y te contactaremos pronto."
                     margin="small"
                 />
-                <div id="contact" className="bg-light flex-1 px-4 py-4 flex flex-wrap items-stretch justify-center gap-8 lg:overflow-hidden overflow-y-auto min-h-0">
+                <div id="contact" className="bg-light flex-1 px-4 py-4 flex flex-wrap items-stretch justify-center gap-8">
                     <ContactForm />
                     <ContactInfo />
                 </div>

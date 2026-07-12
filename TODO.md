@@ -11,8 +11,6 @@
 ### Contactanos
 - Diffrent links to contactanos with filled about page or secret params
 - Contactanos doing something
-- RSS simbolos en pantallas grandes (mi laptop)
-
 ### Blog 
 - Posts muy grandes
 
