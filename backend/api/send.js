@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+const { sendEmail } = await import("./lib/sendEmail.js");
 
 function isValidEmail(email) {
     return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -38,7 +39,6 @@ export default async function handleWelcome(req, res) {
     }
 
     try {
-        const { sendEmail } = await import("./lib/sendEmail.js");
 
         const templatePath = path.join(process.cwd(), 'static', 'welcome.html');
         let htmlTemplate = await fs.readFile(templatePath, 'utf-8');
