@@ -21,6 +21,19 @@ app.all("/api/send-welcome", async (req, res) => {
     }
 });
 
+app.all("/api/subscribe", async (req, res) => {
+    try {
+        const { default: handleSubscribe } = await import("./api/contacts.js");
+        await handleSubscribe(req, res);
+    } catch (error) {
+        const message = error instanceof Error ? error.message : "Unexpected server error";
+        res.status(500).json({
+            ok: false,
+            error: message,
+        });
+    }
+});
+
 app.get("/api/health", (_req, res) => {
     res.status(200).json({
         ok: true,
