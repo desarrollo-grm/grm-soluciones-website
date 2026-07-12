@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.all("/api/send-welcome", async (req, res) => { 
     try { 
         console.log(`[Express] Routing to handleWelcome...`);
-        const { default: handleWelcome } = await import("./api/send.js"); 
+        const { default: handleWelcome } = await import("./api/sendWelcome.js"); 
         await handleWelcome(req, res);
     } catch (error) { 
         console.error(`[Express] Route Error (/api/send-welcome):`, error);
@@ -34,8 +34,7 @@ app.all("/api/send-welcome", async (req, res) => {
 app.all("/api/subscribe", async (req, res) => { 
     try { 
         console.log(`[Express] Routing to handleSubscribe...`);
-        // FIXED: Changed from "./api/contacts.js" to "./api/contact.js" based on your file name
-        const { default: handleSubscribe } = await import("./api/contacts.js"); 
+        const { default: handleSubscribe } = await import("./api/subscribe.js"); 
         await handleSubscribe(req, res); 
     } catch (error) { 
         console.error(`[Express] Route Error (/api/subscribe):`, error);

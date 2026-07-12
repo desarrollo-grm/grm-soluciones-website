@@ -1,5 +1,3 @@
-// api/contact.js
-
 const { createContact, deleteContact } = await import("./lib/contacts.js");
 
 function isValidEmail(email) { 
