@@ -15,7 +15,7 @@
 - Posts muy grandes
 
 ### Create pages
-- https://grm-soluciones.com/unsubscribed-success
+- unsubscribe fail
 
 ### API
 - Auth for send endpoints

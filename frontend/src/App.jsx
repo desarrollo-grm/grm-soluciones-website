@@ -7,6 +7,7 @@ import CondominioPage from '/src/pages/CondominioPage.jsx';
 import SoportePage from '/src/pages/SoportePage.jsx';
 import Blog from '/src/pages/Blog.jsx';
 import BlogPost from '/src/pages/BlogPost.jsx';
+import UnsubscribeSuccessPage from '/src/pages/UnsubscribeSuccessPage.jsx';
 import ScrollToTop from '/src/components/commons/ScrollToTop.jsx';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/soporte" element={<SoportePage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/unsubscribed-success" element={<UnsubscribeSuccessPage />} />
       </Routes>
     </Router>
   );
