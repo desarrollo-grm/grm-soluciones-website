@@ -13,7 +13,7 @@ const Hero = () => {
                     </h2>
                     <CTAButton to="/about-us">Conócenos</CTAButton>
                 </div>
-                <div className="h-full flex items-start justify-start flex-shrink-0">
+                <div className="hidden md:flex h-full items-start justify-start flex-shrink-0">
                     <img src="../../assets/images/partners.png" alt="Guiando a nuestros clientes" className="h-full w-auto object-contain"/>
                 </div>
             </div>

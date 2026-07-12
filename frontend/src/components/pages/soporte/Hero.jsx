@@ -22,7 +22,7 @@ const Hero = () => {
                 </div>
 
                 {/* Right Side - Image */}
-                <div className="h-full flex items-start justify-start flex-shrink-0">
+                <div className="hidden lg:flex h-full items-start justify-start flex-shrink-0">
                     <img 
                         src="/assets/images/soporte-2.png" 
                         alt="Soporte y Asesorías" 

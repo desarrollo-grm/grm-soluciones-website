@@ -8,10 +8,6 @@
 
 ## DEV
 
-### Heros 
-
-- Big heros adapt badly to small screens
-
 ### Contactanos
 - Diffrent links to contactanos with filled about page or secret params
 - Contactanos doing something
