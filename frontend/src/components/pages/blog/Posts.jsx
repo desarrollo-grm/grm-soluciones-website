@@ -82,16 +82,16 @@ const Posts = () => {
 
     return (
         <section className="bg-light py-12 md:py-16">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-8 xl:px-18">
                 <h2 className="font-display text-4xl md:text-5xl font-bold text-dark mb-8 text-center">
                             Más artículos
                 </h2>
-                <div className="grid lg:grid-cols-[1fr_350px] gap-8 lg:gap-12">
+                <div className="grid lg:grid-cols-[minmax(0,1fr)_280px] xl:grid-cols-[minmax(0,1fr)_300px] gap-8 lg:gap-10 xl:gap-12">
                     {/* Main Content */}
                     <div>
                         {/* Loading State */}
                         {loading ? (
-                            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                            <div className="grid md:grid-cols-2 gap-7 mb-8">
                                 {[...Array(postsPerPage)].map((_, i) => (
                                     <div key={i} className="animate-pulse">
                                         <div className="bg-gray-200 h-48 rounded-2xl mb-4"></div>
@@ -106,7 +106,7 @@ const Posts = () => {
                             </div>
                         ) : (
                             /* Posts Grid */
-                            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                            <div className="grid md:grid-cols-2 gap-10 mb-8">
                                 {currentPosts.map(post => (
                                     <PostCard 
                                         key={post.id}

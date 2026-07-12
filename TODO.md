@@ -11,8 +11,6 @@
 ### Contactanos
 - Diffrent links to contactanos with filled about page or secret params
 - Contactanos doing something
-### Blog 
-- Posts muy grandes
 
 ### Create pages
 - unsubscribe fail
