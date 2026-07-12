@@ -81,3 +81,33 @@ test('POST /api/subscribe - Should return 200 for valid email', async () => {
     assert.strictEqual(response.status, 201);
     assert.strictEqual(data.ok, true);
 });
+
+test('POST /api/subscribe - Should return 409 for duplicate email', async () => {
+    // 1. Ensure we have a specific email for the duplicate test
+    const duplicateEmail = "duplicate-tester@example.com";
+    const payload = JSON.stringify({ email: duplicateEmail });
+
+    // 2. Make the first request. 
+    // (We don't assert this one, because depending on the database state, 
+    // it might return 201 Created or 409 Conflict. We just need it to exist).
+    await fetch(`${API_URL}/api/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload
+    });
+
+    // 3. Make the second request. This one is GUARANTEED to be a duplicate.
+    const response = await fetch(`${API_URL}/api/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload
+    });
+    
+    const data = await response.json();
+
+    // 4. Assert that the server caught the Brevo error and returned our custom response
+    assert.strictEqual(response.status, 409, "Expected status code 409 Conflict");
+    assert.strictEqual(data.ok, false);
+    assert.strictEqual(data.code, "duplicate_parameter");
+    assert.strictEqual(data.error, "This email is already subscribed.");
+});
