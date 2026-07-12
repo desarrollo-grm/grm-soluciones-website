@@ -10,7 +10,7 @@ app.use(express.json({ limit: "1mb" }));
 
 app.all("/api/send-welcome", async (req, res) => {
     try {
-        const { default: handleWelcome } = await import("../api/send.js");
+        const { default: handleWelcome } = await import("./api/send.js");
         await handleWelcome(req, res);
     } catch (error) {
         const message = error instanceof Error ? error.message : "Unexpected server error";
