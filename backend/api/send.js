@@ -40,7 +40,7 @@ export default async function handleWelcome(req, res) {
     try {
         const { sendEmail } = await import("./lib/sendEmail.js");
 
-        const templatePath = path.join(process.cwd(), 'email_templates', 'welcome.html');
+        const templatePath = path.join(process.cwd(), 'static', 'welcome.html');
         let htmlTemplate = await fs.readFile(templatePath, 'utf-8');
 
         const body = req.body && typeof req.body === "object" ? req.body : {};
