@@ -14,12 +14,19 @@
 
 ### Side wide 
 - Add newsletter
+
+### Contactanos
 - Diffrent links to contactanos with filled about page or secret params
 - Contactanos doing something
+- RSS simbolos en pantallas grandes (mi laptop)
+
+### Blog 
+- Posts muy grandes
 
 ### Create pages
 - https://grm-soluciones.com/unsubscribed-success
 
 ### API
+- Auth for send endpoints
 - handdle cover image in new post email
 - handdle unsubscribe link
