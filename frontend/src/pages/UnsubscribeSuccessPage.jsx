@@ -27,10 +27,6 @@ const UnsubscribeSuccessPage = () => {
             <Header />
             <main className="bg-light overflow-hidden">
                 <section className="relative isolate py-16 sm:py-20 lg:py-24">
-                    <div className="absolute inset-x-0 top-0 -z-10 h-64 bg-gradient-to-b from-secondary/15 via-transparent to-transparent" />
-                    <div className="absolute -left-20 top-20 -z-10 h-64 w-64 rounded-full bg-accent/15 blur-3xl" />
-                    <div className="absolute -right-20 bottom-0 -z-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
-
                     <div className="container mx-auto px-6">
                         <div className="mx-auto max-w-5xl">
                             <SectionHeader
