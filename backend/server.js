@@ -44,6 +44,18 @@ app.all("/api/subscribe", async (req, res) => {
     } 
 });
 
+app.all("/api/unsubscribe", async (req, res) => { 
+    try { 
+        console.log(`[Express] Routing to handleUnsubscribe...`);
+        const { default: handleUnsubscribe } = await import("./api/unsubscribe.js"); 
+        await handleUnsubscribe(req, res); 
+    } catch (error) { 
+        console.error(`[Express] Route Error (/api/unsubscribe):`, error);
+        const message = error instanceof Error ? error.message : "Unexpected server error"; 
+        res.status(500).json({ ok: false, error: message }); 
+    } 
+});
+
 app.get("/api/health", (_req, res) => { 
     console.log(`[Express] Health check pinged`);
     res.status(200).json({ ok: true, status: "healthy", route: "/api/health", timestamp: new Date().toISOString() }); 

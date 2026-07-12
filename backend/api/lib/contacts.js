@@ -9,3 +9,10 @@ export async function createContact(contactData) {
     }
     return await brevoClient.contacts.createContact(contactData);
 }
+
+export async function deleteContact(email) {
+    if (!email || typeof email !== 'string') {
+        throw new Error("Invalid email. Expected a string.");
+    }
+    return await brevoClient.contacts.deleteContact({identifier: email, identifierType: 'email_id'});
+}

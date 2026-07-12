@@ -16,3 +16,6 @@
 - Add newsletter
 - Diffrent links to contactanos with filled about page or secret params
 - Contactanos doing something
+
+### Create pages
+- https://grm-soluciones.com/unsubscribed-success

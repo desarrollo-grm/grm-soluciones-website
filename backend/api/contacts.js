@@ -1,6 +1,6 @@
 // api/contact.js
 
-const { createContact } = await import("./lib/contacts.js");
+const { createContact, deleteContact } = await import("./lib/contacts.js");
 
 function isValidEmail(email) { 
     return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
