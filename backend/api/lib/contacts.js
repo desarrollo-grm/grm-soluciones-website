@@ -16,3 +16,7 @@ export async function deleteContact(email) {
     }
     return await brevoClient.contacts.deleteContact({identifier: email, identifierType: 'email_id'});
 }
+
+export async function getAllContacts() {
+    return await brevoClient.contacts.getContacts();
+}

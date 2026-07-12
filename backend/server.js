@@ -31,6 +31,18 @@ app.all("/api/send-welcome", async (req, res) => {
     } 
 });
 
+app.all("/api/send-new-post", async (req, res) => {
+    try {
+        console.log(`[Express] Routing to handleSendNewPost...`);
+        const { default: handleSendNewPost } = await import("./api/sendNewPost.js");
+        await handleSendNewPost(req, res);
+    } catch (error) {
+        console.error(`[Express] Route Error (/api/send-new-post):`, error);
+        const message = error instanceof Error ? error.message : "Unexpected server error";
+        res.status(500).json({ ok: false, error: message });
+    }
+});
+
 app.all("/api/subscribe", async (req, res) => { 
     try { 
         console.log(`[Express] Routing to handleSubscribe...`);

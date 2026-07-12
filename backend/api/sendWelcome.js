@@ -1,5 +1,3 @@
-// api/send.js
-
 import fs from 'fs/promises'; 
 import path from 'path'; 
 const { sendEmail } = await import("./lib/sendEmail.js");
@@ -24,7 +22,7 @@ export default async function handleWelcome(req, res) {
     console.log(`[Send API] handleWelcome initialized.`);
 
     if (req.method === "GET") { 
-        return res.status(200).json({ ok: true, status: "healthy", route: "/send", timestamp: new Date().toISOString() }); 
+        return res.status(200).json({ ok: true, status: "healthy", route: "/send-welcome", timestamp: new Date().toISOString() }); 
     }
 
     if (req.method !== "POST") {

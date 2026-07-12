@@ -19,3 +19,7 @@
 
 ### Create pages
 - https://grm-soluciones.com/unsubscribed-success
+
+### API
+- handdle cover image in new post email
+- handdle unsubscribe link
