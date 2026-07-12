@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a GRM Soluciones</title>
+  <style>
+    /* Keep it minimal to look like a normal email and avoid spam filters */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      margin: 0;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 20px;
+      color: #1a1a1a;
+      margin-bottom: 24px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    a {
+      color: #2563eb; /* A nice, trustworthy blue */
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eaeaea;
+      font-size: 12px;
+      color: #666666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Replace {{name}} in your Node backend before sending -->
+    <h1>¡Hola! Bienvenido a GRM Soluciones 👋</h1>
+
+    <p>Gracias por suscribirte a nuestro boletín. Nos hace mucha ilusión tenerte por aquí.</p>
+
+    <p>A través de nuestro blog compartimos novedades, guías y consejos sobre cómo la tecnología puede optimizar el día a día de tu negocio, enfocándonos en <strong>Facturación Digital</strong>, <strong>Gestión de Condominios</strong> y <strong>Soporte Técnico</strong>.</p>
+
+    <p>A partir de ahora, recibirás un correo cada vez que publiquemos contenido nuevo. Prometemos mantenerlo simple, útil y sin spam.</p>
+
+    <!-- Hack #1: Ask a question to encourage a reply -->
+    <p><strong>Para asegurarnos de que estamos creando contenido que te sirva:</strong><br>
+    ¿Sobre qué tema tecnológico o reto en tu empresa te gustaría que escribiéramos en nuestro próximo artículo? <em>(Solo dale a responder a este correo, leemos todas las respuestas personalmente)</em>.</p>
+
+    <p>Un saludo,<br><br>
+    <a href="https://yourdomain.com">GRM Soluciones</a></p>
+
+    <div class="footer">
+      <!-- Hack #2: The drag-to-primary trick -->
+      <p><strong>P.D:</strong> Si usas Gmail y este correo llegó a la pestaña de "Promociones", por favor arrástralo a la pestaña "Principal" para asegurarte de recibir nuestros próximos artículos.</p>
+      
+      <!-- Replace with your actual unsubscribe logic -->
+      <p>Estás recibiendo este correo porque te suscribiste en nuestro blog. Si prefieres no recibir más notificaciones, puedes <a href="{{unsubscribe_url}}">darte de baja aquí</a>.</p>
+    </div>
+  </div>
+</body>
