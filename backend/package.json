@@ -4,7 +4,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npx ngrok start --config=ngrok.yaml dev-server --log=stdout\" \"node --watch server.js\"",
+    "dev": "node --watch server.js",
+    "dev-ngrok": "concurrently \"npx ngrok start --config=ngrok.yaml dev-server --log=stdout\" \"node --watch server.js\"",
     "start": "node server.js",
     "test": "node --test test.js",
     "lint": "eslint ."

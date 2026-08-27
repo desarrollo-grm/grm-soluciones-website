@@ -14,6 +14,7 @@
     "@sanity/client": "^7.13.0",
     "@sanity/image-url": "^1.2.0",
     "@tailwindcss/vite": "^4.1.16",
+    "@vnedyalk0v/react19-simple-maps": "^2.0.9",
     "leaflet": "^1.9.4",
     "next-sanity": "^11.6.8",
     "react": "^19.1.1",
