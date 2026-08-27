@@ -35,12 +35,11 @@ const Hero = () => {
           {/* Left Side - Description */}
           <div className="text-base md:text-lg lg:text-xl leading-relaxed text-dark max-w-md flex-1">
             <p>
-              Somos una <span className="text-accent font-semibold">empresa familiar</span>.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Etiam metus odio, cursus sed leo luctus, ultrices{' '}
-              <span className="text-secondary font-semibold">condimentum</span> metus. Ut id
-              leo mollis justo laoreet iaculis. Fusce nec metus vitae ligula dapibus porta id
-              non magna. Donec laoreet nec ante eu.
+              En GRM contamos con <span className="text-accent font-semibold">más de 30 años</span> de experiencia ofreciendo soluciones tecnológicas integrales. 
+              Nos especializamos en sistemas administrativos, contables y de gestión de pago, adaptándonos a las necesidades específicas de cada cliente.
+            </p>
+            <p>
+              Nuestra trayectoria y alianzas nos posicionan como un canal  <span className="text-secondary font-semibold">confiable</span> en el mercado.
             </p>
           </div>
 
