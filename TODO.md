@@ -4,7 +4,8 @@
 
 - [ ] Content for about 
 - [ ] Content for Saint e Intégraciones
-- [ ] Content for Equipos y Maquinas fiscales
+- [ X ] Content for Equipos y Maquinas fiscales
+- [ ] Set icons for Equipos y Maquinas fiscales 
 
 ## DEV
 

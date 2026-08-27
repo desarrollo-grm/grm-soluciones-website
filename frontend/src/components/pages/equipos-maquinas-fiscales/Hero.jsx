@@ -1,0 +1,39 @@
+import CTAButton from "/src/components/commons/CTAButton";
+
+const Hero = () => {
+    return (
+        <section className="bg-light lg:min-h-[calc(100dvh-88px)] flex items-center overflow-hidden py-16 px-6">
+            <div className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 lg:gap-16">
+                {/* Left Side - Text Content */}
+                <div className="flex-1 flex flex-col gap-6 max-w-2xl">
+                    <h1 className="font-display text-secondary text-5xl md:text-6xl lg:text-7xl font-bold">
+                        Equipos y Máquinas Fiscales
+                    </h1>
+                    <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-dark">
+                        Garantiza la continuidad fiscal y operativa de tu negocio
+                    </h2>
+                    <p className="text-lg md:text-xl text-dark leading-relaxed">
+                        Te ofrecemos un servicio integral como Canal y Servicio Técnico Autorizado por el SENIAT. 
+                        Cumple con la normativa tributaria con el respaldo de nuestro equipo experto.
+                    </p>
+                    <CTAButton to="/contact">
+                        Solicita Asesoría
+                    </CTAButton>
+                </div>
+
+                {/* Right Side - Image */}
+                <div className="flex-1 flex items-center justify-center">
+                    <div className="relative w-full max-w-xl">
+                        <img 
+                            src="/assets/images/digital-invoice.png" 
+                            alt="Sistema de Facturación Digital" 
+                            className="w-full h-auto object-contain drop-shadow-2xl"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Hero;

@@ -3,6 +3,7 @@ import HomePage from '/src/pages/HomePage.jsx';
 import AboutUsPage from '/src/pages/AboutUsPage.jsx';
 import ContactPage from '/src/pages/ContactPage.jsx';
 import FacturacionDigitalPage from '/src/pages/FacturacionDigitalPage.jsx';
+import EquiposMaquinasFiscalesPage from '/src/pages/EquiposMaquinasFiscalesPage.jsx';
 import CondominioPage from '/src/pages/CondominioPage.jsx';
 import SoportePage from '/src/pages/SoportePage.jsx';
 import Blog from '/src/pages/Blog.jsx';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about-us" element={<AboutUsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/facturacion-digital" element={<FacturacionDigitalPage />} />
+        <Route path="/equipos-maquinas-fiscales" element={<EquiposMaquinasFiscalesPage />} />
         <Route path="/condominio" element={<CondominioPage />} />
         <Route path="/soporte" element={<SoportePage />} />
         <Route path="/blog" element={<Blog />} />

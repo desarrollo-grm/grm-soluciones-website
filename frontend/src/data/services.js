@@ -55,7 +55,7 @@ const services = [
             "Asesoría en cumplimiento fiscal"
         ],
         icon: "/assets/icons/hardware.svg",
-        link: "/#services",
+        link: "/equipos-maquinas-fiscales",
         type: "product",
         isFeatured: false
     },
