@@ -91,7 +91,7 @@ const Header = () => {
     <header className="bg-primary text-white sticky top-0 z-50 h-[88px]">
       <div className="w-full h-full mx-auto px-6 py-4 flex justify-between items-center">
         <div className="w-20 h-auto">
-           <Link to="/"><img src={logoGrm} alt="GRM Logo" className="w-full h-full" /></Link>
+           <Link to="/"><img src={logoGrm} alt="GRM Logo" className="w-full h-full  brightness-0 invert" /></Link>
         </div>
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (

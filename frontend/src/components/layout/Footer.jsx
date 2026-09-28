@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LogoGRM from '/assets/logo-grm.svg?react';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '/assets/icons';
 import { getAllForFooter } from '/src/data/services.js';
 
@@ -72,7 +73,7 @@ const Footer = () => {
                         <img 
                             src="/assets/logo-grm.svg" 
                             alt="GRM Soluciones" 
-                            className="h-32 mb-4"
+                            className="h-32 mb-4 brightness-0 invert"
                         />
                         <div className="flex gap-4 mt-4">
                             <a href="#" className="hover:opacity-80 transition-opacity">
