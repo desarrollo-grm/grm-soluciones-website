@@ -22,9 +22,13 @@
 - [ ] unsubscribe fail
 
 ### API
-- [ ] Auth for send endpoints
+- [ - ] Auth for send endpoints
+    - [ x ] Google catpcha
+      - [  ] Test bot call
+    - [ ] Filter for temporary emails : deep-email-validator
+    - [ ] Strict IP Rate Limiting
 - [ ] handdle cover image in new post email
-- [ ] handdle unsubscribe link
+- [ ] handdle unsubscribe link, tokens...
 - [ ] subscribe + send welcome
 - [ ] send to grm contactanos
 - [ ] security

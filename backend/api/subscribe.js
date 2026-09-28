@@ -1,4 +1,5 @@
 const { createContact } = await import("./lib/contacts.js");
+const { verifyCaptcha } = await import("./lib/captcha.js");
 
 function isValidEmail(email) { 
     return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
@@ -20,9 +21,21 @@ export default async function handleSubscribe(req, res) {
     try {
         const contactData = req.body && typeof req.body === "object" ? req.body : {};
 
+        // Validate email
         if (!isValidEmail(contactData.email)) {
             console.warn(`[Contact API] Validation failed. Invalid email: ${contactData.email}`);
             return res.status(400).json({ ok: false, error: "Invalid email address." });
+        }
+
+        // Validate captcha token
+        if (!contactData.captchaToken || typeof contactData.captchaToken !== "string") {
+            console.warn(`[Contact API] Validation failed. Missing or invalid captcha token.`);
+            return res.status(400).json({ ok: false, error: "Missing or invalid captcha token." });
+        }
+        const isHuman = await verifyCaptcha(contactData.captchaToken);
+        if (!isHuman) {
+            console.warn(`[Contact API] Captcha verification failed. Possible bot detected.`);
+            return res.status(400).json({ ok: false, error: "Captcha verification failed. Please try again." });
         }
 
         console.log(`[Contact API] Proceeding to create contact for: ${contactData.email}`);
@@ -46,7 +59,8 @@ export default async function handleSubscribe(req, res) {
             });
         }
 
-        const message = error instanceof Error ? error.message : "Unexpected server error";
+        console.error(`[Contact API] Unexpected error during subscription process:`, error.message || error);
+        const message = "Unexpected server error";
         return res.status(500).json({ ok: false, error: message });
     }
 };

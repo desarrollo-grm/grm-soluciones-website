@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import LogoGRM from '/assets/logo-grm.svg?react';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '/assets/icons';
 import { getAllForFooter } from '/src/data/services.js';
@@ -8,6 +9,7 @@ const Footer = () => {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('idle');
     const [message, setMessage] = useState('');
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const subscriptionApiUrl = import.meta.env.VITE_SUBSCRIPTION_ENDPOINT;
 
@@ -22,8 +24,17 @@ const Footer = () => {
             return;
         }
 
+        if (!executeRecaptcha) {
+            setStatus('error');
+            setMessage('Hemos encontrado un problema. Intenta de nuevo más tarde.');
+            return;
+        }
+
         setStatus('loading');
         setMessage('');
+
+        // Generate the reCAPTCHA token
+        const recaptchaToken = await executeRecaptcha('newsletter_subscription');
 
         try {
             const response = await fetch(subscriptionApiUrl, {
@@ -31,7 +42,7 @@ const Footer = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: trimmedEmail }),
+                body: JSON.stringify({ email: trimmedEmail, captchaToken: recaptchaToken }),
             });
 
             const data = await response.json().catch(() => ({}));
@@ -43,7 +54,8 @@ const Footer = () => {
 
                 return;
             }
-
+            // TODO : No dar esta informacion por seguridad, cambiar a un mensaje genérico
+            // Succes? 
             if (response.status === 409) {
                 setStatus('error');
                 setMessage(data.error || 'Este correo ya está suscrito.');
@@ -56,6 +68,7 @@ const Footer = () => {
                 return;
             }
 
+            console.log('Error en la suscripción:', data.error);
             setStatus('error');
             setMessage(data.error || 'No pudimos completar la suscripción. Intenta de nuevo.');
         } catch {
@@ -159,6 +172,11 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+                <p className="mt-4 text-[10px] text-gray-300 leading-tight">
+                    Este sitio está protegido por reCAPTCHA y aplican la{' '}
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-white">Política de Privacidad</a> y los{' '}
+                    <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-white">Términos de Servicio</a> de Google.
+                </p>
             </div>
         </footer>
     );
