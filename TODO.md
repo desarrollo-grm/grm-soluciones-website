@@ -29,6 +29,6 @@
     - [ X ] Strict IP Rate Limiting
 - [ ] handdle cover image in new post email
 - [ ] handdle unsubscribe link, tokens...
-- [ ] subscribe + send welcome
+- [ X ] subscribe + send welcome
 - [ ] send to grm contactanos
 - [ ] security
