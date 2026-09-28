@@ -23,9 +23,9 @@
 
 ### API
 - [ - ] Auth for send endpoints
-    - [ x ] Google catpcha
+    - [ X ] Google catpcha
       - [  ] Test bot call
-    - [ ] Filter for temporary emails : deep-email-validator
+    - [ X ] Filter for temporary emails : deep-email-validator
     - [ ] Strict IP Rate Limiting
 - [ ] handdle cover image in new post email
 - [ ] handdle unsubscribe link, tokens...

@@ -1,8 +1,10 @@
 const { createContact } = await import("./lib/contacts.js");
 const { verifyCaptcha } = await import("./lib/captcha.js");
+import { validate } from 'deep-email-validator'
 
-function isValidEmail(email) { 
-    return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
+async function isValidEmail(email) { 
+    const res = await validate(email)
+    return { valid: res.valid, reason: res.reason };
 }
 
 export default async function handleSubscribe(req, res) { 
@@ -22,8 +24,9 @@ export default async function handleSubscribe(req, res) {
         const contactData = req.body && typeof req.body === "object" ? req.body : {};
 
         // Validate email
-        if (!isValidEmail(contactData.email)) {
-            console.warn(`[Contact API] Validation failed. Invalid email: ${contactData.email}`);
+        const { valid, reason } = await isValidEmail(contactData.email);
+        if (!valid) {
+            console.warn(`[Contact API] Validation failed. Invalid email: ${contactData.email}, Reason: ${reason}`);
             return res.status(400).json({ ok: false, error: "Invalid email address." });
         }
 

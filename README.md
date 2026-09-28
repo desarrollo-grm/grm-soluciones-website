@@ -17,6 +17,7 @@ This project uses a **Monorepo Architecture**, separating the frontend, the back
 ### Backend (API)
 - **Node.js & Express** - Traditional server for API routes
 - **Brevo (@getbrevo/brevo)** - Transactional email handling
+- **Protected by Google ReCaptcha V3**
 
 ### Studio (CMS)
 - **Sanity Studio** - Headless CMS for managing blog posts, articles, and dynamic content.
