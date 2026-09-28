@@ -22,11 +22,11 @@
 - [ ] unsubscribe fail
 
 ### API
-- [ - ] Auth for send endpoints
+- [ X ] Auth for send endpoints
     - [ X ] Google catpcha
       - [  ] Test bot call
     - [ X ] Filter for temporary emails : deep-email-validator
-    - [ ] Strict IP Rate Limiting
+    - [ X ] Strict IP Rate Limiting
 - [ ] handdle cover image in new post email
 - [ ] handdle unsubscribe link, tokens...
 - [ ] subscribe + send welcome
