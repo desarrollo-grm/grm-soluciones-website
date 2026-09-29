@@ -28,7 +28,10 @@
     - [ X ] Filter for temporary emails : deep-email-validator
     - [ X ] Strict IP Rate Limiting
 - [ ] handdle cover image in new post email
-- [ ] handdle unsubscribe link, tokens...
+- [ - ] handdle unsubscribe link, tokens...
+    - [ ] handdle on batch email
+    - [ ] Seems to work, have to test on dev. 
+- [ ] batch email with api token
 - [ X ] subscribe + send welcome
 - [ ] send to grm contactanos
-- [ ] security
+- [ - ] security

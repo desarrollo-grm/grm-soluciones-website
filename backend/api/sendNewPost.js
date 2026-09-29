@@ -15,8 +15,18 @@ function normalizeRecipients(value) {
         .map((item) => ({
             email: item.email.trim(),
             ...(item.name ? { name: String(item.name) } : {}),
+            unsubToken: item.attributes?.EXT_ID || item.attributes?.ext_id || item.unsubToken,
         }))
-        .filter((item) => isValidEmail(item.email));
+        .filter((item) => isValidEmail(item.email) && typeof item.unsubToken === "string" && item.unsubToken.length > 0);
+}
+
+function renderPostTemplate(template, { title, excerpt, postUrl, unsubscribeUrl, tag }) {
+    return template
+        .replaceAll('{{title}}', title)
+        .replaceAll('{{excerpt}}', excerpt)
+        .replaceAll('{{tags[0]}}', tag)
+        .replaceAll('{{post-url}}', postUrl)
+        .replaceAll('{{unsubscribe_url}}', unsubscribeUrl);
 }
 
 export default async function handleSendNewPost(req, res) { 
@@ -35,7 +45,7 @@ export default async function handleSendNewPost(req, res) {
     try {
         const templatePath = path.join(process.cwd(), 'static', 'new-post.html');
         console.log(`[Send API] Reading HTML template from: ${templatePath}`);
-        let htmlTemplate = await fs.readFile(templatePath, 'utf-8');
+        const htmlTemplate = await fs.readFile(templatePath, 'utf-8');
 
         const body = req.body && typeof req.body === "object" ? req.body : {};
         const contacts = await getAllContacts(); // Fetch all contacts from the database
@@ -54,31 +64,76 @@ export default async function handleSendNewPost(req, res) {
         // TODO : Haddle image with sanity
         const title = body.title || "Nuevo Post en GRM Soluciones";
         const excerpt = body.excerpt || "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
-        const slug = body.slug.current || '';
+        const slug = body.slug?.current || '';
         const tags = Array.isArray(body.tags) ? body.tags : [];
         const postUrl = `${process.env.GRM_WEBSITE_URL}/blog/${slug}`;
-        // TODO : My mail? 
-        const unsubLink = `${process.env.GRM_API_URL}/api/unsubscribe`;
+        const subject = `${title} - Lo último de GRM-soluciones`;
+        const senderEmail = process.env.BREVO_SENDER_EMAIL;
+        const senderName = process.env.BREVO_SENDER_NAME || "GRM Soluciones";
 
-        let htmlContent = htmlTemplate.replace('{{title}}', title);
-        htmlTemplate = htmlContent.replace('{{excerpt}}', excerpt);
-        htmlTemplate = htmlContent.replace('{{tags[0]}}', tags[0] || '');
-        htmlContent = htmlContent.replace('{{post-url}}', postUrl);
-        htmlContent = htmlContent.replace('{{unsubscribe_url}}', unsubLink);
+        if (!senderEmail) {
+            throw new Error("BREVO_SENDER_EMAIL is not configured in the server environment.");
+        }
+
+        const sendResults = [];
 
         console.log(`[Send API] Calling sendEmail for ${recipients.length} recipient(s)...`);
-        
-        const response = await sendEmail({
-            subject: `${title} - Lo último de GRM-soluciones`,
-            htmlContent: htmlContent,
-            to: [{ email: process.env.BREVO_SENDER_EMAIL }],
-            bcc: recipients.length > 0 ? recipients : undefined,
-            sender: { email: process.env.BREVO_SENDER_EMAIL },
-        });
 
-        console.log(`[Send API] Email sent successfully! Message ID: ${response?.messageId}`);
-        
-        return res.status(200).json({ ok: true, messageId: response?.messageId || null });
+        for (const recipient of recipients) {
+            const unsubscribeUrl = `${process.env.GRM_API_URL}/api/unsubscribe?token=${encodeURIComponent(recipient.unsubToken)}`;
+            const htmlContent = renderPostTemplate(htmlTemplate, {
+                title,
+                excerpt,
+                postUrl,
+                unsubscribeUrl,
+                tag: tags[0] || '',
+            });
+
+            try {
+                const response = await sendEmail({
+                    subject,
+                    htmlContent,
+                    to: [{ email: recipient.email, ...(recipient.name ? { name: recipient.name } : {}) }],
+                    sender: { email: senderEmail, name: senderName },
+                    headers: {
+                        "List-Unsubscribe": `<${unsubscribeUrl}>`,
+                        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+                    },
+                });
+
+                sendResults.push({
+                    email: recipient.email,
+                    messageId: response?.messageId || null,
+                    ok: true,
+                });
+            } catch (recipientError) {
+                const message = recipientError instanceof Error ? recipientError.message : "Unexpected server error";
+                console.error(`[Send API] Failed to send to ${recipient.email}:`, recipientError);
+                sendResults.push({
+                    email: recipient.email,
+                    ok: false,
+                    error: message,
+                });
+            }
+        }
+
+        const failed = sendResults.filter((item) => !item.ok);
+        const sentCount = sendResults.length - failed.length;
+
+        if (failed.length > 0) {
+            return res.status(207).json({
+                ok: false,
+                sentCount,
+                failedCount: failed.length,
+                results: sendResults,
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            sentCount,
+            messageIds: sendResults.map((item) => item.messageId).filter(Boolean),
+        });
         
     } catch (error) {
         console.error(`[Send API] Exception caught during handleSendNewPost:`, error);

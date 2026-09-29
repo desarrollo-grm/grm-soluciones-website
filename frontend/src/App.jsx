@@ -10,6 +10,7 @@ import CondominioPage from '/src/pages/CondominioPage.jsx';
 import SoportePage from '/src/pages/SoportePage.jsx';
 import Blog from '/src/pages/Blog.jsx';
 import BlogPost from '/src/pages/BlogPost.jsx';
+import UnsubscribePage from '/src/pages/UnsubscribePage.jsx';
 import UnsubscribeSuccessPage from '/src/pages/UnsubscribeSuccessPage.jsx';
 import ScrollToTop from '/src/components/commons/ScrollToTop.jsx';
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/soporte" element={<SoportePage />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/unsubscribe" element={<UnsubscribePage />} />
           <Route path="/unsubscribed-success" element={<UnsubscribeSuccessPage />} />
         </Routes>
       </Router>
