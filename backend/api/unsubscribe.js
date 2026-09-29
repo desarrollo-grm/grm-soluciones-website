@@ -36,6 +36,7 @@ export default async function handleUnsubscribe(req, res) {
     if (req.method === "GET") {
         // DO NOT unsubscribe here.
         // Redirect to your frontend confirmation page where the user can click "Confirm".
+        console.log(`[Unsubscribe API] Redirecting to frontend confirmation page for token: ${token}`);
         const frontendConfirmUrl = `${frontendUrl}/unsubscribe?token=${encodeURIComponent(token)}`;
         return res.redirect(302, frontendConfirmUrl);
     }

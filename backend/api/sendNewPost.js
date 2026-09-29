@@ -1,6 +1,6 @@
 import fs from 'fs/promises'; 
 import path from 'path'; 
-const { sendEmail } = await import("./lib/sendEmail.js");
+const { sendBatchEmail } = await import("./lib/sendEmail.js");
 const { getAllContacts } = await import("./lib/contacts.js");
 
 function isValidEmail(email) { 
@@ -56,6 +56,8 @@ export default async function handleSendNewPost(req, res) {
 
         console.log(`[Send API] Fetched ${recipients.length} recipients from the database.`);
 
+        console.log(`[Send API] Normalized recipients:`, recipients, "Contacts: ", contacts.contacts);
+
         if (recipients.length === 0) {
             console.warn(`[Send API] No contacts found in the database. Aborting.`);
             return res.status(400).json({ ok: false, error: "No subscribers found to send to." });
@@ -70,69 +72,54 @@ export default async function handleSendNewPost(req, res) {
         const subject = `${title} - Lo último de GRM-soluciones`;
         const senderEmail = process.env.BREVO_SENDER_EMAIL;
         const senderName = process.env.BREVO_SENDER_NAME || "GRM Soluciones";
+        const unsubscribeUrl = `${process.env.GRM_API_URL}/api/unsubscribe?token={{params.unsubToken}}`;
 
         if (!senderEmail) {
             throw new Error("BREVO_SENDER_EMAIL is not configured in the server environment.");
         }
 
-        const sendResults = [];
+        const htmlContent = renderPostTemplate(htmlTemplate, {
+            title,
+            excerpt,
+            postUrl,
+            unsubscribeUrl,
+            tag: tags[0] || '',
+        });
 
-        console.log(`[Send API] Calling sendEmail for ${recipients.length} recipient(s)...`);
+        const versions = [];
+
+        console.log(`[Send API] Building message versions for ${recipients.length} recipient(s)...`);
 
         for (const recipient of recipients) {
-            const unsubscribeUrl = `${process.env.GRM_API_URL}/api/unsubscribe?token=${encodeURIComponent(recipient.unsubToken)}`;
-            const htmlContent = renderPostTemplate(htmlTemplate, {
-                title,
-                excerpt,
-                postUrl,
-                unsubscribeUrl,
-                tag: tags[0] || '',
+            console.log(`[Send API] Preparing email for: ${recipient.email}, UnsubToken: ${recipient.unsubToken}`);
+            versions.push({
+                to: [{ email: recipient.email, ...(recipient.name ? { name: recipient.name } : {}) }],
+                params: {
+                    unsubToken: recipient.unsubToken
+                }
             });
-
-            try {
-                const response = await sendEmail({
-                    subject,
-                    htmlContent,
-                    to: [{ email: recipient.email, ...(recipient.name ? { name: recipient.name } : {}) }],
-                    sender: { email: senderEmail, name: senderName },
-                    headers: {
-                        "List-Unsubscribe": `<${unsubscribeUrl}>`,
-                        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-                    },
-                });
-
-                sendResults.push({
-                    email: recipient.email,
-                    messageId: response?.messageId || null,
-                    ok: true,
-                });
-            } catch (recipientError) {
-                const message = recipientError instanceof Error ? recipientError.message : "Unexpected server error";
-                console.error(`[Send API] Failed to send to ${recipient.email}:`, recipientError);
-                sendResults.push({
-                    email: recipient.email,
-                    ok: false,
-                    error: message,
-                });
-            }
         }
 
-        const failed = sendResults.filter((item) => !item.ok);
-        const sentCount = sendResults.length - failed.length;
+        const response = await sendBatchEmail({
+            subject,
+            htmlContent,
+            versions,
+            sender: { email: senderEmail, name: senderName },
+        });
 
-        if (failed.length > 0) {
-            return res.status(207).json({
-                ok: false,
-                sentCount,
-                failedCount: failed.length,
-                results: sendResults,
-            });
+        if (!response || !Array.isArray(response.messageIds) ){
+            console.error(`[Send API] Invalid response from sendBatchEmail:`, response);
+            return res.status(500).json({ ok: false, error: "Failed to send batch email." });
+        }
+
+        if (response.messageIds.length !== recipients.length) {
+            console.error(`[Send API] Some messages failed to send:`, response);
+            return res.status(207).json({ ok: false, error: `Failed to send ${recipients.length - response.messageIds.length} messages.` });
         }
 
         return res.status(200).json({
             ok: true,
-            sentCount,
-            messageIds: sendResults.map((item) => item.messageId).filter(Boolean),
+            messageIds: response.messageIds,
         });
         
     } catch (error) {
