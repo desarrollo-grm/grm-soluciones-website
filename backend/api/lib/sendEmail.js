@@ -20,7 +20,8 @@ export async function sendEmail({
     cc,
     bcc,
     sender,
-    headers
+    headers,
+    replyTo,
 } = {}) {
     const recipients = Array.isArray(to) && to.length > 0 ? to : getDefaultRecipients();
     const ccRecipients = Array.isArray(cc) && cc.length > 0 ? cc : undefined;
@@ -38,6 +39,7 @@ export async function sendEmail({
         bcc: bccRecipients,
         sender: sender || getDefaultSender(),
         headers,
+        replyTo: replyTo
     });
 
     return response;

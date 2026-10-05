@@ -17,9 +17,10 @@
 ### Contactanos
 - [ ] Diffrent links to contactanos with filled about page or secret params
 - [ ] Contactanos doing something
+- [ ] Validate properly telefono number
 
 ### Create pages
-- [ ] unsubscribe fail
+- [ X ] unsubscribe fail
 
 ### API
 - [ X ] Auth for send endpoints
@@ -33,5 +34,5 @@
     - [ ] Seems to work, have to test on dev. 
 - [ ] batch email with api token
 - [ X ] subscribe + send welcome
-- [ ] send to grm contactanos
+- [ X ] send to grm contactanos
 - [ - ] security
