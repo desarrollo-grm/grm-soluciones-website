@@ -2,6 +2,17 @@ import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import CTAButton from "/src/components/commons/CTAButton";
 
+const telephonePattern = /^[+]?[0-9\s().-]{9,20}$/;
+
+const isValidTelephone = (telephone) => {
+    if (!telephone.trim()) {
+        return true;
+    }
+
+    const digits = telephone.replace(/\D/g, "");
+    return telephonePattern.test(telephone) && digits.length >= 9 && digits.length <= 15;
+};
+
 const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -21,6 +32,12 @@ const ContactForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!isValidTelephone(formData.telephone)) {
+            setStatus("error");
+            setFeedback("Introduce un número de teléfono válido.");
+            return;
+        }
 
         if (!executeRecaptcha) {
             setStatus("error");
@@ -91,7 +108,7 @@ const ContactForm = () => {
                 </div>
                 
                 <div className="flex flex-col">
-                    <label htmlFor="phone" className="text-sm font-medium text-dark mb-1">
+                    <label htmlFor="telephone" className="text-sm font-medium text-dark mb-1">
                         Teléfono <span className="text-dark/60">(opcional)</span>
                     </label>
                     <input 
@@ -100,6 +117,10 @@ const ContactForm = () => {
                         value={formData.telephone}
                         onChange={handleChange}
                         placeholder="0412-555-1234" 
+                        pattern="[+]?[0-9\s().-]{7,20}"
+                        maxLength={20}
+                        inputMode="tel"
+                        title="Usa entre 9 y 15 dígitos. Puedes incluir +, espacios, paréntesis, puntos o guiones."
                         className="px-3 py-1.5 border border-dark/20 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-0 focus:border-transparent text-sm"
                     />
                 </div>

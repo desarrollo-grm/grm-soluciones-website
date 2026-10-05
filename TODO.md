@@ -16,8 +16,9 @@
 
 ### Contactanos
 - [ ] Diffrent links to contactanos with filled about page or secret params
-- [ ] Contactanos doing something
-- [ ] Validate properly telefono number
+- [ X ] Contactanos doing something
+- [ X ] Validate properly telefono number
+- [ ] Map is requesting an API Key
 
 ### Create pages
 - [ X ] unsubscribe fail
