@@ -1,17 +1,17 @@
+'use client'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import LogoGRM from '/assets/logo-grm.svg?react';
-import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '/assets/icons';
-import { getAllForFooter } from '/src/data/services.js';
+import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
+import { getAllForFooter } from '@/src/data/services.js';
 
 const Footer = () => {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('idle');
     const [message, setMessage] = useState('');
-    const { executeRecaptcha } = useGoogleReCaptcha();
+    const { executeRecaptcha } = useGoogleReCaptcha() || {};
 
-    const subscriptionApiUrl = import.meta.env.VITE_SUBSCRIPTION_ENDPOINT;
+    const subscriptionApiUrl = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT || '/api/subscribe';
 
     const handleSubscribe = async (event) => {
         event.preventDefault();
@@ -84,7 +84,7 @@ const Footer = () => {
                     {/* Logo Section */}
                     <div className="flex flex-col items-center md:items-start">
                         <img 
-                            src="/assets/logo-grm.svg" 
+                            src="/assets/logo-grm.svg"
                             alt="GRM Soluciones" 
                             className="h-32 mb-4 brightness-0 invert"
                         />
@@ -108,11 +108,11 @@ const Footer = () => {
                     <div className='hidden md:block'>
                         <h3 className="text-xl font-display font-bold mb-4">Navegación</h3>
                         <ul className="space-y-2">
-                            <li><Link to="/about-us" className="hover:underline">Conócenos</Link></li>
+                            <li><Link href="/about-us" className="hover:underline">Conócenos</Link></li>
                             <li><a href="/#services" className="hover:underline">Productos</a></li>
                             <li><a href="/#services" className="hover:underline">Servicios</a></li>
-                            <li><Link to="/blog" className="hover:underline">Blog</Link></li>
-                            <li><Link to="/contact" className="hover:underline">Contáctanos</Link></li>
+                            <li><Link href="/blog" className="hover:underline">Blog</Link></li>
+                            <li><Link href="/contact" className="hover:underline">Contáctanos</Link></li>
                         </ul>
                     </div>
 
@@ -122,7 +122,7 @@ const Footer = () => {
                         <ul className="space-y-2">
                             {getAllForFooter().map((service, index) => (
                                 <li key={index}>
-                                    <Link to={service.link} className="hover:underline">
+                                    <Link href={service.link} className="hover:underline">
                                         {service.title}
                                     </Link>
                                 </li>

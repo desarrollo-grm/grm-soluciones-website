@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client'
+import Link from 'next/link';
 
 const CTAButton = ({ children, onClick, type, to, fullWidth = false, className = '', disabled = false }) => {
     const widthClass = fullWidth ? 'w-full' : 'w-64';
@@ -7,7 +8,7 @@ const CTAButton = ({ children, onClick, type, to, fullWidth = false, className =
 
     if (to) {
         return (
-            <Link to={to} className={baseClassName} aria-disabled={disabled} onClick={(event) => disabled && event.preventDefault()}>
+            <Link href={to} className={baseClassName} aria-disabled={disabled} onClick={(event) => disabled && event.preventDefault()}>
                 {children}
             </Link>
         );

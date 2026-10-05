@@ -16,6 +16,9 @@ dist-ssr
 *.local
 *.zip
 
+# Next.js build output
+.next/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

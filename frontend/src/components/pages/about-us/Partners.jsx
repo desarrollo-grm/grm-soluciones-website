@@ -1,5 +1,5 @@
-import SectionHeader from "/src/components/commons/SectionHeader";
-import LogoCard from "/src/components/commons/LogoCard";
+import SectionHeader from "@/src/components/commons/SectionHeader";
+import LogoCard from "@/src/components/commons/LogoCard";
 const Partners = ({ partners }) => {
     return (
         <section className="bg-light py-16 px-4 flex flex-col items-center justify-center">

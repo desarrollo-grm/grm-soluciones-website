@@ -4,8 +4,8 @@ import {
   getRelatedPosts as getRelatedPostsFromSanity, 
   getFilteredPosts,
   getPostsCount 
-} from '/src/sanity/queries';
-import { urlFor } from '/src/sanity/sanity';
+} from '@/src/sanity/queries';
+import { urlFor } from '@/src/sanity/sanity';
 
 // Products and services with their tag mappings
 export const products = [
@@ -102,7 +102,7 @@ const getDefaultCTAbyTags= (tags) => {
 export const formatPost = (post) => ({
   id: post._id,
   slug: post.slug,
-  image: post.coverImage.asset.url || urlFor(post.coverImage).url(),
+  image: post.coverImage?.asset?.url || (post.coverImage ? urlFor(post.coverImage).url() : '/assets/images/article-placeholder.jpg'),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,
@@ -121,7 +121,7 @@ export const formatPost = (post) => ({
 export const formatFullPost = (post) => ({
   id: post._id,
   slug: post.slug,
-  image: post.coverImage.asset.url || urlFor(post.coverImage).url(),
+  image: post.coverImage?.asset?.url || (post.coverImage ? urlFor(post.coverImage).url() : '/assets/images/article-placeholder.jpg'),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,

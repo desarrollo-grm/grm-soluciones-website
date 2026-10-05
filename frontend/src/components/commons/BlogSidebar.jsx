@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { products, categories } from '/src/data/posts';
+import { products, categories } from '@/src/data/posts';
 
 const BlogSidebar = ({ 
     searchTerm, 
@@ -122,3 +122,4 @@ const BlogSidebar = ({
 };
 
 export default BlogSidebar;
+'use client';

@@ -1,5 +1,5 @@
-import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
-import Carousel from "/src/components/commons/Carousel";
+import UnderlinedTitle from "@/src/components/commons/UnderlinedTitle";
+import Carousel from "@/src/components/commons/Carousel";
 
 const Clients = ({ clients }) => {
     return (

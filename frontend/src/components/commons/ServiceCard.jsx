@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client'
+import Link from 'next/link';
 
 const ServiceCard = ({ service, featured = false, color }) => {
     // Map color prop to Tailwind classes
@@ -12,7 +13,7 @@ const ServiceCard = ({ service, featured = false, color }) => {
         const CardWrapper = service.link ? Link : 'div';
         return (
             <CardWrapper
-                to={service.link || undefined}
+                href={service.link || undefined}
                 aria-label={service.title}
                 className={`bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 w-full p-8 md:p-10 ${service.link ? 'cursor-pointer' : ''} block`}
             >
@@ -53,7 +54,7 @@ const ServiceCard = ({ service, featured = false, color }) => {
     const CardWrapper = service.link ? Link : 'div';
     return (
         <CardWrapper
-            to={service.link || undefined}
+            href={service.link || undefined}
             aria-label={service.title}
             className={`bg-white rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300 p-8 flex flex-col items-center justify-center text-center h-full min-h-[280px] ${service.link ? 'cursor-pointer' : ''} block`}
         >

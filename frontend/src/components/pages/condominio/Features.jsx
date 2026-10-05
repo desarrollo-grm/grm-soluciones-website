@@ -1,5 +1,5 @@
-import SectionHeader from "/src/components/commons/SectionHeader";
-import ValueCard from "/src/components/commons/ValueCard";
+import SectionHeader from "@/src/components/commons/SectionHeader";
+import ValueCard from "@/src/components/commons/ValueCard";
 
 const Features = () => {
 

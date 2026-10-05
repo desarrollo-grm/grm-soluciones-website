@@ -1,6 +1,6 @@
-import StatPill from "/src/components/commons/StatPill";
-import CTAButton from "/src/components/commons/CTAButton";
-import SectionHeader from "/src/components/commons/SectionHeader";
+import StatPill from "@/src/components/commons/StatPill";
+import CTAButton from "@/src/components/commons/CTAButton";
+import SectionHeader from "@/src/components/commons/SectionHeader";
 
 const ContactUs = () => {
     return (

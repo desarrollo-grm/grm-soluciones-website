@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client'
+import Link from 'next/link';
 
 const PostCard = ({ post, featured = false, compact = false }) => {
     const { slug, image, categories, title, excerpt, date, readTime } = post;
@@ -6,7 +7,7 @@ const PostCard = ({ post, featured = false, compact = false }) => {
     // Compact card layout (image + title only)
     if (compact) {
         return (
-            <Link to={`/blog/${slug}`} className="block h-full group">
+            <Link href={`/blog/${slug}`} className="block h-full group">
                 <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
                     {/* Image - Square aspect ratio */}
                     <div className="relative w-full overflow-hidden flex-shrink-0" style={{ paddingTop: '100%' }}>
@@ -30,7 +31,7 @@ const PostCard = ({ post, featured = false, compact = false }) => {
 
     if (featured) {
         return (
-            <Link to={`/blog/${slug}`} className="block h-full">
+            <Link href={`/blog/${slug}`} className="block h-full">
                 <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex">
                     <div className="grid grid-cols-2 gap-0 h-full w-full">
                         {/* Image */}
@@ -85,7 +86,7 @@ const PostCard = ({ post, featured = false, compact = false }) => {
 
     // Regular card layout
     return (
-        <Link to={`/blog/${slug}`} className="block h-full">
+        <Link href={`/blog/${slug}`} className="block h-full">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
                 {/* Image - Consistent 16:9 aspect ratio */}
                 <div className="relative w-full overflow-hidden flex-shrink-0" style={{ paddingTop: '56.25%' }}>

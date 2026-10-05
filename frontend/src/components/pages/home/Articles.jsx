@@ -1,30 +1,9 @@
-import { useState, useEffect } from 'react';
-import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
-import PostCard from "/src/components/commons/PostCard";
-import { getPostsForHome } from '/src/data/posts';
+import UnderlinedTitle from "@/src/components/commons/UnderlinedTitle";
+import PostCard from "@/src/components/commons/PostCard";
+import { getPostsForHome } from '@/src/data/posts';
 
-const Articles = () => {
-    const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchArticles = async () => {
-            try {
-                const posts = await getPostsForHome(4);
-                setArticles(posts);
-            } catch (error) {
-                console.error('Error fetching articles:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchArticles();
-    }, []);
-
-    if (loading) {
-        return null;
-    }
+const Articles = async () => {
+    const articles = await getPostsForHome(4);
 
     return (
         <section className="bg-light py-16 px-4 min-h-[calc(100dvh-88px)]">

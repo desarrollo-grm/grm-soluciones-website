@@ -1,6 +1,6 @@
-import UnderlinedTitle from "/src/components/commons/UnderlinedTitle";
-import ServiceCard from "/src/components/commons/ServiceCard";
-import { getFeaturedService, getNonFeaturedServices } from "/src/data/services.js";
+import UnderlinedTitle from "@/src/components/commons/UnderlinedTitle";
+import ServiceCard from "@/src/components/commons/ServiceCard";
+import { getFeaturedService, getNonFeaturedServices } from "@/src/data/services.js";
 
 const Services = () => {
     const featuredService = getFeaturedService();

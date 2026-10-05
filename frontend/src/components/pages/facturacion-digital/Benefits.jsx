@@ -1,4 +1,4 @@
-import BenefitCard from '/src/components/commons/BenefitCard';
+import BenefitCard from '@/src/components/commons/BenefitCard';
 
 const Benefits = () => {
   const benefits = [

@@ -1,5 +1,5 @@
-import SectionHeader from "/src/components/commons/SectionHeader";
-import ServiceCard from "/src/components/commons/ServiceCard";
+import SectionHeader from "@/src/components/commons/SectionHeader";
+import ServiceCard from "@/src/components/commons/ServiceCard";
 
 const Values = () => {
     return (

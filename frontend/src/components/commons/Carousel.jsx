@@ -1,5 +1,5 @@
-import '/src/styles/carousel.css';
-import LogoCard from '/src/components/commons/LogoCard';
+import '@/src/styles/carousel.css';
+import LogoCard from '@/src/components/commons/LogoCard';
 
 const Carousel = ({ objects, animated = true }) => {
     return (

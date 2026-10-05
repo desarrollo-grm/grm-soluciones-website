@@ -1,5 +1,5 @@
-import SectionHeader from "/src/components/commons/SectionHeader";
-import ObjectiveCard from "/src/components/commons/ObjectiveCard";
+import SectionHeader from "@/src/components/commons/SectionHeader";
+import ObjectiveCard from "@/src/components/commons/ObjectiveCard";
 
 const Beneficios = () => {
 

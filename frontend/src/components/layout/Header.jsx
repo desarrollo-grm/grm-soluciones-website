@@ -1,12 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+'use client'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import logoGrm from '/assets/logo-grm.svg';
-import { getProductsForNav, getServicesForNav } from '/src/data/services.js';
+import { getProductsForNav, getServicesForNav } from '@/src/data/services.js';
 
 const Header = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const location = useLocation();
+    const pathname = usePathname();
 
     const productos = getProductsForNav();
     const servicios = getServicesForNav();
@@ -48,7 +49,7 @@ const Header = () => {
     // Close mobile menu on route change
     useEffect(() => {
         closeMobileMenu();
-    }, [location.pathname]);
+    }, [pathname]);
 
     // Handle Escape key to close mobile menu
     useEffect(() => {
@@ -91,7 +92,7 @@ const Header = () => {
     <header className="bg-primary text-white sticky top-0 z-50 h-[88px]">
       <div className="w-full h-full mx-auto px-6 py-4 flex justify-between items-center">
         <div className="w-20 h-auto">
-           <Link to="/"><img src={logoGrm} alt="GRM Logo" className="w-full h-full  brightness-0 invert" /></Link>
+           <Link href="/"><img src="/assets/logo-grm.svg" alt="GRM Logo" className="w-full h-full  brightness-0 invert" /></Link>
         </div>
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
@@ -117,7 +118,7 @@ const Header = () => {
                       {item.dropdown.map((subItem, index) => (
                         <Link
                           key={subItem.name}
-                          to={subItem.path}
+                          href={subItem.path}
                           onClick={() => setOpenDropdown(null)}
                           className={`block px-4 py-2 hover:bg-secondary hover:text-light transition-colors ${index === 0 ? 'rounded-t-md' : ''} ${index === item.dropdown.length - 1 ? 'rounded-b-md' : ''}`}
                         >
@@ -133,7 +134,7 @@ const Header = () => {
                 {item.name}
               </a>
             ) : (
-              <Link key={item.name} to={item.path} className="hover:text-orange-400 transition-colors">
+              <Link key={item.name} href={item.path} className="hover:text-orange-400 transition-colors">
                 {item.name}
               </Link>
             )
@@ -194,7 +195,7 @@ const Header = () => {
         <nav className="flex flex-col items-center justify-center h-full px-8 space-y-6">
           {/* Home Link */}
           <Link 
-            to="/"
+            href="/"
             onClick={closeMobileMenu}
             className="text-white text-2xl font-medium hover:text-secondary transition-colors"
           >
@@ -228,7 +229,7 @@ const Header = () => {
                     {item.dropdown.map((subItem) => (
                       <Link
                         key={subItem.name}
-                        to={subItem.path}
+                        href={subItem.path}
                         onClick={closeMobileMenu}
                         className="text-white text-lg hover:text-secondary transition-colors text-center"
                       >
@@ -241,7 +242,7 @@ const Header = () => {
             ) : (
               <Link 
                 key={item.name} 
-                to={item.path}
+                href={item.path}
                 onClick={closeMobileMenu}
                 className="text-white text-2xl font-medium hover:text-secondary transition-colors"
               >

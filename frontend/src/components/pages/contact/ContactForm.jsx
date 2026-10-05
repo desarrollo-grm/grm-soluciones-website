@@ -1,6 +1,7 @@
+'use client'
 import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import CTAButton from "/src/components/commons/CTAButton";
+import CTAButton from "@/src/components/commons/CTAButton";
 
 const telephonePattern = /^[+]?[0-9\s().-]{9,20}$/;
 
@@ -22,8 +23,8 @@ const ContactForm = () => {
     });
     const [status, setStatus] = useState("idle");
     const [feedback, setFeedback] = useState("");
-    const { executeRecaptcha } = useGoogleReCaptcha();
-    const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || "/api/contact";
+    const { executeRecaptcha } = useGoogleReCaptcha() || {};
+    const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
 
     const handleChange = (event) => {
         const { id, value } = event.target;

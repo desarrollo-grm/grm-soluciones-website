@@ -1,8 +1,8 @@
-import SectionHeader from '/src/components/commons/SectionHeader';
-import Carousel from '/src/components/commons/Carousel';
-import CTAButton from '/src/components/commons/CTAButton';
+import SectionHeader from '@/src/components/commons/SectionHeader';
+import Carousel from '@/src/components/commons/Carousel';
+import CTAButton from '@/src/components/commons/CTAButton';
 
-import { ccClients } from '/src/data/clients';
+import { ccClients } from '@/src/data/clients';
 
 const ContactUs = () => {
     return (
