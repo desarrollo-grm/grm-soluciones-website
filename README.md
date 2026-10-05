@@ -2,16 +2,16 @@
 
 Corporate website for GRM Soluciones, a technology solutions provider specializing in digital services for businesses and condominiums. 
 
-This project uses a **Monorepo Architecture**, separating the frontend, the backend API, and the content management system (CMS) into distinct, independent workspaces.
+This project uses a **monorepo architecture**, separating the frontend, backend API, and content management system (CMS) into distinct npm workspaces.
 
 ## 🚀 Tech Stack
 
 ### Frontend (Website)
-- **React** 19.1.1 - Modern UI library
-- **Next.js** 15 - App Router, SSR, and static generation
+- **React** 19 - UI library
+- **Next.js** 15 - App Router, server rendering, and static generation
 - **Tailwind CSS** 4.1.16 - Utility-first CSS framework
 - **Leaflet** 1.9.4 - Interactive maps
-- **@sanity/client** - Data fetching from the CMS
+- **Sanity** - Headless CMS integration and Portable Text rendering
 
 ### Backend (API)
 - **Node.js & Express** - Traditional server for API routes
@@ -23,11 +23,12 @@ This project uses a **Monorepo Architecture**, separating the frontend, the back
 
 ## 📋 Features
 
-- **Multi-page Application** with server-rendered Next.js routes.
+- **Multi-page application** with server-rendered Next.js routes.
 - **Service Pages**: Digital Invoicing, Condominium Management, Technical Support.
 - **Corporate Pages**: Home, About Us, Contact.
 - **Headless Blog**: Fully dynamic blog powered by Sanity CMS.
-- **Working Contact Forms**: Handled securely via the custom Express backend and Brevo.
+- **Contact and subscription forms**: Handled by the custom Express backend and Brevo.
+- **Protected API**: Request rate limiting and Google reCAPTCHA v3 validation.
 - **Responsive Design** with Tailwind CSS.
 - **Interactive Maps** using Leaflet.
 
@@ -35,17 +36,17 @@ This project uses a **Monorepo Architecture**, separating the frontend, the back
 
 ```text
 grm-soluciones/
-├── frontend/               # The React + Vite Website
-│   ├── public/             
-│   ├── app/                # Next.js App Router routes and SEO metadata
+├── frontend/               # Next.js website
+│   ├── public/
+│   ├── app/                # App Router routes, metadata, robots, and sitemap
 │   ├── src/
 │   │   ├── components/     # Reusable UI components & layouts
 │   │   ├── page-sections/  # Reused page compositions
-│   │   ├── sanity/         # Sanity API configurations & queries
+│   │   ├── sanity/         # Sanity client configuration and queries
 │   │   └── styles/         # Global Tailwind styles
 │   └── package.json        
 ├── backend/                # The Express API Server
-│   ├── api/                # Email logic & integrations (Brevo)
+│   ├── api/                # API handlers and integrations
 │   ├── email_templates/    # HTML email templates
 │   ├── server.js           # Express entry point
 │   └── package.json        
@@ -59,8 +60,8 @@ grm-soluciones/
 ## 🛠️ Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher recommended)
-- npm (v7 or higher for workspace support)
+- Node.js 18 or higher
+- npm 7 or higher (npm workspaces support)
 
 ### Installation
 
@@ -75,10 +76,12 @@ cd grm-soluciones
 npm install
 ```
 
-3. Set up Environment Variables:
-   - Create a `.env` file in `/frontend` using the `NEXT_PUBLIC_*` variables documented in `frontend/.env`.
-   - Create a `.env` file in `/backend` (for Brevo API keys)
-   - Create a `.env` file in `/studio` (for Sanity keys)
+3. Set up environment variables. Environment files are intentionally not committed:
+   - **`frontend/.env`**: Set the public site URL, Sanity project and dataset, reCAPTCHA site key, optional form endpoints, and `BACKEND_URL`.
+   - **`backend/.env`**: Set `API_PORT` and the private Brevo, reCAPTCHA, sender, support, and site URL settings required by the API.
+   - **`studio`**: Configure the Sanity project using the Sanity CLI when prompted. Studio configuration is defined in `studio/sanity.config.ts`.
+
+   Never commit API keys, reCAPTCHA secrets, or other credentials. Use the deployment provider's secret or environment-variable settings in production.
 
 4. Start the development environment:
 ```bash
@@ -91,6 +94,8 @@ npm run dev
 - **Backend API:** `http://localhost:8787`
 - **Sanity Studio:** `http://localhost:3333`
 
+The frontend rewrites `/api/*` requests to the backend using `BACKEND_URL`. When running the default local setup, this points to `http://127.0.0.1:8787`.
+
 ## 📜 Available Root Scripts
 
 - `npm run dev` - Starts all three development servers concurrently.
@@ -99,16 +104,26 @@ npm run dev
 - `npm run dev:studio` - Starts only the Sanity Studio.
 - `npm run build` - Builds all workspaces for production.
 - `npm run lint` - Runs ESLint across all workspaces.
+- `npm run test --workspace=backend` - Runs the backend's Node.js test suite.
+- `npm run build --workspace=frontend` - Builds the Next.js website.
+- `npm run build --workspace=studio` - Builds the Sanity Studio.
+
+To run a workspace command from its directory, use the corresponding package script directly. For example:
+
+```bash
+cd backend
+npm test
+```
 
 ## 🚀 Deployment
 
 Because the project is separated into distinct workspaces, it can be deployed anywhere without vendor lock-in.
 
-1. **Frontend (`/frontend`)**: Run `npm run build --workspace=frontend`, then `npm run start --workspace=frontend` on a Node.js-compatible host. The frontend uses Next.js server rendering and must not be deployed as a Vite `dist/` folder.
-2. **Backend (`/backend`)**: Upload the folder to a Node.js-supported server (like cPanel's "Setup Node.js App", Render, or Railway) and start `server.js`.
-3. **Studio (`/studio`)**: Run `npm run build --workspace=studio` and host it statically (e.g., in a `/admin` subfolder on your main domain).
+1. **Frontend (`/frontend`)**: Run `npm run build --workspace=frontend`, then `npm run start --workspace=frontend` on a Node.js-compatible host. Configure `BACKEND_URL` to the deployed API URL.
+2. **Backend (`/backend`)**: Deploy the Node.js service, configure its private environment variables, and run `npm run start --workspace=backend`. Set `API_PORT` to the port provided by the hosting platform when required.
+3. **Studio (`/studio`)**: Run `npm run build --workspace=studio` and host the generated static site (for example, under an `/admin` subfolder).
 
-The Next frontend generates `/robots.txt` and `/sitemap.xml`, renders Sanity blog posts on the server, and statically generates known post slugs with revalidation. `/api/*` requests are proxied to the Express backend through `BACKEND_URL`.
+The Next.js frontend generates `/robots.txt` and `/sitemap.xml`, renders Sanity blog posts on the server, and statically generates known post slugs with revalidation.
 
 ## 📄 License
 

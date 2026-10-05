@@ -48,7 +48,7 @@
 
 ### High priority
 
-- [ ] Add `robots.txt` and a generated `sitemap.xml` covering all indexable routes.
+- [ X ] Add `robots.txt` and a generated `sitemap.xml` covering all indexable routes.
 - [ ] Change the document language from `en` to `es`.
 - [ ] Add `noindex, nofollow` metadata to `/unsubscribe` and `/unsubscribed-success`.
 - [ ] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
