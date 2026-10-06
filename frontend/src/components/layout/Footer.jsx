@@ -1,81 +1,11 @@
 'use client'
-import { useState } from 'react';
 import Link from 'next/link';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
 import { getAllForFooter } from '@/src/data/services.js';
+import useNewsletterSubscription from '@/src/hooks/useNewsletterSubscription';
 
 const Footer = () => {
-    const [email, setEmail] = useState('');
-    const [status, setStatus] = useState('idle');
-    const [message, setMessage] = useState('');
-    const { executeRecaptcha } = useGoogleReCaptcha() || {};
-
-    const subscriptionApiUrl = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT || '/api/subscribe';
-
-    const handleSubscribe = async (event) => {
-        event.preventDefault();
-
-        const trimmedEmail = email.trim();
-
-        if (!trimmedEmail) {
-            setStatus('error');
-            setMessage('Ingresa tu correo electrónico.');
-            return;
-        }
-
-        if (!executeRecaptcha) {
-            setStatus('error');
-            setMessage('Hemos encontrado un problema. Intenta de nuevo más tarde.');
-            return;
-        }
-
-        setStatus('loading');
-        setMessage('');
-
-        // Generate the reCAPTCHA token
-        const recaptchaToken = await executeRecaptcha('newsletter_subscription');
-
-        try {
-            const response = await fetch(subscriptionApiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: trimmedEmail, captchaToken: recaptchaToken }),
-            });
-
-            const data = await response.json().catch(() => ({}));
-
-            if (response.ok) {
-                setStatus('success');
-                setMessage('Suscripción exitosa. Revisa tu bandeja para confirmar las novedades.');
-                setEmail('');
-
-                return;
-            }
-            // TODO : No dar esta informacion por seguridad, cambiar a un mensaje genérico
-            // Succes? 
-            if (response.status === 409) {
-                setStatus('error');
-                setMessage(data.error || 'Este correo ya está suscrito.');
-                return;
-            }
-
-            if (response.status === 400) {
-                setStatus('error');
-                setMessage(data.error || 'Ingresa un correo válido.');
-                return;
-            }
-
-            console.log('Error en la suscripción:', data.error);
-            setStatus('error');
-            setMessage(data.error || 'No pudimos completar la suscripción. Intenta de nuevo.');
-        } catch {
-            setStatus('error');
-            setMessage('No pudimos conectar con el servidor. Intenta más tarde.');
-        }
-    };
+    const { email, setEmail, status, message, handleSubmit } = useNewsletterSubscription();
 
     return (
         <footer className="bg-primary text-white py-12 px-4">
@@ -141,7 +71,7 @@ const Footer = () => {
 
                         <div className="mt-6">
                             <h4 className="text-lg font-display font-bold mb-3">Newsletter</h4>
-                            <form onSubmit={handleSubscribe} className="space-y-3">
+                            <form onSubmit={handleSubmit} className="space-y-3">
                                 <div className="flex max-w-full">
                                     <input 
                                         type="email" 
