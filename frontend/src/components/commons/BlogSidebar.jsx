@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { products, categories } from '@/src/data/posts';
 
 const BlogSidebar = ({ 
@@ -12,12 +13,72 @@ const BlogSidebar = ({
     onCategoriesChange 
 }) => {
     const [email, setEmail] = useState('');
+    const [status, setStatus] = useState('idle');
+    const [message, setMessage] = useState('');
+    const { executeRecaptcha } = useGoogleReCaptcha() || {};
+    const subscriptionApiUrl = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT || '/api/subscribe';
 
     const handleNewsletterSubmit = (e) => {
         e.preventDefault();
-        // Handle newsletter subscription
-        console.log('Newsletter subscription:', email);
-        setEmail('');
+        handleSubscribe(email);
+    };
+
+    const handleSubscribe = async (value) => {
+        const trimmedEmail = value.trim();
+
+        if (!trimmedEmail) {
+            setStatus('error');
+            setMessage('Ingresa tu correo electrónico.');
+            return;
+        }
+
+        if (!executeRecaptcha) {
+            setStatus('error');
+            setMessage('Hemos encontrado un problema. Intenta de nuevo más tarde.');
+            return;
+        }
+
+        setStatus('loading');
+        setMessage('');
+
+        try {
+            const recaptchaToken = await executeRecaptcha('newsletter_subscription');
+            const response = await fetch(subscriptionApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: trimmedEmail, captchaToken: recaptchaToken }),
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (response.ok) {
+                setStatus('success');
+                setMessage('Suscripción exitosa. Revisa tu bandeja para confirmar las novedades.');
+                setEmail('');
+                return;
+            }
+
+            if (response.status === 409) {
+                setStatus('error');
+                setMessage(data.error || 'Este correo ya está suscrito.');
+                return;
+            }
+
+            if (response.status === 400) {
+                setStatus('error');
+                setMessage(data.error || 'Ingresa un correo válido.');
+                return;
+            }
+
+            console.log('Error en la suscripción:', data.error);
+            setStatus('error');
+            setMessage(data.error || 'No pudimos completar la suscripción. Intenta de nuevo.');
+        } catch {
+            setStatus('error');
+            setMessage('No pudimos conectar con el servidor. Intenta más tarde.');
+        }
     };
 
     return (
@@ -113,11 +174,21 @@ const BlogSidebar = ({
                     />
                     <button
                         type="submit"
+                        disabled={status === 'loading'}
                         className="w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors"
                     >
-                        Suscríbete
+                        {status === 'loading' ? 'Enviando...' : 'Suscríbete'}
                     </button>
                 </form>
+                {message ? (
+                    <p
+                        role="status"
+                        aria-live="polite"
+                        className={`mt-3 text-sm ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}
+                    >
+                        {message}
+                    </p>
+                ) : null}
             </div>
         </div>
     );
