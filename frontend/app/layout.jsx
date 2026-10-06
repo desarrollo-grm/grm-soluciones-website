@@ -7,6 +7,8 @@ import Providers from './providers';
 
 export const dynamic = 'force-dynamic';
 
+const allowIndexing = process.env.ALLOW_INDEXING === 'true';
+
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://grm.net.ve'),
   title: {
@@ -27,6 +29,12 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+  robots: allowIndexing
+    ? undefined
+    : {
+        index: false,
+        follow: false,
+      },
 };
 
 export default function RootLayout({ children }) {

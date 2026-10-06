@@ -77,7 +77,7 @@ npm install
 ```
 
 3. Set up environment variables. Environment files are intentionally not committed:
-   - **`frontend/.env`**: Set the public site URL, Sanity project and dataset, reCAPTCHA site key, optional form endpoints, and `BACKEND_URL`.
+   - **`frontend/.env`**: Set the public site URL, Sanity project and dataset, reCAPTCHA site key, optional form endpoints, `BACKEND_URL`, and `ALLOW_INDEXING=false` for dev.
    - **`backend/.env`**: Set `API_PORT` and the private Brevo, reCAPTCHA, sender, support, and site URL settings required by the API.
    - **`studio`**: Configure the Sanity project using the Sanity CLI when prompted. Studio configuration is defined in `studio/sanity.config.ts`.
 
@@ -124,6 +124,33 @@ Because the project is separated into distinct workspaces, it can be deployed an
 3. **Studio (`/studio`)**: Run `npm run build --workspace=studio` and host the generated static site (for example, under an `/admin` subfolder).
 
 The Next.js frontend generates `/robots.txt` and `/sitemap.xml`, renders Sanity blog posts on the server, and statically generates known post slugs with revalidation.
+
+### Dev deployment and search-engine protection
+
+Configure these variables in the frontend deployment environment before building:
+
+```text
+NEXT_PUBLIC_SITE_URL=https://<dev-domain>
+BACKEND_URL=https://<dev-api-domain>
+ALLOW_INDEXING=false
+```
+
+`ALLOW_INDEXING` is deliberately opt-in. With it set to anything other than `true`, the frontend:
+
+- sends `X-Robots-Tag: noindex, nofollow` on every response;
+- renders `noindex, nofollow` metadata;
+- serves a `robots.txt` that disallows every crawler.
+
+For the production deployment, set `NEXT_PUBLIC_SITE_URL` to `https://grm.net.ve` and explicitly set `ALLOW_INDEXING=true`. Do not reuse production environment variables in the dev deployment.
+
+After deployment, verify the protection from a machine that can reach the dev URL:
+
+```bash
+curl -I https://<dev-domain>/
+curl https://<dev-domain>/robots.txt
+```
+
+The response headers must include `X-Robots-Tag: noindex, nofollow`, and `robots.txt` must contain `Disallow: /`. Check the generated HTML as well if the hosting platform modifies response headers.
 
 ## 📄 License
 
