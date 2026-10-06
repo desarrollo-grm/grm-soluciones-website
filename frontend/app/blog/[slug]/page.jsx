@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import PostCard from '@/src/components/commons/PostCard';
 import PortableTextRenderer from '@/src/components/commons/PortableTextRenderer';
+import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
 import { getFormattedPosts, getPost, getRelatedPosts } from '@/src/data/posts';
 
 export const revalidate = 300;
@@ -53,20 +54,27 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <main className="bg-light py-12 md:py-16">
-      <article className="container mx-auto max-w-4xl px-6">
-        <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6">{post.title}</h1>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {post.categories.map((tag) => <span key={tag} className="rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-white">{tag}</span>)}
+      <div className="container mx-auto px-6">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_350px] lg:gap-12">
+          <article className="max-w-4xl">
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6">{post.title}</h1>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {post.categories.map((tag) => <span key={tag} className="rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-white">{tag}</span>)}
+            </div>
+            <div className="text-dark/60 mb-8">Publicado el {post.date} · Lectura de {post.readtime} minutos</div>
+            <img src={post.image} alt={post.title} className="mb-8 w-full rounded-2xl object-cover" />
+            <div className="space-y-4"><PortableTextRenderer content={post.content} /></div>
+            <div className="my-12 rounded-2xl bg-white p-8 text-center shadow-lg">
+              <h2 className="font-display text-2xl font-bold text-dark mb-4">{post.ctaTitle}</h2>
+              <p className="mb-6 text-dark/80">{post.ctaSubtitle}</p>
+              <a className="inline-block rounded-2xl bg-secondary px-8 py-3 font-semibold text-white" href="/contact">{post.ctaButton}</a>
+            </div>
+          </article>
+          <aside className="self-start lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
+            <BlogPostSidebar />
+          </aside>
         </div>
-        <div className="text-dark/60 mb-8">Publicado el {post.date} · Lectura de {post.readtime} minutos</div>
-        <img src={post.image} alt={post.title} className="mb-8 w-full rounded-2xl object-cover" />
-        <div className="space-y-4"><PortableTextRenderer content={post.content} /></div>
-        <div className="my-12 rounded-2xl bg-white p-8 text-center shadow-lg">
-          <h2 className="font-display text-2xl font-bold text-dark mb-4">{post.ctaTitle}</h2>
-          <p className="mb-6 text-dark/80">{post.ctaSubtitle}</p>
-          <a className="inline-block rounded-2xl bg-secondary px-8 py-3 font-semibold text-white" href="/contact">{post.ctaButton}</a>
-        </div>
-      </article>
+      </div>
       {relatedPosts.length ? (
         <section className="container mx-auto max-w-6xl px-6">
           <h2 className="font-display text-3xl font-bold text-dark mb-8">También te puede interesar</h2>

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { products, categories } from '@/src/data/posts';
 
@@ -122,4 +124,3 @@ const BlogSidebar = ({
 };
 
 export default BlogSidebar;
-'use client';
