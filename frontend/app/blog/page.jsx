@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import PostCard from '@/src/components/commons/PostCard';
 import SectionHeader from '@/src/components/commons/SectionHeader';
 import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
+import BlogPagination from '@/src/components/pages/blog/BlogPagination';
 import Providers from '@/app/providers';
 import { getFilteredPaginatedPosts, getFormattedPosts } from '@/src/data/posts';
 
@@ -64,13 +64,7 @@ export default async function BlogPage({ searchParams }) {
               ) : (
                 <p className="text-center text-dark/60">No se encontraron artículos.</p>
               )}
-              {postsData.totalPages > 1 ? (
-                <nav className="mt-10 flex justify-center gap-3" aria-label="Paginación del blog">
-                  {page > 1 ? <Link className="rounded-lg bg-gray-200 px-4 py-2" href={`/blog?page=${page - 1}`}>Anterior</Link> : null}
-                  <span className="px-4 py-2">Página {page} de {postsData.totalPages}</span>
-                  {page < postsData.totalPages ? <Link className="rounded-lg bg-gray-200 px-4 py-2" href={`/blog?page=${page + 1}`}>Siguiente</Link> : null}
-                </nav>
-              ) : null}
+              <BlogPagination currentPage={page} totalPages={postsData.totalPages} />
             </div>
             <aside className="self-start lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
               <Providers>

@@ -31,7 +31,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ X ] Overuse of "use client" (App Router)
 
 ### Blog
-- [ ] Page number from the last implementation.
+- [ X ] Page number from the last implementation.
 
 ### Blog Post
 - [ ] The suggested blog posts should be left
