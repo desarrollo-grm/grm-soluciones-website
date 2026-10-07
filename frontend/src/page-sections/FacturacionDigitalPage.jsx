@@ -1,6 +1,4 @@
-'use client';
-
-import Benefits from "../components/pages/facturacion-digital/Benefits";
+import Benefits from "@/src/components/pages/facturacion-digital/Benefits";
 import Hero from "@/src/components/pages/facturacion-digital/Hero.jsx";
 import ContactUs from "@/src/components/pages/facturacion-digital/ContactUs.jsx";
 

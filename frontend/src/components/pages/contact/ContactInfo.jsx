@@ -1,9 +1,5 @@
-'use client';
-
-import dynamic from 'next/dynamic';
 import { MapMarkerIcon, PhoneIcon, EnvelopeIcon, LinkedInIcon, InstagramIcon, XIcon, WhatsAppIcon } from '@/assets/icons';
-
-const Map = dynamic(() => import('@/src/components/commons/Map'), { ssr: false });
+import Map from '@/src/components/commons/MapClient';
 
 const ContactInfo = () => {
     // Google Maps link with your coordinates

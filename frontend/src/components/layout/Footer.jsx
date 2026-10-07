@@ -1,12 +1,10 @@
-'use client'
 import Link from 'next/link';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
 import { getAllForFooter } from '@/src/data/services.js';
-import useNewsletterSubscription from '@/src/hooks/useNewsletterSubscription';
+import NewsletterForm from '@/src/components/layout/NewsletterForm';
+import Providers from '@/app/providers';
 
 const Footer = () => {
-    const { email, setEmail, status, message, handleSubmit } = useNewsletterSubscription();
-
     return (
         <footer className="bg-primary text-white py-12 px-4">
             <div className="container mx-auto max-w-6xl">
@@ -71,34 +69,9 @@ const Footer = () => {
 
                         <div className="mt-6">
                             <h4 className="text-lg font-display font-bold mb-3">Newsletter</h4>
-                            <form onSubmit={handleSubmit} className="space-y-3">
-                                <div className="flex max-w-full">
-                                    <input 
-                                        type="email" 
-                                        placeholder="Tu email" 
-                                        value={email}
-                                        onChange={(event) => setEmail(event.target.value)}
-                                        aria-label="Correo electrónico para newsletter"
-                                        className="bg-light flex-1 min-w-0 px-4 py-2 rounded-l-full text-gray-800 focus:outline-none"
-                                    />
-                                    <button
-                                        type="submit"
-                                        disabled={status === 'loading'}
-                                        className="bg-secondary hover:bg-accent disabled:opacity-70 disabled:cursor-not-allowed px-4 py-2 rounded-r-full text-sm font-semibold transition-colors whitespace-nowrap"
-                                    >
-                                        {status === 'loading' ? 'Enviando...' : 'Subscríbete'}
-                                    </button>
-                                </div>
-                                {message ? (
-                                    <p
-                                        role="status"
-                                        aria-live="polite"
-                                        className={`text-sm ${status === 'success' ? 'text-green-300' : 'text-red-300'}`}
-                                    >
-                                        {message}
-                                    </p>
-                                ) : null}
-                            </form>
+                            <Providers>
+                                <NewsletterForm />
+                            </Providers>
                         </div>
                     </div>
                 </div>

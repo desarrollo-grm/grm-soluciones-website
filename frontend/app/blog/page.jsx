@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PostCard from '@/src/components/commons/PostCard';
 import SectionHeader from '@/src/components/commons/SectionHeader';
 import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
+import Providers from '@/app/providers';
 import { getFilteredPaginatedPosts, getFormattedPosts } from '@/src/data/posts';
 
 export const revalidate = 300;
@@ -72,7 +73,9 @@ export default async function BlogPage({ searchParams }) {
               ) : null}
             </div>
             <aside className="self-start lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-              <BlogPostSidebar />
+              <Providers>
+                <BlogPostSidebar />
+              </Providers>
             </aside>
           </div>
         </div>

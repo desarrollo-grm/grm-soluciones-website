@@ -1,4 +1,3 @@
-'use client'
 import Link from 'next/link';
 
 const PostCard = ({ post, featured = false, compact = false }) => {

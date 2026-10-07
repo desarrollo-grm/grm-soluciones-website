@@ -3,7 +3,6 @@ import '@/src/styles/main.css';
 import '@/src/styles/carousel.css';
 import Header from '@/src/components/layout/Header';
 import Footer from '@/src/components/layout/Footer';
-import Providers from './providers';
 
 const allowIndexing = process.env.ALLOW_INDEXING === 'true';
 
@@ -39,11 +38,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
