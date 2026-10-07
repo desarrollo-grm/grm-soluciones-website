@@ -70,6 +70,12 @@ export default async function BlogPostPage({ params }) {
               <p className="mb-6 text-dark/80">{post.ctaSubtitle}</p>
               <a className="inline-block rounded-2xl bg-secondary px-8 py-3 font-semibold text-white" href="/contact">{post.ctaButton}</a>
             </div>
+            {relatedPosts.length ? (
+              <section className="container mx-auto max-w-6xl px-6">
+                <h2 className="font-display text-3xl font-bold text-dark mb-8">También te puede interesar</h2>
+                <div className="grid gap-8 md:grid-cols-3">{relatedPosts.map((related) => <PostCard key={related.id} post={related} />)}</div>
+              </section>
+            ) : null}
           </article>
           <aside className="self-start lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
             <Suspense fallback={null}>
@@ -78,12 +84,6 @@ export default async function BlogPostPage({ params }) {
           </aside>
         </div>
       </div>
-      {relatedPosts.length ? (
-        <section className="container mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-3xl font-bold text-dark mb-8">También te puede interesar</h2>
-          <div className="grid gap-8 md:grid-cols-3">{relatedPosts.map((related) => <PostCard key={related.id} post={related} />)}</div>
-        </section>
-      ) : null}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </main>
   );
