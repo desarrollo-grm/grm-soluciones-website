@@ -1,7 +1,7 @@
 'use client';
 
 import { products, categories } from '@/src/data/posts';
-import useNewsletterSubscription from '@/src/hooks/useNewsletterSubscription';
+import NewsletterForm from '@/src/components/layout/NewsletterForm';
 
 const BlogSidebar = ({ 
     searchTerm, 
@@ -11,8 +11,6 @@ const BlogSidebar = ({
     selectedCategories, 
     onCategoriesChange 
 }) => {
-    const { email, setEmail, status, message, handleSubmit } = useNewsletterSubscription();
-
     return (
         <div className="space-y-8">
             {/* Search Bar */}
@@ -95,32 +93,7 @@ const BlogSidebar = ({
                 <p className="text-dark/80 text-sm mb-4">
                     Mantente al tanto de todas las novedades
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-3">
-                    <input
-                        type="email"
-                        placeholder="correo@ejemplo.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-                    />
-                    <button
-                        type="submit"
-                        disabled={status === 'loading'}
-                        className="w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors"
-                    >
-                        {status === 'loading' ? 'Enviando...' : 'Suscríbete'}
-                    </button>
-                </form>
-                {message ? (
-                    <p
-                        role="status"
-                        aria-live="polite"
-                        className={`mt-3 text-sm ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}
-                    >
-                        {message}
-                    </p>
-                ) : null}
+                <NewsletterForm variant="blog" />
             </div>
         </div>
     );
