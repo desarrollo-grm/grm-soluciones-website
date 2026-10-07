@@ -23,6 +23,22 @@
 - [ ] Test the production contact, subscription, welcome email, unsubscribe, and new-post email flows.
 - [ ] Confirm that no private keys, secrets, or local `.env` files are committed or exposed in the frontend bundle.
 
+### Optimization
+- [ ] Optimaze images
+- [ X ] Next.js Caching / Static Generation
+Removed the root-level `force-dynamic` setting so static pages are pre-rendered at build time.
+Blog post pages use SSG with five-minute ISR revalidation, while the filtered and paginated blog index remains dynamic because it reads URL search parameters.
+- [ ] Overuse of "use client" (App Router)
+When moving from React/Vite to Next.js, many developers realize their hooks (useState, useEffect) break because Next.js uses Server Components by default. A common shortcut is to just add "use client" to the top of every file to make it act like Vite again.
+The Problem: If you put "use client" at the very top of your component tree, you bypass the performance benefits of Next.js and force the browser to download huge JavaScript bundles, while also paying the penalty of server-side rendering.
+The Fix: Push "use client" as far down the component tree as possible. Leave your layouts and main pages as Server Components, and only use "use client" on specific interactive elements (like a LikeButton or SearchBar).
+
+### Blog
+- [ ] Page number from the last implementation.
+
+### Blog Post
+- [ ] The suggested blog posts should be left
+
 ### Footer & Header
 - [ - ] Logo svg better visibility : set it to white, maybe could be orange or so.
 

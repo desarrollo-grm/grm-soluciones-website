@@ -26,7 +26,7 @@ This project uses a **monorepo architecture**, separating the frontend, backend 
 - **Multi-page application** with server-rendered Next.js routes.
 - **Service Pages**: Digital Invoicing, Condominium Management, Technical Support.
 - **Corporate Pages**: Home, About Us, Contact.
-- **Headless Blog**: Fully dynamic blog powered by Sanity CMS.
+- **Headless Blog**: Sanity-powered blog with statically generated post pages and five-minute incremental revalidation.
 - **Contact and subscription forms**: Handled by the custom Express backend and Brevo.
 - **Protected API**: Request rate limiting and Google reCAPTCHA v3 validation.
 - **Responsive Design** with Tailwind CSS.
@@ -123,7 +123,7 @@ Because the project is separated into distinct workspaces, it can be deployed an
 2. **Backend (`/backend`)**: Deploy the Node.js service, configure its private environment variables, and run `npm run start --workspace=backend`. Set `API_PORT` to the port provided by the hosting platform when required.
 3. **Studio (`/studio`)**: Run `npm run build --workspace=studio` and host the generated static site (for example, under an `/admin` subfolder).
 
-The Next.js frontend generates `/robots.txt` and `/sitemap.xml`, renders Sanity blog posts on the server, and statically generates known post slugs with revalidation.
+The Next.js frontend generates `/robots.txt` and `/sitemap.xml`. Public pages are statically rendered where possible, and known Sanity blog post slugs are generated with five-minute incremental revalidation. The filtered and paginated `/blog` index remains dynamic because it reads URL search parameters.
 
 ### Dev deployment and search-engine protection
 

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import PostCard from '@/src/components/commons/PostCard';
 import PortableTextRenderer from '@/src/components/commons/PortableTextRenderer';
 import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
@@ -71,7 +72,9 @@ export default async function BlogPostPage({ params }) {
             </div>
           </article>
           <aside className="self-start lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-            <BlogPostSidebar />
+            <Suspense fallback={null}>
+              <BlogPostSidebar />
+            </Suspense>
           </aside>
         </div>
       </div>

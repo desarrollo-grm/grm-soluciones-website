@@ -5,8 +5,6 @@ import Header from '@/src/components/layout/Header';
 import Footer from '@/src/components/layout/Footer';
 import Providers from './providers';
 
-export const dynamic = 'force-dynamic';
-
 const allowIndexing = process.env.ALLOW_INDEXING === 'true';
 
 export const metadata = {

@@ -105,6 +105,14 @@ The main public routes are:
 
 The blog reads published content through the Sanity client in `src/sanity/`. Static page routes and blog post URLs are included in the generated sitemap.
 
+## Rendering and caching
+
+The root layout does not force dynamic rendering, so public routes without request-time data are pre-rendered as static HTML during the production build. Blog post pages use `generateStaticParams` and are incrementally regenerated every five minutes when Sanity content changes.
+
+The `/blog` index is dynamic because search, category, product, and pagination filters are read from URL search parameters. This is intentional; the unfiltered post detail pages and other public routes retain static generation or ISR where applicable.
+
+When adding server-side data to a route, avoid `dynamic = 'force-dynamic'` unless the route genuinely depends on request-time data. Keep interactive behavior in focused client components and preserve a Suspense boundary around client components that use navigation hooks such as `useSearchParams`.
+
 ## SEO and indexing safety
 
 Indexing is opt-in. Unless `ALLOW_INDEXING=true`:
