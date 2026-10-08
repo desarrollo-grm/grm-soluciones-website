@@ -4,16 +4,15 @@ import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
 import BlogPagination from '@/src/components/pages/blog/BlogPagination';
 import Providers from '@/app/providers';
 import { getFilteredPaginatedPosts, getFormattedPosts } from '@/src/data/posts';
+import { createPageMetadata } from '@/src/lib/seo';
 
 export const revalidate = 300;
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: 'Blog',
   description: 'Noticias, consejos y tendencias para optimizar tu negocio.',
-  alternates: {
-    canonical: '/blog',
-  },
-};
+  path: '/blog',
+});
 
 export default async function BlogPage({ searchParams }) {
   const params = await searchParams;

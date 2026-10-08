@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PortableTextRenderer from '@/src/components/commons/PortableTextRenderer';
 import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
 import { getFormattedPosts, getPost, getRelatedPosts } from '@/src/data/posts';
+import { createPageMetadata } from '@/src/lib/seo';
 
 export const revalidate = 300;
 export const dynamicParams = true;
@@ -19,19 +20,15 @@ export async function generateMetadata({ params }) {
   const post = await getPost(slug);
   if (!post) return {};
 
-  return {
+  return createPageMetadata({
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      type: 'article',
-      title: post.title,
-      description: post.excerpt,
-      images: post.image ? [{ url: post.image, alt: post.title }] : [],
-      publishedTime: post.date,
-      tags: post.categories,
-    },
-  };
+    path: `/blog/${post.slug}`,
+    image: post.image,
+    type: 'article',
+    publishedTime: post.date,
+    tags: post.categories,
+  });
 }
 
 export default async function BlogPostPage({ params }) {

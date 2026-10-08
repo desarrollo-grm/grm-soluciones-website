@@ -61,22 +61,26 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 
 #### Critical
 
-- [ ] Add route-specific SEO metadata for every indexable page: title, meta description, canonical URL, Open Graph tags, and Twitter card tags.
+- [ X ] Add route-specific SEO metadata for every indexable page: title, meta description, canonical URL, Open Graph tags, and Twitter card tags.
 - [ X ] Address client-rendered SPA SEO for public pages, especially Sanity blog posts, with SSR, SSG, or a reliable prerendering strategy.
 
 #### High priority
 
 - [ X ] Add `robots.txt` and a generated `sitemap.xml` covering all indexable routes.
-- [ ] Change the document language from `en` to `es`.
-- [ ] Add `noindex, nofollow` metadata to `/unsubscribe` and `/unsubscribed-success`.
+- [ X ] Change the document language from `en` to `es`.
+- [ X ] Add `noindex, nofollow` metadata to `/unsubscribe` and `/unsubscribed-success`.
 - [ ] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
-- [ ] Add Article structured data for blog posts.
+- [ X ] Add Article structured data for blog posts.
 - [ ] Add Organization or LocalBusiness structured data with the company name, location, phone, services, and social profiles.
 - [ ] Replace placeholder About page content (`XXXX` dates and Lorem ipsum).
 - [ ] Replace the incorrect fiscal-equipment hero image and alt text currently referring to digital invoicing.
 
 #### Medium priority
 
+- [ ] Create a dedicated 1200x630 Open Graph image and include its dimensions and MIME type in social metadata.
+- [ ] Add favicon, Apple touch icon, web app manifest, and theme-color metadata.
+- [ ] Add BreadcrumbList structured data for nested routes such as blog posts.
+- [ ] Add Google and Bing verification metadata after obtaining the production verification tokens.
 - [ ] Ensure every indexable page has one meaningful `<h1>`, including About, Contact, Blog, and Condominio.
 - [ ] Replace placeholder social links and generic social profile URLs with the company’s real profiles.
 - [ ] Fix spelling and grammar issues in SEO-visible page copy, including the Condominio page.
