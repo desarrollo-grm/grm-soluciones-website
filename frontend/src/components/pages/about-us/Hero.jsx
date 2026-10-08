@@ -1,4 +1,4 @@
-import SectionHeader from "../../commons/SectionHeader";
+import SectionHeader from "@/src/components/commons/SectionHeader";
 
 const Hero = () => {
   const timelineEvents = [
@@ -28,6 +28,7 @@ const Hero = () => {
           subtitle="Hitos que Marcaron el Camino"
           titleColor="secondary"
           alignment="center"
+          headingLevel={1}
         />
 
         {/* Content Grid */}

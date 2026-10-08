@@ -11,7 +11,7 @@
 ### General
 - [ ] Social media
 - [ ] Maybe .cfg
-
+- [ ] not-found page
 
 ### Optimization
 - [ X ] Optimize images with responsive Next.js images and Sanity format conversion.
@@ -81,13 +81,13 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Add favicon, Apple touch icon, web app manifest, and theme-color metadata.
 - [ ] Add BreadcrumbList structured data for nested routes such as blog posts.
 - [ ] Add Google and Bing verification metadata after obtaining the production verification tokens.
-- [ ] Ensure every indexable page has one meaningful `<h1>`, including About, Contact, Blog, and Condominio.
+- [X] Ensure every indexable page has one meaningful `<h1>`, including About, Contact, Blog, and Condominio.
+- [X] Review heading hierarchy so subtitles and cards use semantic heading levels consistently.
 - [ ] Replace placeholder social links and generic social profile URLs with the company’s real profiles.
 - [ ] Verify every social platform URL is official, active, and consistent with the business identity used on the site.
 - [ ] Validate all public email addresses across the website and backend are the official corporate addresses, not personal or test addresses.
 - [ ] Check that phone numbers, WhatsApp links, Google Maps locations, and email addresses are consistent across all pages and marketing channels.
 - [ ] Fix spelling and grammar issues in SEO-visible page copy, including the Condominio page.
-- [ ] Review heading hierarchy so subtitles and cards use semantic heading levels consistently.
 
 ### Deployment configuration
 - [ ] Create and configure the final corporate email addresses for sender, support, newsletter, and unsubscribe assistance.

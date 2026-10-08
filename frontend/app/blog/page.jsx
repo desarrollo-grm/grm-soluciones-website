@@ -37,6 +37,7 @@ export default async function BlogPage({ searchParams }) {
             titleColor="secondary"
             subtitle="Noticias y consejos de expertos para optimizar tu negocio"
             alignment="center"
+            headingLevel={1}
           />
           {featuredPost ? (
             <div className="mt-12 lg:mx-24">

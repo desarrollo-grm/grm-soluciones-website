@@ -11,6 +11,7 @@ const ContactPage = () => {
                     title="Contáctanos"
                     subtitle="Envíanos tus datos y te contactaremos pronto."
                     margin="small"
+                    headingLevel={1}
                 />
                 <div id="contact" className="bg-light flex-1 px-4 py-4 flex flex-wrap items-stretch justify-center gap-8">
                     <Providers>
