@@ -27,7 +27,7 @@ const Hero = () => {
                 <div className="flex-1 flex items-center justify-center">
                     <div className="relative aspect-[4/3] w-full max-w-xl">
                         <Image
-                            src="/assets/images/digital-invoice.png" 
+                            src="/assets/images/digital-invoice.webp" 
                             alt="Sistema de Facturación Digital" 
                             fill
                             priority

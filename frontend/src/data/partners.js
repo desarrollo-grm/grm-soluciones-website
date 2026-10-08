@@ -8,13 +8,13 @@ const partners = [
     {
         id: 2,
         name: "The Factory",
-        logo: "/assets/partners/thefactory.png",
+        logo: "/assets/partners/thefactory.webp",
         link: ""
     },
     {
         id: 3,
         name: "Saint",
-        logo: "/assets/partners/saint.jpg",
+        logo: "/assets/partners/saint.webp",
         link: ""
     }
 ]

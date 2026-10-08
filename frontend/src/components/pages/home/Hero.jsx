@@ -16,7 +16,7 @@ const Hero = () => {
                 </div>
                 <div className="hidden md:flex h-full items-start justify-start flex-shrink-0">
                     <Image
-                        src="/assets/images/partners.png"
+                        src="/assets/images/partners.webp"
                         alt="Guiando a nuestros clientes"
                         width={989}
                         height={1333}

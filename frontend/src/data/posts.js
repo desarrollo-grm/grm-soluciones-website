@@ -49,6 +49,25 @@ const calculateReadTime = (content) => {
   return minutes > 0 ? minutes : 1; // Minimum 1 minute
 };
 
+const POST_IMAGE_PLACEHOLDER = '/assets/articles/article-placeholder.webp';
+
+const getPostImage = (post) => {
+  if (!post.coverImage) {
+    return POST_IMAGE_PLACEHOLDER;
+  }
+
+  try {
+    return urlFor(post.coverImage).width(1200).auto('format').url();
+  } catch (error) {
+    console.error('Unable to format Sanity cover image', {
+      postId: post._id,
+      coverImage: post.coverImage,
+      error
+    });
+    return POST_IMAGE_PLACEHOLDER;
+  }
+};
+
 /**
  * CTA-Title and Subtitle default values by products
  */
@@ -102,9 +121,7 @@ const getDefaultCTAbyTags= (tags) => {
 export const formatPost = (post) => ({
   id: post._id,
   slug: post.slug,
-  image: post.coverImage
-    ? urlFor(post.coverImage).width(1200).auto('format').url()
-    : '/assets/images/article-placeholder.jpg',
+  image: getPostImage(post),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,
@@ -123,9 +140,7 @@ export const formatPost = (post) => ({
 export const formatFullPost = (post) => ({
   id: post._id,
   slug: post.slug,
-  image: post.coverImage
-    ? urlFor(post.coverImage).width(1200).auto('format').url()
-    : '/assets/images/article-placeholder.jpg',
+  image: getPostImage(post),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,
