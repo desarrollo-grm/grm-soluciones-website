@@ -3,6 +3,7 @@ import '@/src/styles/main.css';
 import '@/src/styles/carousel.css';
 import Header from '@/src/components/layout/Header';
 import Footer from '@/src/components/layout/Footer';
+import { createOrganizationJsonLd } from '@/src/lib/seo';
 
 const allowIndexing = process.env.ALLOW_INDEXING === 'true';
 
@@ -35,12 +36,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const organizationJsonLd = createOrganizationJsonLd();
+
   return (
     <html lang="es">
       <body>
         <Header />
         {children}
         <Footer />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       </body>
     </html>
   );
