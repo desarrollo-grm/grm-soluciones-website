@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import PostCard from '@/src/components/commons/PostCard';
+import Image from 'next/image';
 import PortableTextRenderer from '@/src/components/commons/PortableTextRenderer';
 import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
 import { getFormattedPosts, getPost, getRelatedPosts } from '@/src/data/posts';
@@ -63,7 +64,9 @@ export default async function BlogPostPage({ params }) {
               {post.categories.map((tag) => <span key={tag} className="rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-white">{tag}</span>)}
             </div>
             <div className="text-dark/60 mb-8">Publicado el {post.date} · Lectura de {post.readtime} minutos</div>
-            <img src={post.image} alt={post.title} className="mb-8 w-full rounded-2xl object-cover" />
+            <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-2xl">
+              <Image src={post.image} alt={post.title} fill priority sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" />
+            </div>
             <div className="space-y-4"><PortableTextRenderer content={post.content} /></div>
             <div className="my-12 rounded-2xl bg-white p-8 text-center shadow-lg">
               <h2 className="font-display text-2xl font-bold text-dark mb-4">{post.ctaTitle}</h2>

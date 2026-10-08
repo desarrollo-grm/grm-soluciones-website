@@ -102,7 +102,7 @@ const getDefaultCTAbyTags= (tags) => {
 export const formatPost = (post) => ({
   id: post._id,
   slug: post.slug,
-  image: post.coverImage?.asset?.url || (post.coverImage ? urlFor(post.coverImage).url() : '/assets/images/article-placeholder.jpg'),
+  image: post.coverImage?.asset?.url || (post.coverImage ? urlFor(post.coverImage).width(1200).auto('format').url() : '/assets/images/article-placeholder.jpg'),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,
@@ -121,7 +121,7 @@ export const formatPost = (post) => ({
 export const formatFullPost = (post) => ({
   id: post._id,
   slug: post.slug,
-  image: post.coverImage?.asset?.url || (post.coverImage ? urlFor(post.coverImage).url() : '/assets/images/article-placeholder.jpg'),
+  image: post.coverImage?.asset?.url || (post.coverImage ? urlFor(post.coverImage).width(1200).auto('format').url() : '/assets/images/article-placeholder.jpg'),
   categories: post.tags,
   title: post.title,
   excerpt: post.excerpt,

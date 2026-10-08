@@ -1,10 +1,12 @@
+import Image from 'next/image';
+
 const LogoCard = ({logoSrc, altText, link, width = "w-48", height = "h-32"}) => {
 
     const image = (link === "") ? 
-        <img src={logoSrc} alt={altText} className="max-h-full max-w-full object-contain"/>
+        <Image src={logoSrc} alt={altText} width={256} height={160} sizes="(max-width: 768px) 192px, 256px" className="max-h-full max-w-full object-contain" />
         : 
         <a href={link} className="flex items-center justify-center w-full h-full">
-            <img src={logoSrc} alt={altText} className="max-h-full max-w-full object-contain"/>
+            <Image src={logoSrc} alt={altText} width={256} height={160} sizes="(max-width: 768px) 192px, 256px" className="max-h-full max-w-full object-contain" />
         </a>;
 
     return (

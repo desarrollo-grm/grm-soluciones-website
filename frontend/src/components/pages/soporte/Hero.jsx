@@ -1,4 +1,5 @@
 import CTAButton from "@/src/components/commons/CTAButton";
+import Image from "next/image";
 
 const Hero = () => {
     return (
@@ -23,9 +24,12 @@ const Hero = () => {
 
                 {/* Right Side - Image */}
                 <div className="hidden lg:flex h-full items-start justify-start flex-shrink-0">
-                    <img 
+                    <Image
                         src="/assets/images/soporte-2.png" 
                         alt="Soporte y Asesorías" 
+                        width={1478}
+                        height={1333}
+                        priority
                         className="h-full w-auto object-contain"
                     />
                 </div>

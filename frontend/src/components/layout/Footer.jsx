@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
 import { getAllForFooter } from '@/src/data/services.js';
 import NewsletterForm from '@/src/components/layout/NewsletterForm';
@@ -11,9 +12,11 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[auto_auto_auto_1fr] gap-12">
                     {/* Logo Section */}
                     <div className="flex flex-col items-center md:items-start">
-                        <img 
+                        <Image
                             src="/assets/logo-grm.svg"
                             alt="GRM Soluciones" 
+                            width={160}
+                            height={128}
                             className="h-32 mb-4 brightness-0 invert"
                         />
                         <div className="flex gap-4 mt-4">

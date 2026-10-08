@@ -1,4 +1,5 @@
 import CTAButton from "@/src/components/commons/CTAButton";
+import Image from "next/image";
 
 const Hero = () => {
     return (
@@ -14,7 +15,14 @@ const Hero = () => {
                     <CTAButton to="/about-us">Conócenos</CTAButton>
                 </div>
                 <div className="hidden md:flex h-full items-start justify-start flex-shrink-0">
-                    <img src="/assets/images/partners.png" alt="Guiando a nuestros clientes" className="h-full w-auto object-contain"/>
+                    <Image
+                        src="/assets/images/partners.png"
+                        alt="Guiando a nuestros clientes"
+                        width={989}
+                        height={1333}
+                        priority
+                        className="h-full w-auto object-contain"
+                    />
                 </div>
             </div>
         </section>

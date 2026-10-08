@@ -1,4 +1,5 @@
 import CTAButton from "@/src/components/commons/CTAButton";
+import Image from "next/image";
 
 const Hero = () => {
     return (
@@ -23,11 +24,14 @@ const Hero = () => {
 
                 {/* Right Side - Image */}
                 <div className="flex-1 flex items-center justify-center">
-                    <div className="relative w-full max-w-xl">
-                        <img 
+                    <div className="relative aspect-[4/3] w-full max-w-xl">
+                        <Image
                             src="/assets/images/digital-invoice.png" 
                             alt="Sistema de Facturación Digital" 
-                            className="w-full h-auto object-contain drop-shadow-2xl"
+                            fill
+                            priority
+                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 576px"
+                            className="object-contain drop-shadow-2xl"
                         />
                     </div>
                 </div>

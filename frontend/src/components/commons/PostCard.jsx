@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const PostCard = ({ post, featured = false, compact = false }) => {
     const { slug, image, categories, title, excerpt, date, readTime } = post;
@@ -10,9 +11,11 @@ const PostCard = ({ post, featured = false, compact = false }) => {
                 <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
                     {/* Image - Square aspect ratio */}
                     <div className="relative w-full overflow-hidden flex-shrink-0" style={{ paddingTop: '100%' }}>
-                        <img 
+                        <Image
                             src={image} 
                             alt={title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 350px"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                     </div>
@@ -35,9 +38,11 @@ const PostCard = ({ post, featured = false, compact = false }) => {
                     <div className="grid grid-cols-2 gap-0 h-full w-full">
                         {/* Image */}
                         <div className="relative h-auto min-h-[200px] md:min-h-0 md:h-full">
-                            <img 
+                            <Image
                                 src={image} 
                                 alt={title}
+                                fill
+                                sizes="(max-width: 1024px) 50vw, 600px"
                                 className="w-full h-full object-cover"
                             />
                         </div>
@@ -89,9 +94,11 @@ const PostCard = ({ post, featured = false, compact = false }) => {
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
                 {/* Image - Consistent 16:9 aspect ratio */}
                 <div className="relative w-full overflow-hidden flex-shrink-0" style={{ paddingTop: '56.25%' }}>
-                    <img 
+                    <Image
                         src={image} 
                         alt={title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 420px"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 </div>

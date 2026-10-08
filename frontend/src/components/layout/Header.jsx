@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { getProductsForNav, getServicesForNav } from '@/src/data/services.js';
@@ -92,7 +93,7 @@ const Header = () => {
     <header className="bg-primary text-white sticky top-0 z-50 h-[88px]">
       <div className="w-full h-full mx-auto px-6 py-4 flex justify-between items-center">
         <div className="w-20 h-auto">
-           <Link href="/"><img src="/assets/logo-grm.svg" alt="GRM Logo" className="w-full h-full  brightness-0 invert" /></Link>
+           <Link href="/"><Image src="/assets/logo-grm.svg" alt="GRM Logo" width={80} height={48} className="w-full h-full brightness-0 invert" /></Link>
         </div>
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (

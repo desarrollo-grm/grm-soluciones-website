@@ -34,7 +34,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ X ] Page number from the last implementation.
 
 ### Blog Post
-- [ ] The suggested blog posts should be left
+- [ X ] The suggested blog posts should be left
 
 ### Footer & Header
 - [ - ] Logo svg better visibility : set it to white, maybe could be orange or so.
