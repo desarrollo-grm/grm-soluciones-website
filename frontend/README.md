@@ -1,6 +1,6 @@
 # GRM Soluciones frontend
 
-The frontend is the public website for GRM Soluciones. It is a Next.js 15 application using the App Router, React 19, Tailwind CSS, Leaflet, and Sanity for blog content.
+The frontend is the public website and API for GRM Soluciones. It is a Next.js 15 application using the App Router, React 19, Tailwind CSS, Leaflet, and Sanity for blog content. API route handlers under `app/api/` run as Netlify serverless functions.
 
 This directory is an npm workspace in the repository root. Commands can be run from either the repository root with `--workspace=frontend` or from this directory.
 
@@ -30,7 +30,7 @@ Or run it from this directory:
 npm run dev
 ```
 
-The development server runs at <http://localhost:3000>. To run the complete local stack (frontend, backend, and Sanity Studio), use `npm run dev` from the repository root.
+The development server runs at <http://localhost:3000>. To run the complete local stack (frontend and Sanity Studio), use `npm run dev` from the repository root.
 
 ## Environment variables
 
@@ -45,21 +45,22 @@ Create `frontend/.env` for local development. Environment files are intentionall
 | `NEXT_PUBLIC_CONTACT_ENDPOINT` | Contact form endpoint | `/api/contact` |
 | `NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT` | Newsletter subscription endpoint | `/api/subscribe` |
 | `NEXT_PUBLIC_UNSUBSCRIPTION_ENDPOINT` | Newsletter unsubscribe endpoint | `/api/unsubscribe` |
-| `BACKEND_URL` | Backend origin used by the `/api/*` rewrite | `http://127.0.0.1:8787` |
+| `BREVO_API_KEY` | Private Brevo API key used by server routes | None |
+| `BREVO_SENDER_EMAIL` | Verified Brevo sender address | None |
+| `BREVO_SENDER_NAME` | Brevo sender display name | `GRM Soluciones` |
+| `GOOGLE_RECAPTCHA_SECRET_KEY` | Private reCAPTCHA v3 secret | None |
+| `SUPPORT_EMAIL` | Address that receives contact messages | None |
 | `ALLOW_INDEXING` | Enables search-engine indexing only when exactly `true` | Disabled |
 
-The `NEXT_PUBLIC_*` variables are exposed to browser code, so they must not contain secrets. Backend credentials belong in `backend/.env`, not in this file.
+The `NEXT_PUBLIC_*` variables are exposed to browser code, so they must not contain secrets. Keep private API variables only in the frontend deployment environment.
 
 ### Local API requests
 
-Forms use relative `/api/*` URLs by default. Next.js rewrites those requests to `BACKEND_URL`, allowing the browser to use the same origin during development:
+Forms use relative `/api/*` URLs by default. Next.js route handlers process those requests on the same origin:
 
 ```text
-Browser:  http://localhost:3000/api/contact
-Backend:  http://127.0.0.1:8787/api/contact
+Browser and API:  http://localhost:3000/api/contact
 ```
-
-Set `BACKEND_URL` to the deployed API origin when deploying the frontend separately.
 
 ## Application structure
 
@@ -77,7 +78,8 @@ frontend/
 │   ├── sanity/             # Sanity client, image builder, and queries
 │   ├── styles/             # Global CSS and Tailwind entrypoints
 │   └── types/              # Shared TypeScript types
-├── next.config.mjs         # Image hosting, API rewrites, and response headers
+├── next.config.mjs         # Image hosting and response headers
+├── netlify.toml            # Netlify build and Next.js plugin configuration
 └── package.json
 ```
 
@@ -154,7 +156,7 @@ npm run start --workspace=frontend
 ## Production deployment
 
 1. Install dependencies from the repository root with `npm install`.
-2. Configure the frontend environment variables, including `BACKEND_URL` and `NEXT_PUBLIC_SITE_URL`.
+2. Configure the frontend environment variables, including the private API variables and `NEXT_PUBLIC_SITE_URL`.
 3. Build the workspace:
 
    ```bash
@@ -167,9 +169,8 @@ npm run start --workspace=frontend
    npm run start --workspace=frontend
    ```
 
-The frontend must be deployed alongside a reachable backend API. Keep `ALLOW_INDEXING` disabled for preview or staging deployments and enable it only for the intended production domain.
+The frontend and API are deployed together by Netlify. Keep `ALLOW_INDEXING` disabled for preview or staging deployments and enable it only for the intended production domain.
 
 ## Related workspaces
 
-- [`../backend`](../backend) contains the Express API used by the frontend forms.
 - [`../studio`](../studio) contains the Sanity Studio used to manage blog content.
