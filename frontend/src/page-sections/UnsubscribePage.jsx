@@ -51,7 +51,7 @@ const UnsubscribePage = () => {
                 );
             }
 
-            window.location.href = '/unsubscribed-success';
+            window.location.href = '/newsletter/unsubscribed-success';
         } catch (error) {
             console.error('Error during unsubscription:', error);
             setStatus('error');

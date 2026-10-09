@@ -1,5 +1,5 @@
 export default function robots() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://grm.net.ve';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const allowIndexing = process.env.ALLOW_INDEXING === 'true';
 
   if (!allowIndexing) {
@@ -16,7 +16,7 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/unsubscribe', '/unsubscribed-success', '/api/'],
+        disallow: ['/newsletter/unsubscribe', '/newsletter/unsubscribed-success', '/api/'],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,

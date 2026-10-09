@@ -13,7 +13,7 @@ export async function GET(request) {
         return Response.json({ ok: false, error: "Invalid or missing token." }, { status: 400 });
     }
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin;
-    return Response.redirect(`${siteUrl}/unsubscribe?token=${encodeURIComponent(token)}`, 302);
+    return Response.redirect(`${siteUrl}/newsletter/unsubscribe?token=${encodeURIComponent(token)}`, 302);
 }
 
 export async function POST(request) {
