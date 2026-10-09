@@ -19,7 +19,7 @@ export async function POST(request) {
         const data = await request.json();
         const emailResult = await validate(data?.email);
         if (!emailResult.valid) {
-            return Response.json({ ok: false, error: "Invalid email address." }, { status: 400 });
+            return Response.json({ ok: false, error: "Invalid email address.", raw_response:emailResult }, { status: 400 });
         }
         if (typeof data?.captchaToken !== "string" || !(await verifyCaptcha(data.captchaToken))) {
             return Response.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
