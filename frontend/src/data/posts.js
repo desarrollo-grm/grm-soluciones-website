@@ -9,11 +9,11 @@ import { urlFor } from '@/src/sanity/sanity';
 
 // Products and services with their tag mappings
 export const products = [
-  { name: 'Condominio Sagúes', tag: 'Condominio' },
+  { name: 'Condominio Sagués', tag: 'Condominio' },
   { name: 'Facturación digital', tag: 'Facturación' },
   { name: 'Saint', tag: 'Saint' },
   { name: 'Soporte integral', tag: 'Soporte' },
-  { name: 'Equipos y maquinas fiscales', tag: 'Equipos' },
+  { name: 'Equipos y máquinas fiscales', tag: 'Equipos' },
   { name: 'Asesoría integral', tag: 'Asesoría' }
 ];
 
@@ -73,7 +73,7 @@ const getPostImage = (post) => {
  */
 const defaultCTAs = {
   'Condominio': {
-    ctaTitle: 'Descubre Condominio Sagúes',
+    ctaTitle: 'Descubre Condominio Sagués',
     ctaSubtitle: 'Optimiza la gestión de tu condominio con nuestra solución integral.'
   },
   'Facturación': {

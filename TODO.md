@@ -87,7 +87,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Verify every social platform URL is official, active, and consistent with the business identity used on the site.
 - [ ] Validate all public email addresses across the website and backend are the official corporate addresses, not personal or test addresses.
 - [ ] Check that phone numbers, WhatsApp links, Google Maps locations, and email addresses are consistent across all pages and marketing channels.
-- [ ] Fix spelling and grammar issues in SEO-visible page copy, including the Condominio page.
+- [X] Fix spelling and grammar issues in SEO-visible page copy, including the Condominio page.
 
 ### Deployment configuration
 - [ ] Create and configure the final corporate email addresses for sender, support, newsletter, and unsubscribe assistance.

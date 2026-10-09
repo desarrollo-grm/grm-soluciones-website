@@ -4,7 +4,7 @@ const Partners = ({ partners }) => {
     return (
         <section className="bg-light py-16 px-4 flex flex-col items-center justify-center">
             <SectionHeader title="Nuestros aliados comerciales"
-            subtitle="Confian en nosotros para representarlos"
+            subtitle="Confían en nosotros para representarlos"
             titleColor="secondary"
             alignment="center"/>
 

@@ -14,11 +14,11 @@ const Features = () => {
         },
         {
             icon:"/assets/icons/invoice.svg",
-            title:"Gestion de facturas",
+            title:"Gestión de facturas",
         },
         {
             icon:"/assets/icons/bank.svg",
-            title:"Gestion de pagos",
+            title:"Gestión de pagos",
         },
         {
             icon:"/assets/icons/email.svg",
@@ -32,7 +32,7 @@ const Features = () => {
         <section className="bg-light lg:h-min-[calc(100dvh-88px)] py-12 px-6 flex flex-col justify-center">
             <SectionHeader 
             title="Nuestra solución para centros comerciales"
-            subtitle="Software de gestion de condominos"
+            subtitle="Software de gestión de condominios"
             headingLevel={1}
             />
             <div className="container mx-auto pb-6 xl:px-64 flex flex-col md:flex-row flex-wrap items-stretch justify-center gap-6 xl:gap-8">

@@ -11,7 +11,7 @@ const ContactUs = () => {
             title="Condominio Sagués"
             subtitle="Lleva tu gestión de condominios al siguiente nivel"
             />
-            <p className="text-lg text-dark font-normal text-center max-w-2xl">Ya estos 5 grandes centros comerciales confían en nosotros.</p>
+            <p className="text-lg text-dark font-normal text-center max-w-2xl">Estos cinco grandes centros comerciales ya confían en nosotros.</p>
             <div className="w-full">
                 <div className="block lg:hidden">
                     <Carousel objects={ccClients} animated={true}/>
