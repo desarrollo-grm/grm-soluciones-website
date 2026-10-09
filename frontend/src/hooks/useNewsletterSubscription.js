@@ -8,7 +8,7 @@ export default function useNewsletterSubscription() {
     const [status, setStatus] = useState('idle');
     const [message, setMessage] = useState('');
     const { executeRecaptcha } = useGoogleReCaptcha() || {};
-    const subscriptionApiUrl = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT || '/api/subscribe';
+    const subscriptionApiUrl = process.env.NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT;
 
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -1,4 +1,4 @@
-import { unsubscribeContact } from "@/src/server/contacts";
+import { unsubscribeContact } from "@/src/server/services/contacts";
 
 export const runtime = "nodejs";
 

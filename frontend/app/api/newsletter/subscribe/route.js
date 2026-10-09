@@ -1,8 +1,8 @@
 import { validate } from "deep-email-validator";
-import { createContact } from "@/src/server/contacts";
+import { createContact } from "@/src/server/services/contacts";
 import { verifyCaptcha } from "@/src/server/lib/captcha";
-import { sendEmail } from "@/src/server/email";
-import { loadTemplate } from "@/src/server/templates";
+import { sendEmail } from "@/src/server/services/email";
+import { loadTemplate } from "@/src/server/services/templates";
 import { checkRateLimit } from "@/src/server/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -26,7 +26,7 @@ export async function POST(request) {
         }
 
         const { unsubToken, ...contact } = await createContact(data);
-        const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || process.env.GRM_WEBSITE_URL}/api/unsubscribe?token=${unsubToken}`;
+        const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/unsubscribe?token=${unsubToken}`;
         const htmlContent = (await loadTemplate("welcome.html")).replace("{{unsubscribe_url}}", unsubscribeUrl);
         const response = await sendEmail({
             subject: "Bienvenido a GRM Soluciones (y una pregunta rápida)",

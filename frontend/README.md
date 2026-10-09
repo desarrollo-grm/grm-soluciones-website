@@ -43,8 +43,8 @@ Create `frontend/.env` for local development. Environment files are intentionall
 | `NEXT_PUBLIC_SANITY_DATASET` | Sanity dataset used by the public client | `production` |
 | `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | Google reCAPTCHA v3 site key used by the client-side provider | None |
 | `NEXT_PUBLIC_CONTACT_ENDPOINT` | Contact form endpoint | `/api/contact` |
-| `NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT` | Newsletter subscription endpoint | `/api/subscribe` |
-| `NEXT_PUBLIC_UNSUBSCRIPTION_ENDPOINT` | Newsletter unsubscribe endpoint | `/api/unsubscribe` |
+| `NEXT_PUBLIC_SUBSCRIPTION_ENDPOINT` | Newsletter subscription endpoint | `/api/newsletter/subscribe` |
+| `NEXT_PUBLIC_UNSUBSCRIPTION_ENDPOINT` | Newsletter unsubscribe endpoint | `/api/newsletter/unsubscribe` |
 | `BREVO_API_KEY` | Private Brevo API key used by server routes | None |
 | `BREVO_SENDER_EMAIL` | Verified Brevo sender address | None |
 | `BREVO_SENDER_NAME` | Brevo sender display name | `GRM Soluciones` |

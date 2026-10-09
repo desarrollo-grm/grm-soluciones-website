@@ -1,7 +1,7 @@
 import { validate } from "deep-email-validator";
 import { verifyCaptcha } from "@/src/server/lib/captcha";
-import { sendEmail } from "@/src/server/email";
-import { loadTemplate } from "@/src/server/templates";
+import { sendEmail } from "@/src/server/services/email";
+import { loadTemplate } from "@/src/server/services/templates";
 import { checkRateLimit } from "@/src/server/lib/rate-limit";
 
 export const runtime = "nodejs";

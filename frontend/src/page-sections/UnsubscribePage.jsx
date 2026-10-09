@@ -8,7 +8,7 @@ const UnsubscribePage = () => {
     const [status, setStatus] = useState('idle');
     const [message, setMessage] = useState('');
     const [token, setToken] = useState('');
-    const unsubscribeEndpoint = process.env.NEXT_PUBLIC_UNSUBSCRIPTION_ENDPOINT || '/api/unsubscribe';
+    const unsubscribeEndpoint = process.env.NEXT_PUBLIC_UNSUBSCRIPTION_ENDPOINT;
 
     //TODO: cual es el correo
     const conctactanos = '\nLamentamos las molestias. Contáctanos a ayuda@grm-soluciones.com, y te daremos de baja manualmente.';

@@ -1,6 +1,6 @@
-import { getAllContacts } from "@/src/server/contacts";
-import { sendBatchEmail } from "@/src/server/email";
-import { loadTemplate } from "@/src/server/templates";
+import { getAllContacts } from "@/src/server/services/contacts";
+import { sendBatchEmail } from "@/src/server/services/email";
+import { loadTemplate } from "@/src/server/services/templates";
 
 export const runtime = "nodejs";
 
@@ -27,8 +27,8 @@ export async function POST(request) {
         const title = body?.title || "Nuevo Post en GRM Soluciones";
         const excerpt = body?.excerpt || "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
         const slug = body?.slug?.current || "";
-        const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL || process.env.GRM_WEBSITE_URL}/blog/${slug}`;
-        const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || process.env.GRM_WEBSITE_URL}/api/unsubscribe?token={{params.unsubToken}}`;
+        const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`;
+        const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/unsubscribe?token={{params.unsubToken}}`;
         const htmlContent = (await loadTemplate("new-post.html"))
             .replaceAll("{{title}}", title)
             .replaceAll("{{excerpt}}", excerpt)
