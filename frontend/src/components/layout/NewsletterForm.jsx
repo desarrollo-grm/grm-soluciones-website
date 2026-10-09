@@ -3,7 +3,7 @@
 import useNewsletterSubscription from '@/src/hooks/useNewsletterSubscription';
 
 export default function NewsletterForm({ variant = 'footer' }) {
-    const { email, setEmail, status, message, handleSubmit } = useNewsletterSubscription();
+    const { email, setEmail, status, message, isRecaptchaReady, handleSubmit } = useNewsletterSubscription();
     const isBlogVariant = variant === 'blog';
 
     return (
@@ -21,7 +21,7 @@ export default function NewsletterForm({ variant = 'footer' }) {
                 />
                 <button
                     type="submit"
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || !isRecaptchaReady}
                     className={isBlogVariant
                         ? 'w-full bg-secondary hover:bg-secondary/90 text-white font-semibold py-2.5 px-6 rounded-lg transition-colors'
                         : 'bg-secondary hover:bg-accent disabled:opacity-70 disabled:cursor-not-allowed px-4 py-2 rounded-r-full text-sm font-semibold transition-colors whitespace-nowrap'}

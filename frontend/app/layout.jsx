@@ -4,6 +4,7 @@ import '@/src/styles/carousel.css';
 import Header from '@/src/components/layout/Header';
 import Footer from '@/src/components/layout/Footer';
 import { createOrganizationJsonLd } from '@/src/lib/seo';
+import Providers from '@/app/providers';
 
 const allowIndexing = process.env.ALLOW_INDEXING === 'true';
 
@@ -41,9 +42,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       </body>
     </html>

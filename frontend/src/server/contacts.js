@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { getBrevoClient } from "./brevo.js";
+import { getBrevoClient } from "./lib/brevo.js";
 
 export async function createContact(contactData) {
     if (!contactData || typeof contactData !== "object" || typeof contactData.email !== "string") {

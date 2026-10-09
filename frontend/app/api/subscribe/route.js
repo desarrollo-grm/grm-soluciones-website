@@ -1,9 +1,9 @@
 import { validate } from "deep-email-validator";
 import { createContact } from "@/src/server/contacts";
-import { verifyCaptcha } from "@/src/server/captcha";
+import { verifyCaptcha } from "@/src/server/lib/captcha";
 import { sendEmail } from "@/src/server/email";
 import { loadTemplate } from "@/src/server/templates";
-import { checkRateLimit } from "@/src/server/rate-limit";
+import { checkRateLimit } from "@/src/server/lib/rate-limit";
 
 export const runtime = "nodejs";
 

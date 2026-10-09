@@ -1,4 +1,4 @@
-import { getBrevoClient } from "./brevo.js";
+import { getBrevoClient } from "./lib/brevo.js";
 
 function getDefaultSender() {
     const email = process.env.BREVO_SENDER_EMAIL;

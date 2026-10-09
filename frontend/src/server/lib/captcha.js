@@ -9,5 +9,6 @@ export async function verifyCaptcha(captchaToken) {
         params: { secret, response: captchaToken },
     });
     const { success, score } = response.data;
+    console.log("Captcha verification response:", response.data);
     return success === true && score >= 0.5;
 }

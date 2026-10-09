@@ -75,6 +75,7 @@ export default function useNewsletterSubscription() {
         setEmail,
         status,
         message,
+        isRecaptchaReady: Boolean(executeRecaptcha),
         handleSubmit,
     };
 }

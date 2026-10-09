@@ -2,7 +2,6 @@ import PostCard from '@/src/components/commons/PostCard';
 import SectionHeader from '@/src/components/commons/SectionHeader';
 import BlogPostSidebar from '@/src/components/pages/blog/BlogPostSidebar';
 import BlogPagination from '@/src/components/pages/blog/BlogPagination';
-import Providers from '@/app/providers';
 import { getFilteredPaginatedPosts, getFormattedPosts } from '@/src/data/posts';
 import { createPageMetadata } from '@/src/lib/seo';
 
@@ -67,9 +66,7 @@ export default async function BlogPage({ searchParams }) {
               <BlogPagination currentPage={page} totalPages={postsData.totalPages} />
             </div>
             <aside className="self-start lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-              <Providers>
-                <BlogPostSidebar />
-              </Providers>
+              <BlogPostSidebar />
             </aside>
           </div>
         </div>

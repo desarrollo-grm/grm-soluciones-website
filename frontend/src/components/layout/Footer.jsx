@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
 import { getAllForFooter } from '@/src/data/services.js';
 import NewsletterForm from '@/src/components/layout/NewsletterForm';
-import Providers from '@/app/providers';
 
 const Footer = () => {
     return (
@@ -72,9 +71,7 @@ const Footer = () => {
 
                         <div className="mt-6">
                             <h4 className="text-lg font-display font-bold mb-3">Newsletter</h4>
-                            <Providers>
-                                <NewsletterForm />
-                            </Providers>
+                            <NewsletterForm />
                         </div>
                     </div>
                 </div>
