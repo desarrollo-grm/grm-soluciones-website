@@ -19,7 +19,14 @@ export async function POST(request) {
         if (!["name", "email", "message"].every((field) => typeof data?.[field] === "string" && data[field].trim())) {
             return Response.json({ ok: false, error: "Missing or invalid contact fields." }, { status: 400 });
         }
-        if (!(await validate(data.email)).valid) {
+        if (!(await validate({
+            email:data?.email, 
+            validateRegex: true,
+            validateMx: true,
+            validateTypo: false,
+            validateDisposable: true,
+            validateSMTP: false
+        })).valid) {
             return Response.json({ ok: false, error: "Invalid email address." }, { status: 400 });
         }
         if (typeof data.captchaToken !== "string" || !(await verifyCaptcha(data.captchaToken))) {

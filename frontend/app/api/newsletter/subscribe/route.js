@@ -17,7 +17,14 @@ export async function POST(request) {
 
     try {
         const data = await request.json();
-        const emailResult = await validate(data?.email);
+        const emailResult = await validate({
+            email:data?.email, 
+            validateRegex: true,
+            validateMx: true,
+            validateTypo: false,
+            validateDisposable: true,
+            validateSMTP: false
+        });
         if (!emailResult.valid) {
             return Response.json({ ok: false, error: "Invalid email address.", raw_response:emailResult }, { status: 400 });
         }
