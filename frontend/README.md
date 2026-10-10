@@ -123,7 +123,7 @@ Indexing is opt-in. Unless `ALLOW_INDEXING=true`:
 - page metadata contains `noindex, nofollow`; and
 - `robots.txt` disallows all crawlers.
 
-Indexable routes define their own title, description, canonical URL, Open Graph metadata, and Twitter card metadata. Blog articles additionally use article-specific Open Graph fields and their cover image.
+Indexable routes define their own title, description, canonical URL, Open Graph metadata, and Twitter card metadata. Blog articles additionally use article-specific Open Graph fields and their cover image. Blog query-parameter variations keep `/blog` as the canonical URL and receive `noindex, follow` metadata, while empty parameters and `page=1` are treated as the clean blog URL.
 
 For a production deployment, set `NEXT_PUBLIC_SITE_URL` to the public HTTPS URL and explicitly set `ALLOW_INDEXING=true`. When indexing is enabled, `robots.txt` still excludes `/api/`, `/unsubscribe`, and `/unsubscribed-success`.
 

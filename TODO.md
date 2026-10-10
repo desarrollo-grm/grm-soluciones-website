@@ -49,9 +49,9 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
     - [ X ] Filter for temporary emails : deep-email-validator
     - [ X ] Strict IP Rate Limiting
 - [ ] handdle cover image in new post email
-- [ - ] handdle unsubscribe link, tokens...
+- [ X ] handdle unsubscribe link, tokens...
     - [ X ] handdle on batch email
-    - [ ] Seems to work, have to test on dev. 
+    - [ X ] Seems to work, have to test on dev. 
 - [ ] batch email with api token
 - [ X ] subscribe + send welcome
 - [ X ] send to grm contactanos
@@ -69,7 +69,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ X ] Add `robots.txt` and a generated `sitemap.xml` covering all indexable routes.
 - [ X ] Change the document language from `en` to `es`.
 - [ X ] Add `noindex, nofollow` metadata to `/unsubscribe` and `/unsubscribed-success`.
-- [ ] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
+- [X] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
 - [ X ] Add Article structured data for blog posts.
 - [ X ] Add Organization or LocalBusiness structured data with the company name, location, phone, services, and social profiles.
 - [ ] Replace placeholder About page content (`XXXX` dates and Lorem ipsum).

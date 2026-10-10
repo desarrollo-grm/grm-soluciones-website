@@ -7,11 +7,37 @@ import { createPageMetadata } from '@/src/lib/seo';
 
 export const revalidate = 300;
 
-export const metadata = createPageMetadata({
-  title: 'Blog',
-  description: 'Noticias, consejos y tendencias para optimizar tu negocio.',
-  path: '/blog',
-});
+function hasMeaningfulQueryParams(params) {
+  return Object.entries(params || {}).some(([key, value]) => {
+    const values = Array.isArray(value) ? value : [value];
+
+    return values.some((entry) => {
+      if (typeof entry !== 'string' || !entry.trim()) {
+        return false;
+      }
+
+      return !(key === 'page' && /^\d+$/.test(entry) && Number(entry) === 1);
+    });
+  });
+}
+
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const metadata = createPageMetadata({
+    title: 'Blog',
+    description: 'Noticias, consejos y tendencias para optimizar tu negocio.',
+    path: '/blog',
+  });
+
+  if (hasMeaningfulQueryParams(params)) {
+    metadata.robots = {
+      index: false,
+      follow: true,
+    };
+  }
+
+  return metadata;
+}
 
 export default async function BlogPage({ searchParams }) {
   const params = await searchParams;
@@ -25,7 +51,6 @@ export default async function BlogPage({ searchParams }) {
     getFilteredPaginatedPosts(search, categories, products, page, 6),
   ]);
   const featuredPost = featuredPosts[0];
-  const noIndexFilters = Boolean(search || categories.length || products.length || page > 1);
 
   return (
     <main className="bg-light">
@@ -71,9 +96,6 @@ export default async function BlogPage({ searchParams }) {
           </div>
         </div>
       </section>
-      {noIndexFilters ? (
-        <meta name="robots" content="noindex,follow" />
-      ) : null}
     </main>
   );
 }
