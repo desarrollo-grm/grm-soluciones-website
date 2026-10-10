@@ -10,7 +10,9 @@
     "dev:studio": "npm run dev --workspace=studio",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:studio\"",
     "lint": "npm run lint --workspaces",
-    "build": "npm run build --workspaces"
+    "build": "npm run build --workspaces",
+    "cf:build": "npm run cf:build --workspace=frontend",
+    "cf:deploy": "npm run cf:deploy --workspace=frontend"
   },
   "version": "1.0.0",
   "description": "Corporate website for GRM Soluciones, a technology solutions provider specializing in digital services for businesses and condominiums.",

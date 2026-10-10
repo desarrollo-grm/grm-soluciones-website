@@ -18,6 +18,7 @@ dist-ssr
 
 # Next.js build output
 .next/
+.open-next/
 
 # Editor directories and files
 .vscode/*

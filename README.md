@@ -2,7 +2,7 @@
 
 Corporate website for GRM Soluciones, a technology solutions provider specializing in digital services for businesses and condominiums. 
 
-This project uses a **monorepo architecture** with the Next.js website and Sanity Studio as npm workspaces. The website also contains the server-side API routes used by Netlify.
+This project uses a **monorepo architecture** with the Next.js website and Sanity Studio as npm workspaces. The website also contains the server-side API routes deployed in the Cloudflare Worker.
 
 ## 🚀 Tech Stack
 
@@ -14,7 +14,7 @@ This project uses a **monorepo architecture** with the Next.js website and Sanit
 - **Sanity** - Headless CMS integration and Portable Text rendering
 
 ### Backend (API)
-- **Next.js App Router route handlers** - Netlify-compatible serverless API routes
+- **Next.js App Router route handlers** - OpenNext-compatible Cloudflare Worker API routes
 - **Brevo (@getbrevo/brevo)** - Transactional email handling
 - **Protected by Google ReCaptcha V3**
 
@@ -46,7 +46,7 @@ grm-soluciones/
 │   │   └── styles/         # Global Tailwind styles
 │   └── package.json        
 ├── frontend/
-│   ├── app/api/             # Netlify-compatible API route handlers
+│   ├── app/api/             # Cloudflare Worker API route handlers
 │   └── src/server/          # Private Brevo, CAPTCHA, rate-limit, and email helpers
 ├── studio/                 # Sanity CMS Dashboard
 │   ├── schemaTypes/        # Database schemas (Posts, Authors, etc.)
@@ -58,7 +58,7 @@ grm-soluciones/
 ## 🛠️ Getting Started
 
 ### Prerequisites
-- Node.js 18 or higher
+- Node.js 22 or higher (required by the current Wrangler release)
 - npm 7 or higher (npm workspaces support)
 
 ### Installation
@@ -112,9 +112,9 @@ npm run build
 
 ## 🚀 Deployment
 
-The frontend and API are deployed together to Netlify. The Sanity Studio remains a separate static deployment.
+The frontend and API are deployed together to Cloudflare Workers with OpenNext. The Sanity Studio remains a separate static deployment.
 
-1. **Frontend and API (`/frontend`)**: Netlify uses the root `netlify.toml`, builds the frontend, and provisions the `app/api/*` route handlers as serverless functions.
+1. **Frontend and API (`/frontend`)**: OpenNext builds the Next.js app into a Worker using `frontend/wrangler.jsonc`. The configured R2 bucket stores the incremental cache used by ISR.
 2. **Studio (`/studio`)**: Run `npm run build --workspace=studio` and host the generated static site (for example, under an `/admin` subfolder).
 
 The Next.js frontend generates `/robots.txt` and `/sitemap.xml`. Public pages are statically rendered where possible, and known Sanity blog post slugs are generated with five-minute incremental revalidation. The filtered and paginated `/blog` index remains dynamic because it reads URL search parameters.

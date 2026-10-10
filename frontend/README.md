@@ -1,12 +1,12 @@
 # GRM Soluciones frontend
 
-The frontend is the public website and API for GRM Soluciones. It is a Next.js 15 application using the App Router, React 19, Tailwind CSS, Leaflet, and Sanity for blog content. API route handlers under `app/api/` run as Netlify serverless functions.
+The frontend is the public website and API for GRM Soluciones. It is a Next.js 15 application using the App Router, React 19, Tailwind CSS, Leaflet, and Sanity for blog content. The application is adapted by OpenNext and deployed as a Cloudflare Worker.
 
 This directory is an npm workspace in the repository root. Commands can be run from either the repository root with `--workspace=frontend` or from this directory.
 
 ## Prerequisites
 
-- Node.js 18 or newer
+- Node.js 22 or newer (required by the current Wrangler release)
 - npm 7 or newer
 - The repository dependencies installed from the root directory
 
@@ -79,7 +79,7 @@ frontend/
 │   ├── styles/             # Global CSS and Tailwind entrypoints
 │   └── types/              # Shared TypeScript types
 ├── next.config.mjs         # Image hosting and response headers
-├── netlify.toml            # Netlify build and Next.js plugin configuration
+├── wrangler.jsonc          # Cloudflare Worker, assets, and cache bindings
 └── package.json
 ```
 
@@ -142,6 +142,9 @@ Run these from `frontend/`:
 | --- | --- |
 | `npm run dev` | Start Next.js with Turbopack |
 | `npm run build` | Create a production build |
+| `npm run cf:build` | Build the Next.js app and adapt it for OpenNext |
+| `npm run cf:preview` | Build and preview the Worker locally with Wrangler |
+| `npm run cf:deploy` | Build and deploy the Worker with OpenNext |
 | `npm run start` | Serve the production build |
 | `npm run lint` | Run ESLint |
 
@@ -153,23 +156,35 @@ npm run lint --workspace=frontend
 npm run start --workspace=frontend
 ```
 
-## Production deployment
+## Cloudflare deployment
 
 1. Install dependencies from the repository root with `npm install`.
-2. Configure the frontend environment variables, including the private API variables and `NEXT_PUBLIC_SITE_URL`.
-3. Build the workspace:
+2. Authenticate Wrangler from the repository root with `npx wrangler login`.
+3. Create the production R2 bucket once:
 
    ```bash
-   npm run build --workspace=frontend
+   npx wrangler r2 bucket create grm-soluciones-opennext-cache
    ```
 
-4. Start the Next.js server:
+4. Configure the frontend environment variables, including the private API variables and `NEXT_PUBLIC_SITE_URL`. Add private values with Wrangler secrets rather than committing them:
 
    ```bash
-   npm run start --workspace=frontend
+   npx wrangler secret put BREVO_API_KEY
+   npx wrangler secret put BREVO_SENDER_EMAIL
+   npx wrangler secret put GOOGLE_RECAPTCHA_SECRET_KEY
+   npx wrangler secret put SUPPORT_EMAIL
    ```
 
-The frontend and API are deployed together by Netlify. Keep `ALLOW_INDEXING` disabled for preview or staging deployments and enable it only for the intended production domain.
+   Set public build-time variables such as `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, and `ALLOW_INDEXING` in the Cloudflare deployment environment.
+5. Deploy from the frontend workspace:
+
+   ```bash
+   npm run cf:deploy
+   ```
+
+The Worker and API route handlers are deployed together. OpenNext uses the configured R2 bucket for incremental cache data, including the blog's five-minute revalidation. `wrangler dev` provides a local production preview after `npm run cf:build`.
+
+Keep `ALLOW_INDEXING` disabled for preview or staging deployments and enable it only for the intended production domain.
 
 ## Related workspaces
 
