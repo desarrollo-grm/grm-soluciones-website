@@ -1,4 +1,7 @@
 const nextConfig = {
+  outputFileTracingIncludes: {
+    '/*': ['./src/server/templates/**/*'],
+  },
   images: {
     remotePatterns: [
       {

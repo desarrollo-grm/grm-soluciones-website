@@ -1,5 +1,16 @@
 import fs from "node:fs/promises";
 
+const templateUrls = {
+    "welcome.html": new URL("../templates/welcome.html", import.meta.url),
+    "support-contact.html": new URL("../templates/support-contact.html", import.meta.url),
+    "new-post.html": new URL("../templates/new-post.html", import.meta.url),
+    "contact-confirmation.html": new URL("../templates/contact-confirmation.html", import.meta.url),
+};
+
 export function loadTemplate(name) {
-    return fs.readFile(new URL(`../templates/${name}`, import.meta.url), "utf8");
+    const templateUrl = templateUrls[name];
+    if (!templateUrl) {
+        throw new Error(`Unknown email template: ${name}`);
+    }
+    return fs.readFile(templateUrl, "utf8");
 }
