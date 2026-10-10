@@ -53,11 +53,11 @@ const ContactInfo = () => {
                 <EnvelopeIcon className="text-light mt-1 flex-shrink-0" size={18} />
                 <div>
                     <h3 className="font-semibold mb-1 text-sm">Email</h3>
-                    <a href="mailto:contacto@grmsoluciones.com" 
+                    <a href={`mailto: ${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="text-light/90 hover:text-light hover:underline transition-colors text-sm">
-                        contacto@grmsoluciones.com
+                        {process.env.NEXT_PUBLIC_SUPPORT_EMAIL}
                     </a>
                 </div>
             </div>

@@ -91,18 +91,10 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 
 ### Deployment configuration
 - [ ] Create and configure the final corporate email addresses for sender, support, newsletter, and unsubscribe assistance.
-- [ ] Replace personal/test email addresses in `backend/.env`, `frontend/src/components/layout/Footer.jsx`, `frontend/src/components/pages/contact/ContactInfo.jsx`, and `frontend/src/page-sections/UnsubscribePage.jsx`.
+- [X] Replace personal/test email addresses in, `frontend/src/components/layout/Footer.jsx`, `frontend/src/components/pages/contact/ContactInfo.jsx`, and `frontend/src/page-sections/UnsubscribePage.jsx`.
 - [ ] Verify the final corporate email list matches the production sender, support, newsletter, and unsubscribe inboxes.
 - [ ] Confirm the official company social profiles, contact emails, and phone numbers match the sources of truth used in the structured data and footer/contact components.
-- [ ] Revoke and regenerate the Brevo API key currently used for development.
-- [ ] Revoke and regenerate the Google reCAPTCHA secret and register the production domain; update the public site key.
-- [ ] Revoke and regenerate the ngrok authentication token if it has been shared outside the local machine.
-- [ ] Configure production `NEXT_PUBLIC_SITE_URL`, `BACKEND_URL`, `GRM_WEBSITE_URL`, and `GRM_API_URL` with HTTPS URLs.
-- [ ] Set `ALLOW_INDEXING=true` only in the production frontend deployment; keep it disabled in development.
-- [ ] Set the production `API_PORT` provided by the hosting platform.
-- [ ] Confirm whether Sanity project `no20m7ap` and dataset `production` will remain the company production CMS or be migrated.
+- [ ] Change Apis
 - [ ] Verify the production sender domain in Brevo with SPF, DKIM, and DMARC.
 - [ ] Replace and verify company contact details: address, phone numbers, WhatsApp, Google Maps location, and social profile URLs.
 - [ ] Test the production contact, subscription, welcome email, unsubscribe, and new-post email flows.
-- [ ] Confirm that no private keys, secrets, or local `.env` files are committed or exposed in the frontend bundle.
-- [ ] Reduce the initial JavaScript bundle and optimize the oversized logo SVG for Core Web Vitals.

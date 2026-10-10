@@ -11,7 +11,7 @@ const UnsubscribePage = () => {
     const unsubscribeEndpoint = process.env.NEXT_PUBLIC_UNSUBSCRIPTION_ENDPOINT;
 
     //TODO: cual es el correo
-    const conctactanos = '\nLamentamos las molestias. Contáctanos a ayuda@grm-soluciones.com, y te daremos de baja manualmente.';
+    const conctactanos = '\nLamentamos las molestias. Contáctanos a ' + process.env.NEXT_PUBLIC_SUPPORT_EMAIL + ', y te daremos de baja manualmente.';
 
     useEffect(() => {
         setToken(new URLSearchParams(window.location.search).get('token')?.trim() || '');

@@ -59,7 +59,7 @@ export function createOrganizationJsonLd() {
     logo: `${siteUrl}/assets/logo-grm.svg`,
     image: `${siteUrl}/assets/images/partners.webp`,
     telephone: '+58-212-959-7141',
-    email: 'contacto@grmsoluciones.com',
+    email: `${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`,
     areaServed: 'Venezuela',
     sameAs: [
       'https://www.linkedin.com',
