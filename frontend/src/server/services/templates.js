@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
 const templateUrls = {
     "welcome.html": new URL("../templates/welcome.html", import.meta.url),
@@ -12,5 +13,5 @@ export function loadTemplate(name) {
     if (!templateUrl) {
         throw new Error(`Unknown email template: ${name}`);
     }
-    return fs.readFile(templateUrl, "utf8");
+    return fs.readFile(fileURLToPath(templateUrl), "utf8");
 }
