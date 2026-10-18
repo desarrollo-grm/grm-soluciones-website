@@ -10,7 +10,7 @@ const services = [
             "Desarrollos a la medida"
         ],
         icon: "/assets/icons/verified.svg",
-        link: "/#services",
+        link: "/saint-e-integraciones",
         type: "service",
         isFeatured: true
     },

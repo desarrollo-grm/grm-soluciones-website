@@ -1,11 +1,5 @@
 # TODO
 
-## GRM 
-
-- [ ] Content for about 
-- [ ] Content for Saint e Intégraciones
-- [ X ] Content for Equipos y Maquinas fiscales
-
 ## DEV
 
 ### General
@@ -19,6 +13,16 @@
 Removed the root-level `force-dynamic` setting so static pages are pre-rendered at build time.
 Blog post pages use SSG with five-minute ISR revalidation, while the filtered and paginated blog index remains dynamic because it reads URL search parameters.
 - [ X ] Overuse of "use client" (App Router)
+
+### About us
+- [ ] Hero section colors
+
+### Saint e integraciones
+- [ ] Crear logo de saint svg
+- [ ] Hide for small view ports
+
+### Soporte 
+- [ ] Hero quitar 1vh
 
 ### Blog
 - [ X ] Page number from the last implementation.

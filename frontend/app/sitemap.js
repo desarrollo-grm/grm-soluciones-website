@@ -10,6 +10,7 @@ export default async function sitemap() {
     '/facturacion-digital',
     '/equipos-maquinas-fiscales',
     '/condominio',
+    '/saint-e-integraciones',
     '/soporte',
     '/blog',
   ];
