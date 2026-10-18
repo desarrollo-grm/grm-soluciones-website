@@ -65,9 +65,9 @@ const services = [
         description: "Acompañamiento experto para tus operaciones.",
         bullets: [
             "Soporte remoto y en sitio",
-            "Mantenimiento preventivo y correctivo",
-            "Actualizaciones de software",
-            "Capacitación técnica"
+            "Mantenimiento de servidores, equipos e impresoras",
+            "Servicio técnico fiscal autorizado",
+            "Redes corporativas e integración"
         ],
         icon: "/assets/icons/soporte.svg",
         link: "/soporte",

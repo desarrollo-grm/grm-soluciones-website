@@ -3,7 +3,7 @@ import { createPageMetadata } from '@/src/lib/seo';
 
 export const metadata = createPageMetadata({
   title: 'Soporte integral',
-  description: 'Soporte técnico integral para mantener tu operación funcionando.',
+  description: 'Soporte técnico especializado para software, hardware, equipos fiscales y redes corporativas.',
   path: '/soporte',
 });
 
