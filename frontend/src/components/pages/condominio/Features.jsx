@@ -5,20 +5,20 @@ const Features = () => {
 
     const features = [
         {
-            icon:"/assets/icons/arithmetic.svg",
-            title:"Información contable",
-        },
-        {
-            icon:"/assets/icons/data.svg",
-            title:"Visualización de datos",
-        },
-        {
             icon:"/assets/icons/invoice.svg",
             title:"Gestión de facturas",
         },
         {
             icon:"/assets/icons/bank.svg",
             title:"Gestión de pagos",
+        },
+        {
+            icon:"/assets/icons/arithmetic.svg",
+            title:"Información contable",
+        },
+        {
+            icon:"/assets/icons/data.svg",
+            title:"Visualización de datos",
         },
         {
             icon:"/assets/icons/email.svg",
