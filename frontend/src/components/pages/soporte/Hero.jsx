@@ -15,7 +15,8 @@ const Hero = () => {
                     </h2>
                     <p className="text-g md:text-lg text-dark leading-relaxed">
                         Con el entendimiento y las necesidades de tu empresa en el centro, brindamos una asesoría integral y acompañada 
-                        para garantizar el éxito continuo del uso de su Módulo Administrativo, Contable y Gestión de talento humano.
+                        para garantizar el éxito continuo del uso de sus módulos administrativo, contable y de talento humano, 
+                        así como de su infraestructura tecnológica.
                     </p>
                     <CTAButton to="/contact">
                         Solicita Información
