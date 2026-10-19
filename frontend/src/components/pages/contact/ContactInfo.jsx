@@ -45,6 +45,12 @@ const ContactInfo = () => {
                     className="text-light/90 hover:text-light hover:underline transition-colors text-sm">
                         +58 (424) 213-9974
                     </a>
+                    <a href="tel:+584122334598"
+                    target='_blank'
+                    rel='noopener noreferrer' 
+                    className="text-light/90 hover:text-light hover:underline transition-colors text-sm">
+                        +58 (412) 233-45-98
+                    </a>
                 </div>
             </div>
             
