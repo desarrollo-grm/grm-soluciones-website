@@ -11,16 +11,20 @@ const Hero = () => {
       description: 'Certificación como Canal Autorizado Saint'
     },
     {
-      year: 'XXXX',
+      year: '2001',
+      description: 'Lanzamiento del Condomio Sagues'
+    },
+    {
+      year: '2006',
       description: 'Evolución a GRM Soluciones'
     },
     {
-      year: 'XXXX',
+      year: '2017',
       description: 'Expansión a Chile, Mexico y Panamá'
     },
     {
-      year: 'XXXX',
-      description: 'Lanzamiento del Condomio Sagues'
+      year: '2026',
+      description: 'Representantes de The Factory en facturación digital'
     }
   ];
 
@@ -65,7 +69,7 @@ const Hero = () => {
             {timelineEvents.map((event, index) => (
               <li
                 key={index}
-                className="relative flex items-center gap-4 pb-9 last:pb-0"
+                className="relative flex items-center gap-2 pb-6 last:pb-0"
               >
                 <span
                   aria-hidden="true"
