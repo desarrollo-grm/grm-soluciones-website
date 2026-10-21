@@ -112,10 +112,10 @@ npm run build
 
 ## 🚀 Deployment
 
-The frontend and API are deployed together to Netlify. The Sanity Studio remains a separate static deployment.
+The frontend/API and Sanity Studio are deployed as separate Netlify sites.
 
-1. **Frontend and API (`/frontend`)**: Netlify uses the root `netlify.toml`, builds the frontend, and provisions the `app/api/*` route handlers as serverless functions.
-2. **Studio (`/studio`)**: Run `npm run build --workspace=studio` and host the generated static site (for example, under an `/admin` subfolder).
+1. **Frontend and API (`/frontend`)**: Create a Netlify site with `frontend` as its **Base directory**, `npm run build` as its build command, and `.next` as its publish directory. Enable the Next.js runtime/plugin in Netlify if prompted.
+2. **Studio (`/studio`)**: Create a second Netlify site with `studio` as its **Base directory**, `npm run build` as its build command, and `dist` as its publish directory. Add a `/*` to `/index.html` rewrite with status `200` in Netlify if client-side Studio routes need direct access.
 
 The Next.js frontend generates `/robots.txt` and `/sitemap.xml`. Public pages are statically rendered where possible, and known Sanity blog post slugs are generated with five-minute incremental revalidation. The filtered and paginated `/blog` index remains dynamic because it reads URL search parameters.
 
@@ -147,7 +147,8 @@ The response headers must include `X-Robots-Tag: noindex, nofollow`, and `robots
 
 ## 📄 License
 
-Private project - All rights reserved.
+This project is licensed under the GNU General Public License, version 3.0.
+See [LICENSE](./LICENSE) for the complete license text.
 
 ---
 

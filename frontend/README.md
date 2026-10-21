@@ -79,7 +79,6 @@ frontend/
 │   ├── styles/             # Global CSS and Tailwind entrypoints
 │   └── types/              # Shared TypeScript types
 ├── next.config.mjs         # Image hosting and response headers
-├── netlify.toml            # Netlify build and Next.js plugin configuration
 └── package.json
 ```
 
@@ -169,7 +168,11 @@ npm run start --workspace=frontend
    npm run start --workspace=frontend
    ```
 
-The frontend and API are deployed together by Netlify. Keep `ALLOW_INDEXING` disabled for preview or staging deployments and enable it only for the intended production domain.
+The frontend and API are deployed together by Netlify. In the Netlify web
+interface, set `frontend` as the base directory and `npm run build` as the
+build command. Netlify should detect the Next.js app and use its generated
+`.next` output. Keep `ALLOW_INDEXING` disabled for preview or staging
+deployments and enable it only for the intended production domain.
 
 ## Related workspaces
 

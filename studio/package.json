@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
-  "license": "UNLICENSED",
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "sanity dev",
     "start": "sanity start",
