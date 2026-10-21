@@ -23,14 +23,14 @@ const Hero = () => {
                 </div>
 
                 {/* Right Side - Image */}
-                <div className="flex-1 flex items-center justify-center">
-                    <div className="relative aspect-[4/3] w-full max-w-xl">
+                <div className="flex-1 flex items-center justify-center w-full">
+                    <div className="relative aspect-[4/3] w-full">
                         <Image
-                            src="/assets/images/digital-invoice.webp" 
+                            src="/assets/images/pos.png" 
                             alt="Sistema de Facturación Digital" 
                             fill
                             priority
-                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 576px"
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-contain drop-shadow-2xl"
                         />
                     </div>

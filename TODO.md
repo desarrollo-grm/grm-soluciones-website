@@ -73,7 +73,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ X ] Add `robots.txt` and a generated `sitemap.xml` covering all indexable routes.
 - [ X ] Change the document language from `en` to `es`.
 - [ X ] Add `noindex, nofollow` metadata to `/unsubscribe` and `/unsubscribed-success`.
-- [X] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
+- [ X ] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
 - [ X ] Add Article structured data for blog posts.
 - [ X ] Add Organization or LocalBusiness structured data with the company name, location, phone, services, and social profiles.
 - [ ] Replace placeholder About page content (`XXXX` dates and Lorem ipsum).
