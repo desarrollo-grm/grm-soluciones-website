@@ -32,7 +32,7 @@ export async function POST(request) {
         const htmlContent = (await loadTemplate("new-post.html"))
             .replaceAll("{{title}}", title)
             .replaceAll("{{excerpt}}", excerpt)
-            .replaceAll("{{tags[0]}}", Array.isArray(body?.tags) ? body.tags[0] || "" : "")
+            .replaceAll("{{tags[0]}}", Array.isArray(body?.tags) ? body.tags[0] || "Blog" : "Blog")
             .replaceAll("{{post-url}}", postUrl)
             .replaceAll("{{unsubscribe_url}}", unsubscribeUrl);
         const response = await sendBatchEmail({

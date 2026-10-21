@@ -35,11 +35,11 @@ export async function POST(request) {
 
         const supportTemplate = await loadTemplate("support-contact.html");
         const supportHtmlContent = supportTemplate
-            .replace("{{name}}", data.name)
-            .replace("{{email}}", data.email)
-            .replace("{{message}}", data.message)
-            .replace("{{timestamp}}", new Date().toISOString())
-            .replace("{{telephone}}", data.telephone || "Not provided");
+            .replaceAll("{{name}}", data.name)
+            .replaceAll("{{email}}", data.email)
+            .replaceAll("{{message}}", data.message)
+            .replaceAll("{{timestamp}}", new Date().toISOString())
+            .replaceAll("{{telephone}}", data.telephone || "Not provided");
         const supportEmail = process.env.SUPPORT_EMAIL;
         if (!supportEmail) throw new Error("SUPPORT_EMAIL is not configured in the server environment.");
 

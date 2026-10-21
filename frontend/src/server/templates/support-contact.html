@@ -1,141 +1,125 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Nuevo mensaje de contacto</title>
     <style>
-        body {
-            margin: 0;
-            padding: 20px 0;
-            background-color: #f4f6f9;
-            font-family: "Segoe UI", Arial, sans-serif;
-            color: #333333;
-        }
-        .email-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-        .header {
-            padding: 30px 20px;
-            background-color: #0f2c59;
-            text-align: center;
-        }
-        .header h1 {
-            margin: 0;
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .content {
-            padding: 36px 30px;
-        }
-        .tag {
-            display: inline-block;
-            margin-bottom: 15px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            background-color: #e1e7ff;
-            color: #4051b5;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .intro {
-            margin: 0 0 24px;
-            color: #555555;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        .details {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 24px;
-        }
-        .details th,
-        .details td {
-            padding: 12px 0;
-            border-bottom: 1px solid #e9ecef;
-            text-align: left;
-            vertical-align: top;
-            line-height: 1.5;
-        }
-        .details th {
-            width: 34%;
-            color: #0f2c59;
-            font-size: 13px;
-        }
-        .details td {
-            color: #555555;
-            font-size: 15px;
-            overflow-wrap: anywhere;
-        }
-        .message {
-            margin: 0;
-            padding: 18px;
-            border-left: 4px solid #ff6b6b;
-            background-color: #fff7f7;
-            color: #444444;
-            font-size: 15px;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-        }
-        .footer {
-            padding: 20px;
-            border-top: 1px solid #e9ecef;
-            background-color: #f4f6f9;
-            color: #888888;
-            font-size: 12px;
-            text-align: center;
+        @media only screen and (max-width: 620px) {
+            .email-container { width: 100% !important; border-radius: 0 !important; }
+            .email-padding { padding-left: 22px !important; padding-right: 22px !important; }
+            .email-title { font-size: 22px !important; }
+            .email-header { padding: 24px 22px !important; }
         }
     </style>
 </head>
-<body>
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+<body style="margin: 0; padding: 0; background-color: #FDFAF5;">
+    <div style="display: none; font-size: 1px; color: #FDFAF5; line-height: 1px; max-height: 0; max-width: 0; opacity: 0; overflow: hidden;">
+        Nuevo mensaje recibido desde el formulario de contacto de GRM Soluciones.
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #FDFAF5;">
         <tr>
-            <td>
-                <div class="email-container">
-                    <div class="header">
-                        <h1>GRM-soluciones</h1>
-                    </div>
+            <td align="center" style="padding: 32px 16px;">
+                <table role="presentation" class="email-container" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px; background-color: #ffffff; border: 1px solid #ECE6DA; border-radius: 16px; overflow: hidden;">
 
-                    <div class="content">
-                        <span class="tag">Contacto web</span>
-                        <p class="intro">Se recibió un nuevo mensaje desde el formulario de contacto.</p>
+                    <tr>
+                        <td class="email-header" align="center" style="padding: 30px 32px; background-color: #004992; border-bottom: 4px solid #EA7314;">
+                            <a href="https://grm.net.ve" target="_blank" style="text-decoration: none;">
+                                <div style="font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: #ffffff;">
+                                    GRM Soluciones
+                                </div>
+                                <div style="padding-top: 8px; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #BFD4E8;">
+                                    Soluciones para tu negocio
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
 
-                        <table class="details">
-                            <tr>
-                                <th>Nombre</th>
-                                <td>{{name}}</td>
-                            </tr>
-                            <tr>
-                                <th>Correo electrónico</th>
-                                <td>{{email}}</td>
-                            </tr>
-                            <tr>
-                                <th>Teléfono</th>
-                                <td>{{telephone}}</td>
-                            </tr>
-                            <tr>
-                                <th>Fecha y hora</th>
-                                <td>{{timestamp}}</td>
-                            </tr>
-                        </table>
+                    <tr>
+                        <td class="email-padding" style="padding: 40px 36px 32px;">
+                            <span style="display: inline-block; padding: 6px 14px; border-radius: 999px; background-color: #E6EEF7; color: #004992; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;">
+                                Contacto web
+                            </span>
 
-                        <h2 style="margin: 0 0 10px; color: #0f2c59; font-size: 18px;">Mensaje</h2>
-                        <p class="message">{{message}}</p>
-                    </div>
+                            <h1 class="email-title" style="margin: 18px 0 8px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 26px; line-height: 1.3; font-weight: 700; color: #004992;">
+                                Nuevo mensaje de contacto
+                            </h1>
 
-                    <div class="footer">
-                        <p style="margin: 0;">Notificación automática del formulario de contacto de GRM-soluciones.</p>
-                    </div>
-                </div>
+                            <p style="margin: 0 0 28px; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.65; color: #4B5563;">
+                                Se recibió un nuevo mensaje desde el formulario de contacto.
+                            </p>
+
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 0 0 28px; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #004992; width: 34%; vertical-align: top;">
+                                        Nombre
+                                    </td>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.5; color: #1A1A1A; vertical-align: top; overflow-wrap: anywhere;">
+                                        {{name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #004992; width: 34%; vertical-align: top;">
+                                        Correo
+                                    </td>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.5; color: #1A1A1A; vertical-align: top; overflow-wrap: anywhere;">
+                                        <a href="mailto:{{email}}" style="color: #004992; text-decoration: none;">{{email}}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #004992; width: 34%; vertical-align: top;">
+                                        Teléfono
+                                    </td>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.5; color: #1A1A1A; vertical-align: top; overflow-wrap: anywhere;">
+                                        {{telephone}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #004992; width: 34%; vertical-align: top;">
+                                        Fecha y hora
+                                    </td>
+                                    <td style="padding: 14px 0; border-bottom: 1px solid #ECE6DA; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.5; color: #1A1A1A; vertical-align: top; overflow-wrap: anywhere;">
+                                        {{timestamp}}
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h2 style="margin: 0 0 12px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; font-weight: 700; color: #004992;">
+                                Mensaje
+                            </h2>
+
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 0 0 28px;">
+                                <tr>
+                                    <td style="padding: 20px 22px; background-color: #FDF1E7; border-left: 4px solid #EA7314; border-radius: 0 12px 12px 0; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #1A1A1A; white-space: pre-wrap; overflow-wrap: anywhere;">
+                                        {{message}}
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 0 4px;">
+                                <tr>
+                                    <td align="center" bgcolor="#EA7314" style="border-radius: 12px;">
+                                        <a href="mailto:{{email}}" style="display: inline-block; padding: 14px 32px; border-radius: 12px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; text-decoration: none;">
+                                            Responder a {{name}}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="email-padding" style="padding: 24px 36px; background-color: #F7F2E9; border-top: 1px solid #ECE6DA;">
+                            <p style="margin: 0; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 12px; line-height: 1.6; color: #6B7280;">
+                                Notificación automática del formulario de contacto de GRM Soluciones.<br>
+                                GRM Soluciones · CCCT, Torre A, Piso 8, Oficina 805, Caracas, Venezuela
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
             </td>
         </tr>
     </table>
