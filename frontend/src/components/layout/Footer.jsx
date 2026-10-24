@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
 import { getAllForFooter } from '@/src/data/services.js';
 import NewsletterForm from '@/src/components/layout/NewsletterForm';
+import {socials} from '@/src/data/socials.js';
 
 const Footer = () => {
     return (
@@ -19,16 +20,16 @@ const Footer = () => {
                             className="h-32 mb-4 brightness-0 invert"
                         />
                         <div className="flex gap-4 mt-4">
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a href={socials.twitter} className="hover:opacity-80 transition-opacity">
                                 <XIcon className="w-8 h-8" />
                             </a>
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a href={socials.instagram} className="hover:opacity-80 transition-opacity">
                                 <InstagramIcon className="w-8 h-8" />
                             </a>
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a href={socials.linkedin} className="hover:opacity-80 transition-opacity">
                                 <LinkedInIcon className="w-8 h-8" />
                             </a>
-                            <a href="#" className="hover:opacity-80 transition-opacity">
+                            <a href={socials.whatsapp} className="hover:opacity-80 transition-opacity">
                                 <WhatsAppIcon className="w-8 h-8" />
                             </a>
                         </div>

@@ -3,7 +3,7 @@
 ## DEV
 
 ### General
-- [ ] Social media
+- [ x ] Social media
 - [ ] Maybe .cfg
 - [ ] not-found page
 
@@ -76,8 +76,8 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ X ] Add canonical URL handling for blog search, product, category, and other query-parameter variations.
 - [ X ] Add Article structured data for blog posts.
 - [ X ] Add Organization or LocalBusiness structured data with the company name, location, phone, services, and social profiles.
-- [ ] Replace placeholder About page content (`XXXX` dates and Lorem ipsum).
-- [ ] Replace the incorrect fiscal-equipment hero image and alt text currently referring to digital invoicing.
+- [ x ] Replace placeholder About page content (`XXXX` dates and Lorem ipsum).
+- [ x ] Replace the incorrect fiscal-equipment hero image and alt text currently referring to digital invoicing.
 
 #### Medium priority
 
@@ -87,18 +87,18 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Add Google and Bing verification metadata after obtaining the production verification tokens.
 - [X] Ensure every indexable page has one meaningful `<h1>`, including About, Contact, Blog, and Condominio.
 - [X] Review heading hierarchy so subtitles and cards use semantic heading levels consistently.
-- [ ] Replace placeholder social links and generic social profile URLs with the company’s real profiles.
+- [ x ] Replace placeholder social links and generic social profile URLs with the company’s real profiles.
 - [ ] Verify every social platform URL is official, active, and consistent with the business identity used on the site.
-- [ ] Validate all public email addresses across the website and backend are the official corporate addresses, not personal or test addresses.
+- [x] Validate all public email addresses across the website and backend are the official corporate addresses, not personal or test addresses.
 - [ ] Check that phone numbers, WhatsApp links, Google Maps locations, and email addresses are consistent across all pages and marketing channels.
 - [X] Fix spelling and grammar issues in SEO-visible page copy, including the Condominio page.
 
 ### Deployment configuration
-- [ ] Create and configure the final corporate email addresses for sender, support, newsletter, and unsubscribe assistance.
+- [x] Create and configure the final corporate email addresses for sender, support, newsletter, and unsubscribe assistance.
 - [X] Replace personal/test email addresses in, `frontend/src/components/layout/Footer.jsx`, `frontend/src/components/pages/contact/ContactInfo.jsx`, and `frontend/src/page-sections/UnsubscribePage.jsx`.
-- [ ] Verify the final corporate email list matches the production sender, support, newsletter, and unsubscribe inboxes.
-- [ ] Confirm the official company social profiles, contact emails, and phone numbers match the sources of truth used in the structured data and footer/contact components.
-- [ ] Change Apis
+- [x] Verify the final corporate email list matches the production sender, support, newsletter, and unsubscribe inboxes.
+- [x] Confirm the official company social profiles, contact emails, and phone numbers match the sources of truth used in the structured data and footer/contact components.
+- [-] Change Apis
 - [ ] Verify the production sender domain in Brevo with SPF, DKIM, and DMARC.
-- [ ] Replace and verify company contact details: address, phone numbers, WhatsApp, Google Maps location, and social profile URLs.
+- [x] Replace and verify company contact details: address, phone numbers, WhatsApp, Google Maps location, and social profile URLs.
 - [ ] Test the production contact, subscription, welcome email, unsubscribe, and new-post email flows.

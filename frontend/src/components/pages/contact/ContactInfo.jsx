@@ -1,5 +1,6 @@
 import { MapMarkerIcon, PhoneIcon, EnvelopeIcon, LinkedInIcon, InstagramIcon, XIcon, WhatsAppIcon } from '@/assets/icons';
 import Map from '@/src/components/commons/MapClient';
+import { socials } from '@/src/data/socials.js';
 
 const ContactInfo = () => {
     // Google Maps link with your coordinates
@@ -76,7 +77,7 @@ const ContactInfo = () => {
             {/* Redes Sociales */}
             <div className="flex gap-4 mt-4 flex-shrink-0">
                 <a 
-                    href="https://x.com" 
+                    href={socials.twitter} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-light hover:text-secondary transition-colors"
@@ -85,7 +86,7 @@ const ContactInfo = () => {
                     <XIcon size={24} />
                 </a>
                 <a 
-                    href="https://instagram.com" 
+                    href={socials.instagram} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-light hover:text-secondary transition-colors"
@@ -94,7 +95,7 @@ const ContactInfo = () => {
                     <InstagramIcon size={24} />
                 </a>
                 <a 
-                    href="https://linkedin.com" 
+                    href={socials.linkedin} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-light hover:text-secondary transition-colors"
@@ -103,7 +104,7 @@ const ContactInfo = () => {
                     <LinkedInIcon size={24} />
                 </a>
                 <a 
-                    href="https://wa.me/582125551234" 
+                    href={socials.whatsapp} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-light hover:text-secondary transition-colors"
