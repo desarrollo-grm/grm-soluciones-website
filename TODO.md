@@ -85,7 +85,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Add favicon, Apple touch icon, web app manifest, and theme-color metadata.
 - [ ] Add BreadcrumbList structured data for nested routes such as blog posts.
 - [ ] Add Google and Bing verification metadata after obtaining the production verification tokens. (after v1.0.0)
-- [ - ] Add GA4 and GSC
+- [x] Add GA4 and GSC
 - [X] Ensure every indexable page has one meaningful `<h1>`, including About, Contact, Blog, and Condominio.
 - [X] Review heading hierarchy so subtitles and cards use semantic heading levels consistently.
 - [ x ] Replace placeholder social links and generic social profile URLs with the company’s real profiles.
@@ -103,3 +103,13 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Verify the production sender domain in Brevo with SPF, DKIM, and DMARC.
 - [x] Replace and verify company contact details: address, phone numbers, WhatsApp, Google Maps location, and social profile URLs.
 - [ ] Test the production contact, subscription, welcome email, unsubscribe, and new-post email flows.
+
+## Lauch Day
+When you deploy your site live to your production domain:
+- [ ] Submit Sitemap to GSC:
+    In Google Search Console, go to Sitemaps in the left menu.
+    Enter your sitemap path (e.g., https://yourdomain.com/sitemap.xml) and click Submit.
+- [ ] Link GA4 and Search Console:
+In GA4, navigate to Admin > Product Links > Search Console Links.
+Click Link and select your verified GSC property.
+This allows you to view organic Google search queries and search impressions alongside user behavior inside GA4.
