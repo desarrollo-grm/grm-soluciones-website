@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { XIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon } from '@/assets/icons';
 import { getAllForFooter } from '@/src/data/services.js';
 import NewsletterForm from '@/src/components/layout/NewsletterForm';
-import {socials} from '@/src/data/socials.js';
+import socials from '@/src/data/socials.js';
 
 const Footer = () => {
     return (

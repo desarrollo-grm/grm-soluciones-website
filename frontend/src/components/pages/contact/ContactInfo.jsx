@@ -1,6 +1,6 @@
 import { MapMarkerIcon, PhoneIcon, EnvelopeIcon, LinkedInIcon, InstagramIcon, XIcon, WhatsAppIcon } from '@/assets/icons';
 import Map from '@/src/components/commons/MapClient';
-import { socials } from '@/src/data/socials.js';
+import socials from '@/src/data/socials.js';
 
 const ContactInfo = () => {
     // Google Maps link with your coordinates
