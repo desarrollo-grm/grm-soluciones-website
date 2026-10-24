@@ -61,6 +61,30 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ X ] send to grm contactanos
 - [ - ] security
 
+#### API review findings
+
+Priority 1 — security and correctness
+- [x] Authenticate `POST /api/newsletter/send-new-post` with a Sanity webhook signature or shared secret; fail closed when the secret is missing.
+- [ ] Dedupe by post `_id` + `_rev` so webhook retries do not resend the campaign.
+- [ ] HTML-escape every substituted value in `send-new-post` (`title`, `excerpt`, `tags[0]`) and `contact` (`name`, `email`, `message`, `telephone`); encode `slug.current` before building the post URL.
+- [ ] Return `400` on malformed JSON and enforce content type, body size, and field length caps (`name`, `email`, `telephone`, `message`, `title`, `excerpt`).
+- [ ] Verify captcha before running `deep-email-validator` MX lookups; check reCAPTCHA `action` and `hostname`, and remove the full response log.
+
+Priority 2 — reliability
+- [ ] Move rate limiting to a durable store and key it per route+IP (the in-memory `Map` resets per serverless instance and never prunes).
+- [ ] Remove `raw_response` from the subscribe error response.
+- [ ] Fix `unsubscribe` error handling to use `error?.statusCode === 404` instead of `error?.status`.
+- [ ] Validate `NEXT_PUBLIC_SITE_URL` at startup and reject empty or malformed `slug` values before building email links.
+- [ ] Send the contact confirmation without failing the whole request when the support email already succeeded; same for the welcome email after subscribing.
+- [ ] Handle `messageId` as well as `messageIds` in the batch response and remove the dead `207` path.
+- [ ] Map submitted fields explicitly in `createContact` (e.g., `FIRSTNAME`) and normalize email casing.
+- [ ] Add the `/api/newsletter/subscribe` fallback in `useNewsletterSubscription`
+- [ ] Remove the duplicate health GET handlers from POST-only routes (keep `/api/health`).
+- [ ] Standardize responses: `403` for captcha failures and one consistent `{ ok, error }` shape.
+- [ ] Cache email templates in module scope instead of reading from disk on every send.
+- [ ] Paginate `getAllContacts` (Brevo defaults to 50 per page) and chunk campaigns into ≤2000-recipient batches
+- [ ] Stop deleting contacts on unsubscribe; mark them unsubscribed/blacklisted in Brevo instead so history and dedupe are preserved.
+
 ### SEO (frontend)
 
 #### Critical

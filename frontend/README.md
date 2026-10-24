@@ -50,6 +50,7 @@ Create `frontend/.env` for local development. Environment files are intentionall
 | `BREVO_SENDER_NAME` | Brevo sender display name | `GRM Soluciones` |
 | `GOOGLE_RECAPTCHA_SECRET_KEY` | Private reCAPTCHA v3 secret | None |
 | `SUPPORT_EMAIL` | Address that receives contact messages | None |
+| `SANITY_WEBHOOK_SECRET` | Secret configured on the Sanity webhook; validates the `sanity-webhook-signature` header (or `Authorization: Bearer <secret>`) before sending a new-post campaign | None |
 | `ALLOW_INDEXING` | Enables search-engine indexing only when exactly `true` | Disabled |
 
 The `NEXT_PUBLIC_*` variables are exposed to browser code, so they must not contain secrets. Keep private API variables only in the frontend deployment environment.
@@ -155,7 +156,7 @@ npm run start --workspace=frontend
 ## Production deployment
 
 1. Install dependencies from the repository root with `npm install`.
-2. Configure the frontend environment variables, including the private API variables and `NEXT_PUBLIC_SITE_URL`.
+2. Configure the frontend environment variables, including the private API variables, `SANITY_WEBHOOK_SECRET` (the same secret set on the Sanity webhook that calls `/api/newsletter/send-new-post`), and `NEXT_PUBLIC_SITE_URL`.
 3. Build the workspace:
 
    ```bash

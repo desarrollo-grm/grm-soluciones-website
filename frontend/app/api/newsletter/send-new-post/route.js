@@ -1,6 +1,7 @@
 import { getAllContacts } from "@/src/server/services/contacts";
 import { sendBatchEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
+import { verifySanityWebhookRequest } from "@/src/server/lib/webhook-auth";
 
 export const runtime = "nodejs";
 
@@ -9,8 +10,27 @@ export async function GET() {
 }
 
 export async function POST(request) {
+    const webhookSecret = process.env.SANITY_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+        console.error("[Send API] SANITY_WEBHOOK_SECRET is not configured in the server environment.");
+        return Response.json({ ok: false, error: "Webhook authentication is not configured." }, { status: 500 });
+    }
+
     try {
-        const body = await request.json();
+        const rawBody = await request.text();
+        const auth = verifySanityWebhookRequest(request, rawBody, webhookSecret);
+        if (!auth.ok) {
+            console.warn(`[Send API] Rejected webhook request: ${auth.reason}`);
+            return Response.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+        }
+
+        let body;
+        try {
+            body = JSON.parse(rawBody);
+        } catch {
+            return Response.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
+        }
+
         const { contacts = [] } = await getAllContacts();
         const recipients = contacts
             .filter((item) => typeof item?.email === "string")
