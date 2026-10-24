@@ -15,11 +15,5 @@
   "version": "1.0.0",
   "license": "GPL-3.0",
   "description": "Corporate website for GRM Soluciones, a technology solutions provider specializing in digital services for businesses and condominiums.",
-  "author": "",
-  "devDependencies": {
-    "concurrently": "^9.2.4"
-  },
-  "dependencies": {
-    "@next/third-parties": "^16.4.3"
-  }
+  "author": ""
 }
