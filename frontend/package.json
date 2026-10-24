@@ -11,35 +11,36 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@getbrevo/brevo": "^6.0.2",
+    "@next/third-parties": "^16.4.3",
     "@portabletext/react": "^5.0.0",
     "@sanity/client": "^7.13.0",
     "@sanity/image-url": "^1.2.0",
-    "@getbrevo/brevo": "^6.0.2",
     "@vnedyalk0v/react19-simple-maps": "^2.0.9",
     "axios": "^1.20.0",
     "deep-email-validator": "^0.1.27",
     "leaflet": "^1.9.4",
+    "next": "^15.5.5",
     "next-sanity": "^11.6.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-google-recaptcha-v3": "^1.11.0",
-    "react-leaflet": "^5.0.0",
-    "next": "^15.5.5"
+    "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.15.0",
     "@eslint/js": "^9.36.0",
+    "@netlify/plugin-nextjs": "^5.15.0",
     "@tailwindcss/postcss": "^4.1.16",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "eslint": "^9.36.0",
+    "eslint-config-next": "^15.5.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.4.0",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.16",
-    "eslint-config-next": "^15.5.5"
+    "tailwindcss": "^4.1.16"
   },
   "optionalDependencies": {
-  "lightningcss-linux-x64-gnu": "*"
+    "lightningcss-linux-x64-gnu": "*"
   }
 }

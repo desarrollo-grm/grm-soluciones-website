@@ -18,5 +18,8 @@
   "author": "",
   "devDependencies": {
     "concurrently": "^9.2.4"
+  },
+  "dependencies": {
+    "@next/third-parties": "^16.4.3"
   }
 }

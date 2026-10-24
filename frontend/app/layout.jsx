@@ -3,6 +3,7 @@ import '@/src/styles/main.css';
 import '@/src/styles/carousel.css';
 import Header from '@/src/components/layout/Header';
 import Footer from '@/src/components/layout/Footer';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { createOrganizationJsonLd } from '@/src/lib/seo';
 import Providers from '@/app/providers';
 
@@ -48,6 +49,9 @@ export default function RootLayout({ children }) {
           <Footer />
         </Providers>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
