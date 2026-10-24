@@ -40,7 +40,7 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Diffrent links to contactanos with filled about page or secret params
 - [ X ] Contactanos doing something
 - [ X ] Validate properly telefono number
-- [ ] Map is requesting an API Key
+- [ x ] Map is requesting an API Key
 
 ### Create pages
 - [ X ] unsubscribe fail

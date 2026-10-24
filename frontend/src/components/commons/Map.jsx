@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { divIcon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+const CARTO_KEY = process.env.NEXT_PUBLIC_CARTO_KEY || '';
+
 const Map = ({ latitude = 10.4806, longitude = -66.9036, address = "Caracas, Venezuela", tileStyle = 'default', markerColor = '#EA7314' }) => {
     // Available tile layers
     const tileProviders = {
@@ -15,15 +17,15 @@ const Map = ({ latitude = 10.4806, longitude = -66.9036, address = "Caracas, Ven
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/">HOT</a>'
         },
         cartoLight: {
-            url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+            url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=' + CARTO_KEY,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         },
         cartoDark: {
-            url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+            url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=' + CARTO_KEY,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         },
         cartoVoyager: {
-            url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+            url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=' + CARTO_KEY,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         }
     };
@@ -51,7 +53,7 @@ const Map = ({ latitude = 10.4806, longitude = -66.9036, address = "Caracas, Ven
     return (
         <MapContainer 
             center={[latitude, longitude]} 
-            zoom={15} 
+            zoom={13} 
             style={{ height: '100%', width: '100%' }}
             scrollWheelZoom={false}
         >
