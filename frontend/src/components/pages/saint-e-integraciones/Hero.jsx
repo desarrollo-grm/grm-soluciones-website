@@ -26,7 +26,7 @@ const Hero = () => {
                     <div className="w-full max-w-xl bg-white rounded-3xl shadow-xl p-10 md:p-14 flex flex-col items-center gap-6">
                         <div className="relative w-full aspect-[16/9]">
                             <Image
-                                src="/assets/images/saint-logo-big.jpg"
+                                src="/assets/images/saint.svg"
                                 alt="Saint casa de software"
                                 fill
                                 priority
