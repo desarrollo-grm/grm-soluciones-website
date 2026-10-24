@@ -5,7 +5,7 @@
 ### General
 - [ x ] Social media
 - [ ] Maybe .cfg
-- [ ] not-found page
+- [ x ] not-found page
 
 ### Optimization
 - [ X ] Optimize images with responsive Next.js images and Sanity format conversion.

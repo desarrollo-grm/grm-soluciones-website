@@ -169,7 +169,10 @@ export const getFormattedPosts = async (start = 0, end = 100) => {
  * Get a single post by slug
  */
 export const getPost = async (slug) => {
-  return formatFullPost(await getPostBySlug(slug));
+  const post = await getPostBySlug(slug);
+  if (!post) return null;
+
+  return formatFullPost(post);
 };
 
 /**
