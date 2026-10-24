@@ -84,7 +84,8 @@ Blog post pages use SSG with five-minute ISR revalidation, while the filtered an
 - [ ] Create a dedicated 1200x630 Open Graph image and include its dimensions and MIME type in social metadata.
 - [ ] Add favicon, Apple touch icon, web app manifest, and theme-color metadata.
 - [ ] Add BreadcrumbList structured data for nested routes such as blog posts.
-- [ ] Add Google and Bing verification metadata after obtaining the production verification tokens.
+- [ ] Add Google and Bing verification metadata after obtaining the production verification tokens. (after v1.0.0)
+- [ - ] Add GA4 and GSC
 - [X] Ensure every indexable page has one meaningful `<h1>`, including About, Contact, Blog, and Condominio.
 - [X] Review heading hierarchy so subtitles and cards use semantic heading levels consistently.
 - [ x ] Replace placeholder social links and generic social profile URLs with the company’s real profiles.
