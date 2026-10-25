@@ -2,8 +2,14 @@ import { getAllContacts } from "@/src/server/services/contacts";
 import { sendBatchEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
 import { verifySanityWebhookRequest } from "@/src/server/lib/webhook-auth";
+import { claimCampaignSend, releaseCampaignSend } from "@/src/server/lib/campaign-idempotency";
 
 export const runtime = "nodejs";
+
+function skipWebhook(reason) {
+    console.info(`[Send API] Skipping webhook payload: ${reason}`);
+    return Response.json({ ok: true, skipped: reason });
+}
 
 export async function GET() {
     return Response.json({ ok: true, status: "healthy", route: "/send-new-post", timestamp: new Date().toISOString() });
@@ -24,11 +30,25 @@ export async function POST(request) {
             return Response.json({ ok: false, error: "Unauthorized" }, { status: 401 });
         }
 
-        let body;
+        let post;
         try {
-            body = JSON.parse(rawBody);
+            post = JSON.parse(rawBody);
         } catch {
             return Response.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
+        }
+
+        if (!post || typeof post !== "object" || post._type !== "post") {
+            return skipWebhook("not a post document");
+        }
+        if (typeof post._id !== "string" || !post._id || post._id.startsWith("drafts.")) {
+            return skipWebhook("not a published post");
+        }
+        if (typeof post._rev !== "string" || !post._rev) {
+            return skipWebhook("missing post revision");
+        }
+        const slug = post.slug?.current;
+        if (typeof slug !== "string" || !slug.trim()) {
+            return skipWebhook("missing post slug");
         }
 
         const { contacts = [] } = await getAllContacts();
@@ -44,27 +64,41 @@ export async function POST(request) {
             return Response.json({ ok: false, error: "No subscribers found to send to." }, { status: 400 });
         }
 
-        const title = body?.title || "Nuevo Post en GRM Soluciones";
-        const excerpt = body?.excerpt || "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
-        const slug = body?.slug?.current || "";
-        const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug}`;
+        const title = post.title || "Nuevo Post en GRM Soluciones";
+        const excerpt = post.excerpt || "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
+        const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug.trim()}`;
         const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/unsubscribe?token={{params.unsubToken}}`;
         const htmlContent = (await loadTemplate("new-post.html"))
             .replaceAll("{{title}}", title)
             .replaceAll("{{excerpt}}", excerpt)
-            .replaceAll("{{tags[0]}}", Array.isArray(body?.tags) ? body.tags[0] || "Blog" : "Blog")
+            .replaceAll("{{tags[0]}}", Array.isArray(post.tags) ? post.tags[0] || "Blog" : "Blog")
             .replaceAll("{{post-url}}", postUrl)
             .replaceAll("{{unsubscribe_url}}", unsubscribeUrl);
-        const response = await sendBatchEmail({
-            subject: `${title} - Lo último de GRM-soluciones`,
-            htmlContent,
-            versions: recipients.map(({ email, name, unsubToken }) => ({
-                to: [{ email, ...(name ? { name } : {}) }],
-                params: { unsubToken },
-            })),
-        });
+
+        const claimed = await claimCampaignSend(post._id, post._rev);
+        if (!claimed) {
+            console.info(`[Send API] Campaign already sent for post ${post._id}.`);
+            return Response.json({ ok: true, skipped: "already_sent" });
+        }
+
+        let response;
+        try {
+            response = await sendBatchEmail({
+                subject: `${title} - Lo último de GRM-soluciones`,
+                htmlContent,
+                versions: recipients.map(({ email, name, unsubToken }) => ({
+                    to: [{ email, ...(name ? { name } : {}) }],
+                    params: { unsubToken },
+                })),
+            });
+        } catch (error) {
+            await releaseCampaignSend(post._id);
+            throw error;
+        }
+
         const messageIds = response?.messageIds || [];
         if (messageIds.length !== recipients.length) {
+            await releaseCampaignSend(post._id);
             return Response.json({ ok: false, error: `Failed to send ${recipients.length - messageIds.length} messages.` }, { status: 207 });
         }
         return Response.json({ ok: true, messageIds });

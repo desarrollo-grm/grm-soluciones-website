@@ -55,6 +55,12 @@ Create `frontend/.env` for local development. Environment files are intentionall
 
 The `NEXT_PUBLIC_*` variables are exposed to browser code, so they must not contain secrets. Keep private API variables only in the frontend deployment environment.
 
+### Sanity webhook for new posts
+
+Configure a Sanity webhook that sends published `post` documents with `POST` to `/api/newsletter/send-new-post` when a post is created. Set the same `SANITY_WEBHOOK_SECRET` on the Sanity webhook and in the frontend environment, and include `_id`, `_type`, `_rev`, `title`, `excerpt`, `slug`, and `tags` in the projection.
+
+The route ignores drafts, deletes, non-`post` documents, and posts that already have a campaign. Sent post IDs are recorded in Netlify Blobs (with an in-memory fallback outside Netlify), so webhook retries and later edits do not resend the campaign. A failed send releases the record so the webhook retry can try again.
+
 ### Local API requests
 
 Forms use relative `/api/*` URLs by default. Next.js route handlers process those requests on the same origin:
