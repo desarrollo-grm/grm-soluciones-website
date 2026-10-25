@@ -39,6 +39,9 @@ export async function POST(request) {
             || message.length > FIELD_LIMITS.message) {
             return Response.json({ ok: false, error: "Contact fields exceed the allowed length." }, { status: 400 });
         }
+        if (typeof data.captchaToken !== "string" || !(await verifyCaptcha(data.captchaToken))) {
+            return Response.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
+        }
         if (!(await validate({
             email,
             validateRegex: true,
@@ -48,9 +51,6 @@ export async function POST(request) {
             validateSMTP: false
         })).valid) {
             return Response.json({ ok: false, error: "Invalid email address." }, { status: 400 });
-        }
-        if (typeof data.captchaToken !== "string" || !(await verifyCaptcha(data.captchaToken))) {
-            return Response.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
         }
 
         const supportTemplate = await loadTemplate("support-contact.html");

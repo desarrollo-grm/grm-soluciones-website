@@ -68,7 +68,7 @@ Priority 1 — security and correctness
 - [x] Dedupe by post `_id` + `_rev` so webhook retries do not resend the campaign.
 - [x] HTML-escape every substituted value in `send-new-post` (`title`, `excerpt`, `tags[0]`) and `contact` (`name`, `email`, `message`, `telephone`); encode `slug.current` before building the post URL.
 - [x] Return `400` on malformed JSON and enforce content type, body size, and field length caps (`name`, `email`, `telephone`, `message`, `title`, `excerpt`).
-- [ ] Verify captcha before running `deep-email-validator` MX lookups; check reCAPTCHA `action` and `hostname`, and remove the full response log.
+- [x] Verify captcha before running `deep-email-validator` MX lookups; check reCAPTCHA `action` and `hostname`, and remove the full response log.
 
 Priority 2 — reliability
 - [ ] Move rate limiting to a durable store and key it per route+IP (the in-memory `Map` resets per serverless instance and never prunes).

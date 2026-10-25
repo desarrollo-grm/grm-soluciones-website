@@ -30,6 +30,9 @@ export async function POST(request) {
             return Response.json({ ok: false, error: "Invalid email address." }, { status: 400 });
         }
 
+        if (typeof data?.captchaToken !== "string" || !(await verifyCaptcha(data.captchaToken))) {
+            return Response.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
+        }
         const emailResult = await validate({
             email,
             validateRegex: true,
@@ -40,9 +43,6 @@ export async function POST(request) {
         });
         if (!emailResult.valid) {
             return Response.json({ ok: false, error: "Invalid email address.", raw_response:emailResult }, { status: 400 });
-        }
-        if (typeof data?.captchaToken !== "string" || !(await verifyCaptcha(data.captchaToken))) {
-            return Response.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
         }
 
         const { unsubToken, ...contact } = await createContact({ email });
