@@ -1,6 +1,9 @@
 import { unsubscribeContact } from "@/src/server/services/contacts";
+import { readJsonBody } from "@/src/server/lib/request-body";
 
 export const runtime = "nodejs";
+
+const MAX_BODY_BYTES = 8 * 1024;
 
 function isValidToken(token) {
     return typeof token === "string"
@@ -18,11 +21,12 @@ export async function GET(request) {
 
 export async function POST(request) {
     try {
-        const data = await request.json();
-        if (!isValidToken(data?.token)) {
+        const body = await readJsonBody(request, { maxBytes: MAX_BODY_BYTES });
+        if (body.response) return body.response;
+        if (!isValidToken(body.data?.token)) {
             return Response.json({ ok: false, error: "Invalid or missing token." }, { status: 400 });
         }
-        await unsubscribeContact(data.token);
+        await unsubscribeContact(body.data.token);
         return Response.json({ ok: true, message: "Successfully unsubscribed." });
     } catch (error) {
         console.error("[Unsubscribe API] Request failed:", error);

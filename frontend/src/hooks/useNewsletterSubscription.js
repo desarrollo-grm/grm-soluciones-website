@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
+const MAX_EMAIL_LENGTH = 254;
+
 export default function useNewsletterSubscription() {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState('idle');
@@ -18,6 +20,12 @@ export default function useNewsletterSubscription() {
         if (!trimmedEmail) {
             setStatus('error');
             setMessage('Ingresa tu correo electrónico.');
+            return;
+        }
+
+        if (trimmedEmail.length > MAX_EMAIL_LENGTH) {
+            setStatus('error');
+            setMessage('El correo electrónico no puede superar los 254 caracteres.');
             return;
         }
 

@@ -4,8 +4,13 @@ import { loadTemplate } from "@/src/server/services/templates";
 import { verifySanityWebhookRequest } from "@/src/server/lib/webhook-auth";
 import { claimCampaignSend, releaseCampaignSend } from "@/src/server/lib/campaign-idempotency";
 import { escapeHtml, renderTemplate } from "@/src/server/lib/html";
+import { parseJsonBody, readRequestBody } from "@/src/server/lib/request-body";
 
 export const runtime = "nodejs";
+
+const MAX_BODY_BYTES = 512 * 1024;
+const MAX_TITLE_LENGTH = 200;
+const MAX_EXCERPT_LENGTH = 1000;
 
 function skipWebhook(reason) {
     console.info(`[Send API] Skipping webhook payload: ${reason}`);
@@ -24,21 +29,20 @@ export async function POST(request) {
     }
 
     try {
-        const rawBody = await request.text();
-        const auth = verifySanityWebhookRequest(request, rawBody, webhookSecret);
+        const body = await readRequestBody(request, { maxBytes: MAX_BODY_BYTES });
+        if (body.response) return body.response;
+
+        const auth = verifySanityWebhookRequest(request, body.rawBody, webhookSecret);
         if (!auth.ok) {
             console.warn(`[Send API] Rejected webhook request: ${auth.reason}`);
             return Response.json({ ok: false, error: "Unauthorized" }, { status: 401 });
         }
 
-        let post;
-        try {
-            post = JSON.parse(rawBody);
-        } catch {
-            return Response.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
-        }
+        const parsedBody = parseJsonBody(body.rawBody);
+        if (parsedBody.response) return parsedBody.response;
+        const post = parsedBody.data;
 
-        if (!post || typeof post !== "object" || post._type !== "post") {
+        if (post._type !== "post") {
             return skipWebhook("not a post document");
         }
         if (typeof post._id !== "string" || !post._id || post._id.startsWith("drafts.")) {
@@ -50,6 +54,16 @@ export async function POST(request) {
         const slug = post.slug?.current;
         if (typeof slug !== "string" || !slug.trim()) {
             return skipWebhook("missing post slug");
+        }
+
+        const title = typeof post.title === "string" && post.title.trim()
+            ? post.title.trim()
+            : "Nuevo Post en GRM Soluciones";
+        const excerpt = typeof post.excerpt === "string" && post.excerpt.trim()
+            ? post.excerpt.trim()
+            : "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
+        if (title.length > MAX_TITLE_LENGTH || excerpt.length > MAX_EXCERPT_LENGTH) {
+            return Response.json({ ok: false, error: "Post title or excerpt exceeds the allowed length." }, { status: 400 });
         }
 
         const { contacts = [] } = await getAllContacts();
@@ -65,8 +79,6 @@ export async function POST(request) {
             return Response.json({ ok: false, error: "No subscribers found to send to." }, { status: 400 });
         }
 
-        const title = post.title || "Nuevo Post en GRM Soluciones";
-        const excerpt = post.excerpt || "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
         const tag = Array.isArray(post.tags) && typeof post.tags[0] === "string" && post.tags[0].trim()
             ? post.tags[0]
             : "Blog";

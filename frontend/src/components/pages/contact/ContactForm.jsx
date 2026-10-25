@@ -5,6 +5,12 @@ import CTAButton from "@/src/components/commons/CTAButton";
 
 const telephonePattern = /^[+]?[0-9\s().-]{9,20}$/;
 
+const FIELD_LIMITS = {
+    name: 100,
+    email: 254,
+    message: 5000,
+};
+
 const isValidTelephone = (telephone) => {
     if (!telephone.trim()) {
         return true;
@@ -89,6 +95,7 @@ const ContactForm = () => {
                         onChange={handleChange}
                         placeholder="Alejandro Rodríguez" 
                         required 
+                        maxLength={FIELD_LIMITS.name}
                         className="px-3 py-1.5 border border-dark/20 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-0 focus:border-transparent text-sm"
                     />
                 </div>
@@ -104,6 +111,7 @@ const ContactForm = () => {
                         onChange={handleChange}
                         placeholder="correo@ejemplo.com" 
                         required 
+                        maxLength={FIELD_LIMITS.email}
                         className="px-3 py-1.5 border border-dark/20 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-0 focus:border-transparent text-sm"
                     />
                 </div>
@@ -136,6 +144,7 @@ const ContactForm = () => {
                         onChange={handleChange}
                         placeholder="Cuéntanos sobre tu proyecto o consulta..." 
                         required 
+                        maxLength={FIELD_LIMITS.message}
                         className="px-3 py-2 border border-dark/20 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-0 focus:border-transparent resize-none flex-1 text-sm"
                     ></textarea>
                 </div>

@@ -9,7 +9,10 @@ export const postType = defineType({
       name: 'title',
       title: 'Título',
       type: 'string',
-      validation: (rule) => rule.required().min(10).max(100),
+      validation: (rule) => [
+        rule.required().min(10).error('El título debe tener al menos 10 caracteres.'),
+        rule.max(100).error('El título no puede superar los 100 caracteres.'),
+      ],
     }),
     defineField({
       name: 'slug',
@@ -18,16 +21,26 @@ export const postType = defineType({
       type: 'slug',
       options: {
         source: 'title',
-        maxLength: 96,
+        maxLength: 100,
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => [
+        rule.required().error('El slug es obligatorio.'),
+        rule.custom((value) =>
+          !value?.current || value.current.length <= 100
+            ? true
+            : 'El slug no puede superar los 100 caracteres.',
+        ),
+      ],
     }),
     defineField({
       name: 'excerpt',
       title: 'Extracto',
       description: 'Breve resumen del contenido del post',
       type: 'text',
-      validation: (rule) => rule.required().max(500),
+      validation: (rule) => [
+        rule.required().error('El extracto es obligatorio.'),
+        rule.max(500).error('El extracto no puede superar los 500 caracteres.'),
+      ],
     }),
     defineField({
       name: 'coverImage',

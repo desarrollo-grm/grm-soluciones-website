@@ -4,8 +4,12 @@ import { sendEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
 import { checkRateLimit } from "@/src/server/lib/rate-limit";
 import { escapeHtml, renderTemplate } from "@/src/server/lib/html";
+import { readJsonBody } from "@/src/server/lib/request-body";
 
 export const runtime = "nodejs";
+
+const MAX_BODY_BYTES = 32 * 1024;
+const FIELD_LIMITS = { name: 100, email: 254, telephone: 20, message: 5000 };
 
 export async function GET() {
     return Response.json({ ok: true, status: "healthy", route: "/contact", timestamp: new Date().toISOString() });
@@ -16,12 +20,27 @@ export async function POST(request) {
     if (limited) return limited;
 
     try {
-        const data = await request.json();
-        if (!["name", "email", "message"].every((field) => typeof data?.[field] === "string" && data[field].trim())) {
+        const body = await readJsonBody(request, { maxBytes: MAX_BODY_BYTES });
+        if (body.response) return body.response;
+
+        const data = body.data;
+        const name = typeof data.name === "string" ? data.name.trim() : "";
+        const email = typeof data.email === "string" ? data.email.trim() : "";
+        const message = typeof data.message === "string" ? data.message.trim() : "";
+        const telephoneValue = data.telephone ?? "";
+        const telephone = typeof telephoneValue === "string" ? telephoneValue.trim() : null;
+
+        if (!name || !email || !message) {
             return Response.json({ ok: false, error: "Missing or invalid contact fields." }, { status: 400 });
         }
+        if (name.length > FIELD_LIMITS.name
+            || email.length > FIELD_LIMITS.email
+            || telephone.length > FIELD_LIMITS.telephone
+            || message.length > FIELD_LIMITS.message) {
+            return Response.json({ ok: false, error: "Contact fields exceed the allowed length." }, { status: 400 });
+        }
         if (!(await validate({
-            email:data?.email, 
+            email,
             validateRegex: true,
             validateMx: true,
             validateTypo: false,
@@ -36,25 +55,25 @@ export async function POST(request) {
 
         const supportTemplate = await loadTemplate("support-contact.html");
         const supportHtmlContent = renderTemplate(supportTemplate, {
-            name: escapeHtml(data.name),
-            email: escapeHtml(data.email),
-            message: escapeHtml(data.message),
+            name: escapeHtml(name),
+            email: escapeHtml(email),
+            message: escapeHtml(message),
             timestamp: escapeHtml(new Date().toISOString()),
-            telephone: escapeHtml(data.telephone || "Not provided"),
+            telephone: escapeHtml(telephone || "Not provided"),
         });
         const supportEmail = process.env.SUPPORT_EMAIL;
         if (!supportEmail) throw new Error("SUPPORT_EMAIL is not configured in the server environment.");
 
         await sendEmail({
             to: [{ email: supportEmail }],
-            subject: `Nuevo mensaje de contacto de ${data.name}`,
+            subject: `Nuevo mensaje de contacto de ${name}`,
             htmlContent: supportHtmlContent,
         });
         const confirmation = renderTemplate(await loadTemplate("contact-confirmation.html"), {
-            name: escapeHtml(data.name),
+            name: escapeHtml(name),
         });
         await sendEmail({
-            to: [{ email: data.email }],
+            to: [{ email }],
             subject: "Mensaje recibido - Gracias por contactarnos",
             htmlContent: confirmation,
             replyTo: { email: supportEmail, name: "GRM Soluciones - Soporte" },

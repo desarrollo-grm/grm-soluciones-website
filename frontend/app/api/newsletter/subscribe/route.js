@@ -5,8 +5,12 @@ import { sendEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
 import { checkRateLimit } from "@/src/server/lib/rate-limit";
 import { escapeHtml, renderTemplate } from "@/src/server/lib/html";
+import { readJsonBody } from "@/src/server/lib/request-body";
 
 export const runtime = "nodejs";
+
+const MAX_BODY_BYTES = 16 * 1024;
+const MAX_EMAIL_LENGTH = 254;
 
 export async function GET() {
     return Response.json({ ok: true, status: "healthy", route: "/subscribe", timestamp: new Date().toISOString() });
@@ -17,9 +21,17 @@ export async function POST(request) {
     if (limited) return limited;
 
     try {
-        const data = await request.json();
+        const body = await readJsonBody(request, { maxBytes: MAX_BODY_BYTES });
+        if (body.response) return body.response;
+
+        const data = body.data;
+        const email = typeof data.email === "string" ? data.email.trim() : "";
+        if (!email || email.length > MAX_EMAIL_LENGTH) {
+            return Response.json({ ok: false, error: "Invalid email address." }, { status: 400 });
+        }
+
         const emailResult = await validate({
-            email:data?.email, 
+            email,
             validateRegex: true,
             validateMx: true,
             validateTypo: false,
@@ -33,7 +45,7 @@ export async function POST(request) {
             return Response.json({ ok: false, error: "Captcha verification failed. Please try again." }, { status: 400 });
         }
 
-        const { unsubToken, ...contact } = await createContact(data);
+        const { unsubToken, ...contact } = await createContact({ email });
         const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/unsubscribe?token=${unsubToken}`;
         const htmlContent = renderTemplate(await loadTemplate("welcome.html"), {
             unsubscribe_url: escapeHtml(unsubscribeUrl),

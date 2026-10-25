@@ -2,6 +2,8 @@
 
 import useNewsletterSubscription from '@/src/hooks/useNewsletterSubscription';
 
+const MAX_EMAIL_LENGTH = 254;
+
 export default function NewsletterForm({ variant = 'footer' }) {
     const { email, setEmail, status, message, isRecaptchaReady, handleSubmit } = useNewsletterSubscription();
     const isBlogVariant = variant === 'blog';
@@ -14,6 +16,7 @@ export default function NewsletterForm({ variant = 'footer' }) {
                     placeholder={isBlogVariant ? 'correo@ejemplo.com' : 'Tu email'}
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
+                    maxLength={MAX_EMAIL_LENGTH}
                     aria-label="Correo electrónico para newsletter"
                     className={isBlogVariant
                         ? 'w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent'
