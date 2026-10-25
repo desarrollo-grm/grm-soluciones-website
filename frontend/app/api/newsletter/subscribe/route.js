@@ -4,6 +4,7 @@ import { verifyCaptcha } from "@/src/server/lib/captcha";
 import { sendEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
 import { checkRateLimit } from "@/src/server/lib/rate-limit";
+import { escapeHtml, renderTemplate } from "@/src/server/lib/html";
 
 export const runtime = "nodejs";
 
@@ -34,7 +35,9 @@ export async function POST(request) {
 
         const { unsubToken, ...contact } = await createContact(data);
         const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/unsubscribe?token=${unsubToken}`;
-        const htmlContent = (await loadTemplate("welcome.html")).replace("{{unsubscribe_url}}", unsubscribeUrl);
+        const htmlContent = renderTemplate(await loadTemplate("welcome.html"), {
+            unsubscribe_url: escapeHtml(unsubscribeUrl),
+        });
         const response = await sendEmail({
             subject: "Bienvenido a GRM Soluciones (y una pregunta rápida)",
             htmlContent,

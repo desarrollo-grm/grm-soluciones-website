@@ -3,6 +3,7 @@ import { verifyCaptcha } from "@/src/server/lib/captcha";
 import { sendEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
 import { checkRateLimit } from "@/src/server/lib/rate-limit";
+import { escapeHtml, renderTemplate } from "@/src/server/lib/html";
 
 export const runtime = "nodejs";
 
@@ -34,12 +35,13 @@ export async function POST(request) {
         }
 
         const supportTemplate = await loadTemplate("support-contact.html");
-        const supportHtmlContent = supportTemplate
-            .replaceAll("{{name}}", data.name)
-            .replaceAll("{{email}}", data.email)
-            .replaceAll("{{message}}", data.message)
-            .replaceAll("{{timestamp}}", new Date().toISOString())
-            .replaceAll("{{telephone}}", data.telephone || "Not provided");
+        const supportHtmlContent = renderTemplate(supportTemplate, {
+            name: escapeHtml(data.name),
+            email: escapeHtml(data.email),
+            message: escapeHtml(data.message),
+            timestamp: escapeHtml(new Date().toISOString()),
+            telephone: escapeHtml(data.telephone || "Not provided"),
+        });
         const supportEmail = process.env.SUPPORT_EMAIL;
         if (!supportEmail) throw new Error("SUPPORT_EMAIL is not configured in the server environment.");
 
@@ -48,7 +50,9 @@ export async function POST(request) {
             subject: `Nuevo mensaje de contacto de ${data.name}`,
             htmlContent: supportHtmlContent,
         });
-        const confirmation = (await loadTemplate("contact-confirmation.html")).replace("{{name}}", data.name);
+        const confirmation = renderTemplate(await loadTemplate("contact-confirmation.html"), {
+            name: escapeHtml(data.name),
+        });
         await sendEmail({
             to: [{ email: data.email }],
             subject: "Mensaje recibido - Gracias por contactarnos",

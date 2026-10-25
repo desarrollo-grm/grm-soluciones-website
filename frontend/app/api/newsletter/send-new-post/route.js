@@ -3,6 +3,7 @@ import { sendBatchEmail } from "@/src/server/services/email";
 import { loadTemplate } from "@/src/server/services/templates";
 import { verifySanityWebhookRequest } from "@/src/server/lib/webhook-auth";
 import { claimCampaignSend, releaseCampaignSend } from "@/src/server/lib/campaign-idempotency";
+import { escapeHtml, renderTemplate } from "@/src/server/lib/html";
 
 export const runtime = "nodejs";
 
@@ -66,14 +67,18 @@ export async function POST(request) {
 
         const title = post.title || "Nuevo Post en GRM Soluciones";
         const excerpt = post.excerpt || "¡Hola! Tenemos un nuevo post para ti. Visita nuestro sitio web para más detalles.";
-        const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug.trim()}`;
+        const tag = Array.isArray(post.tags) && typeof post.tags[0] === "string" && post.tags[0].trim()
+            ? post.tags[0]
+            : "Blog";
+        const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${encodeURIComponent(slug.trim())}`;
         const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/newsletter/unsubscribe?token={{params.unsubToken}}`;
-        const htmlContent = (await loadTemplate("new-post.html"))
-            .replaceAll("{{title}}", title)
-            .replaceAll("{{excerpt}}", excerpt)
-            .replaceAll("{{tags[0]}}", Array.isArray(post.tags) ? post.tags[0] || "Blog" : "Blog")
-            .replaceAll("{{post-url}}", postUrl)
-            .replaceAll("{{unsubscribe_url}}", unsubscribeUrl);
+        const htmlContent = renderTemplate(await loadTemplate("new-post.html"), {
+            title: escapeHtml(title),
+            excerpt: escapeHtml(excerpt),
+            "tags[0]": escapeHtml(tag),
+            "post-url": escapeHtml(postUrl),
+            unsubscribe_url: escapeHtml(unsubscribeUrl),
+        });
 
         const claimed = await claimCampaignSend(post._id, post._rev);
         if (!claimed) {
